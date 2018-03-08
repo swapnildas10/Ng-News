@@ -10,7 +10,8 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { TopnavComponent } from './topnav/topnav.component';
 import { CategoryNewsComponent } from './news/category-news/category-news.component';
 import { BreakingNewsComponent } from './news/breaking-news/breaking-news.component';
-
+import { HttpClientModule } from '@angular/common/http';
+import { ApiConnectionService } from './shared/services/apiconnection.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,9 +24,10 @@ import { BreakingNewsComponent } from './news/breaking-news/breaking-news.compon
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     MDBBootstrapModule.forRoot()
   ],
-  providers: [],
+  providers: [ApiConnectionService],
   bootstrap: [AppComponent],
   schemas: [ NO_ERRORS_SCHEMA ]
 })

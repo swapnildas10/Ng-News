@@ -6,12 +6,20 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import { TopnavComponent } from './topnav/topnav.component';
+import { CategoryNewsComponent } from './news/category-news/category-news.component';
+import { BreakingNewsComponent } from './news/breaking-news/breaking-news.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    DashboardComponent
+    DashboardComponent,
+    SidenavComponent,
+    TopnavComponent,
+    CategoryNewsComponent,
+    BreakingNewsComponent
   ],
   imports: [
     BrowserModule,

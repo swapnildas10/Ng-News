@@ -1,0 +1,25 @@
+<div style="max-width:18rem;" class="card card-dark">
+  <!--Card image-->
+  <div class="view hm-white-slight waves-light" mdbRippleRadius>
+      <img [src]="article['urLtoImage']" class="img-fluid" alt="">
+      <a>
+          <div class="mask"></div>
+      </a>
+  </div>
+  <!--/.Card image-->
+  <!--Card content-->
+  <div class="card-body">
+      <!--Social shares button-->
+      <a class="activator"><i class="fa fa-share-alt white-text"></i></a>
+      <!--Title-->
+      <h4 class="card-title">{{article.title}}</h4>
+      <hr>
+      <!--Text-->
+      <p class="card-text white-text">{{article.author}}</p>
+      <a [href]="article.url" class="d-flex flex-row-reverse">
+          <h5 class="waves-effect p-2" mdbRippleRadius>Read More <i class="fa fa-chevron-right"></i></h5>
+      </a>
+  </div>
+  <!--/.Card content-->
+</div>
+<!--/.Card Dark--> 

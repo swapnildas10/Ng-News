@@ -2,6 +2,6 @@ import { Article } from './article';
 
 export class TopHeadlines {
 status: string;
-totalresults: number;
-Articles: Article[];
+totalResults: number;
+articles: Article[];
 }

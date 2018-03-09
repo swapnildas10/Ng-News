@@ -12,6 +12,7 @@ import { CategoryNewsComponent } from './news/category-news/category-news.compon
 import { BreakingNewsComponent } from './news/breaking-news/breaking-news.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiConnectionService } from './shared/services/apiconnection.service';
+import { BreakingNewsArticleComponent } from './news/breaking-news/breaking-news-article/breaking-news-article.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +21,8 @@ import { ApiConnectionService } from './shared/services/apiconnection.service';
     SidenavComponent,
     TopnavComponent,
     CategoryNewsComponent,
-    BreakingNewsComponent
+    BreakingNewsComponent,
+    BreakingNewsArticleComponent
   ],
   imports: [
     BrowserModule,

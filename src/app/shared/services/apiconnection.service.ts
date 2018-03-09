@@ -10,8 +10,29 @@ import { SearchQueryModal } from '../modals/searchquerymodal';
 export class ApiConnectionService {
     _baseUrl = 'http://localhost:5000/api/';
 constructor(private httpClient: HttpClient) { }
-getBreakingNewsfromAPI(): Observable<HttpResponse<TopHeadlines>> {
-    return this.httpClient.get<TopHeadlines>( this._baseUrl + 'TopUSNews', { observe : 'response' } );
+getBreakingNewsfromAPI(country: string = null, category: string = null,
+    sources: string = null, q: string = null, pageSize: number = null, page: number = null ): Observable<HttpResponse<TopHeadlines>> {
+
+        this._baseUrl  = this._baseUrl + 'TopUSNews?';
+        if (category != null && category.toLocaleLowerCase() !== 'null') {
+            this._baseUrl = this._baseUrl + 'category=' + category;
+        }
+        if (country != null && country.toLocaleLowerCase() !== 'null') {
+            this._baseUrl = this._baseUrl + 'country=' + country;
+        }
+        if (sources != null && sources.toLocaleLowerCase() !== 'null') {
+            this._baseUrl = this._baseUrl + '?sources=' + sources;
+        }
+        if (q != null && q.toLocaleLowerCase() !== 'null') {
+            this._baseUrl = this._baseUrl + '&q=' + q;
+        }
+        if (pageSize != null) {
+            this._baseUrl = this._baseUrl + '&pageSize=' + pageSize;
+        }
+        if (page != null ) {
+            this._baseUrl = this._baseUrl + '?page=' + page;
+        }
+    return this.httpClient.get<TopHeadlines>( this._baseUrl , { observe : 'response' } );
 }
 
 getSourcesfromAPI(category: string = null, language: string = null, country: string = null): Observable<HttpResponse<SourceWrapper>> {

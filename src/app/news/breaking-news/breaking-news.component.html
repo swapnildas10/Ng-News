@@ -1,3 +1,6 @@
-<p>
-  breaking-news works!
-</p>
+
+<div *ngIf="newsData">
+<div class="row">
+    <app-breaking-news-article class="col"  *ngFor="let article of newsData.articles" [article]="article"></app-breaking-news-article>
+</div>
+</div>

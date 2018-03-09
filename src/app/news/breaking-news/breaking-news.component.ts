@@ -12,17 +12,17 @@ import { Source, SourceWrapper } from '../../shared/modals/source';
 export class BreakingNewsComponent implements OnInit {
 
   constructor(private apiConnectionService: ApiConnectionService) { }
-  private newsData: TopHeadlines;
+   newsData: TopHeadlines;
   private sourceData: SourceWrapper;
   ngOnInit() {
+    this.getBreakingNewsData();
   }
   getBreakingNewsData() {
-    this.apiConnectionService.getBreakingNewsfromAPI().subscribe(
+    this.apiConnectionService.getBreakingNewsfromAPI('us', null, null, null, 5).subscribe(
       (response) => {
         // this.newsData = response.map(key =>
         //   `${key}: ${response.headers.get(key)}`);
         this.newsData = response.body;
-       console.log(this.newsData);
       }
     );
   }

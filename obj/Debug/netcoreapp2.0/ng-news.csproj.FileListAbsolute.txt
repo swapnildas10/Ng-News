@@ -1,0 +1,10 @@
+C:\Users\swapn\Desktop\ng-news\Ng-News\bin\Debug\netcoreapp2.0\ng-news.deps.json
+C:\Users\swapn\Desktop\ng-news\Ng-News\bin\Debug\netcoreapp2.0\ng-news.runtimeconfig.json
+C:\Users\swapn\Desktop\ng-news\Ng-News\bin\Debug\netcoreapp2.0\ng-news.runtimeconfig.dev.json
+C:\Users\swapn\Desktop\ng-news\Ng-News\bin\Debug\netcoreapp2.0\ng-news.dll
+C:\Users\swapn\Desktop\ng-news\Ng-News\bin\Debug\netcoreapp2.0\ng-news.pdb
+C:\Users\swapn\Desktop\ng-news\Ng-News\obj\Debug\netcoreapp2.0\ng-news.csproj.CoreCompileInputs.cache
+C:\Users\swapn\Desktop\ng-news\Ng-News\obj\Debug\netcoreapp2.0\ng-news.AssemblyInfoInputs.cache
+C:\Users\swapn\Desktop\ng-news\Ng-News\obj\Debug\netcoreapp2.0\ng-news.AssemblyInfo.cs
+C:\Users\swapn\Desktop\ng-news\Ng-News\obj\Debug\netcoreapp2.0\ng-news.dll
+C:\Users\swapn\Desktop\ng-news\Ng-News\obj\Debug\netcoreapp2.0\ng-news.pdb

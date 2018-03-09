@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiConnectionService } from '../../shared/services/apiconnection.service';
+import { Article } from '../../shared/modals/article';
+import { TopHeadlines } from '../../shared/modals/top-headlines';
 
 @Component({
   selector: 'app-breaking-news',
@@ -9,20 +11,16 @@ import { ApiConnectionService } from '../../shared/services/apiconnection.servic
 export class BreakingNewsComponent implements OnInit {
 
   constructor(private apiConnectionService: ApiConnectionService) { }
-  private newsData: any;
+  private newsData: TopHeadlines;
   ngOnInit() {
     this.getBreakingNewsData();
   }
   getBreakingNewsData() {
     this.apiConnectionService.getBreakingNewsfromAPI().subscribe(
-      (response: any) => {
+      (response) => {
         // this.newsData = response.map(key =>
         //   `${key}: ${response.headers.get(key)}`);
-        this.newsData = {
-        status : response.body['status'],
-        totalresults: response.body['totalResults'],
-        articles: response.body['articles']
-       };
+        this.newsData = response.body;
        console.log(this.newsData);
       }
     );

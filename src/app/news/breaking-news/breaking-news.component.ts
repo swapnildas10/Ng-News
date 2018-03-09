@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiConnectionService } from '../../shared/services/apiconnection.service';
 import { Article } from '../../shared/modals/article';
 import { TopHeadlines } from '../../shared/modals/top-headlines';
-import { Source } from '../../shared/modals/source';
+import { Source, SourceWrapper } from '../../shared/modals/source';
 
 @Component({
   selector: 'app-breaking-news',
@@ -13,9 +13,8 @@ export class BreakingNewsComponent implements OnInit {
 
   constructor(private apiConnectionService: ApiConnectionService) { }
   private newsData: TopHeadlines;
-  private sourceData: Source;
+  private sourceData: SourceWrapper;
   ngOnInit() {
-    this.getBreakingNewsData();
   }
   getBreakingNewsData() {
     this.apiConnectionService.getBreakingNewsfromAPI().subscribe(
@@ -26,7 +25,11 @@ export class BreakingNewsComponent implements OnInit {
        console.log(this.newsData);
       }
     );
-    this.apiConnectionService.getSourcesfromAPI().subscribe(
+  }
+
+
+  getSources(category: string = null, language: string = null, country: string = null) {
+    this.apiConnectionService.getSourcesfromAPI(category, language, country).subscribe(
       (response) => {
         // this.newsData = response.map(key =>
         //   `${key}: ${response.headers.get(key)}`);

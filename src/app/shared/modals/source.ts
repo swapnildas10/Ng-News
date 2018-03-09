@@ -7,3 +7,8 @@ category: string;
 language: string;
 country: string;
 }
+
+export interface SourceWrapper {
+    status: string;
+    sources: Source[];
+}

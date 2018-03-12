@@ -1,0 +1,84 @@
+
+<!--Navbar-->
+<div *ngIf='sourceWrapper' class='row justify-content-center'>
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo">
+           
+    <!-- Navbar brand -->
+    <logo><a class="navbar-brand" href="#">Sources</a></logo>
+
+    <!-- Collapsible content -->
+    <links>
+
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link waves-light" mdbRippleRadius>Home<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown" dropdown>
+                <a dropdownToggle mdbRippleRadius type="button" class="nav-link dropdown-toggle waves-light" mdbRippleRadius>
+                Language<span class="caret"></span></a>
+                <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+
+                    <a class="dropdown-item waves-light" mdbRippleRadius href="#" *ngFor='let source of sourceWrapper.sources'>{{source.language}}</a>
+                     
+                </div>
+            </li>
+            <li class="nav-item dropdown" dropdown>
+                <a dropdownToggle mdbRippleRadius type="button" class="nav-link dropdown-toggle waves-light" mdbRippleRadius>
+                Category<span class="caret"></span></a>
+                <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary"  role="menu">
+                    <a class="dropdown-item waves-light" mdbRippleRadius href="#" *ngFor='let source of sourceWrapper.sources'>{{source.category}}</a>
+                    
+                </div>
+            </li>
+
+            <!-- Dropdown -->
+            <li class="nav-item dropdown" dropdown>
+                <a dropdownToggle mdbRippleRadius type="button" class="nav-link dropdown-toggle waves-light" mdbRippleRadius>
+               Country<span class="caret"></span></a>
+                <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+                    <a class="dropdown-item waves-light" mdbRippleRadius href="#" *ngFor='let source of sourceWrapper.sources'>{{source.country}}</a>
+                    
+                 
+                </div>
+            </li>
+
+        </ul>
+        <!-- Links -->
+
+        <!-- Search form -->
+        <form class="form-inline  waves-light" mdbRippleRadius>
+            <input class="form-control mr-sm-2" type="text" placeholder="Search">
+        </form>
+    </links>
+    <!-- Collapsible content -->
+
+</mdb-navbar>
+<!--/.Navbar-->
+
+ <div class="row container-fluid justify-content-center">
+   <div class="col-3 pb-2" style="max-width:13rem" *ngFor='let source of sourceWrapper.sources'>
+     <!--Card Dark-->
+<div class="card card-dark pb-2">
+    <!--Card image-->
+   
+    <!--/.Card image-->
+    <!--Card content-->
+    <div class="card-body">
+        <!--Social shares button-->
+       
+        <!--Title-->
+        <h4 class="card-title">{{source.name}}</h4>
+        <hr>
+        <!--Text-->
+        <!-- <p class="card-text">{{source.description}}</p> -->
+         
+    </div>
+    <!--/.Card content-->
+</div>
+<!--/.Card Dark--> 
+   </div>
+ </div>
+</div>
+
+            

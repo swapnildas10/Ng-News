@@ -13,8 +13,8 @@ namespace NewsApi
         
 
         private const string API_KEY = "367fcf68f19b4595b91d2d242085686d";
- 
-        [HttpGet("api/TopUSNews/{category?}/{country?}/{sources?}/{q?}/{pageSize?}/{page?}")]
+        [Route("api/TopUSNews/{category?}/{country?}/{sources?}/{q?}/{pageSize?}/{page?}")]
+        [HttpGet]
         public async  Task<IActionResult>  getTopUSNews(String category = null,String country =null, String sources = null,String q = null, int? pageSize = null, int? page = null  ) {
             using(var httpClient = new HttpClient()) {
                 try
@@ -39,7 +39,55 @@ namespace NewsApi
                          var response = await httpClient.GetAsync(new Uri(url)).ConfigureAwait(false);
                         response.EnsureSuccessStatusCode();
                         var stringResult = await response.Content.ReadAsStringAsync();
-                        Console.WriteLine(stringResult);
+                        
+                        var rawData = JsonConvert.DeserializeObject<TopHeadlines>(stringResult);
+                          topHeadlines = new TopHeadlines{
+                            
+                            Status = rawData.Status,
+                            TotalResults = rawData.TotalResults,
+                              Articles  = rawData.Articles
+                          };
+                           
+                        return Ok(topHeadlines);
+            
+                }
+                catch (HttpRequestException httpRequestException)
+                {
+                    
+                     return BadRequest($"Error getting data: {httpRequestException.Message}");
+                }
+           
+            }
+         
+            
+        }
+        [Route("api/TopNewsByCategory/{category?}/{country?}/{sources?}/{q?}/{pageSize?}/{page?}")]
+        [HttpGet]
+        public async  Task<IActionResult>  getTopNewsByCategory(String category = null,String country =null, String sources = null,String q = null, int? pageSize = null, int? page = null  ) {
+            using(var httpClient = new HttpClient()) {
+                try
+                {
+                  String url  ="https://newsapi.org/v2/top-headlines?";
+                    TopHeadlines topHeadlines = null;
+                           if(category!=null)
+                    url = url+"category="+category+"&";
+                    if(country!=null)
+                      url = url+"country="+country+"&";
+                      if(sources!=null)
+                        url = url+"sources="+sources+"&";
+                      if(q!=null)
+                        url = url+"q="+q+"&";
+                      if(pageSize!=null)
+                        url = url+"pageSize="+pageSize+"&";
+                      if(page!=null)
+                        url = url+"page="+page+"&";
+                          url = url+"apiKey="+API_KEY;
+                        //GET Method  
+                      //  httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Authorization", API_KEY);
+                         var response = await httpClient.GetAsync(new Uri(url)).ConfigureAwait(false);
+                        response.EnsureSuccessStatusCode();
+                        var stringResult = await response.Content.ReadAsStringAsync();
+                        
                         var rawData = JsonConvert.DeserializeObject<TopHeadlines>(stringResult);
                         topHeadlines = new TopHeadlines{
                            

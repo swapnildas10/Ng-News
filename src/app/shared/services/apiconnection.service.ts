@@ -8,46 +8,71 @@ import { SearchQueryModal } from '../modals/searchquerymodal';
 
 @Injectable()
 export class ApiConnectionService {
-    _baseUrl = 'http://localhost:5000/api/';
+   private  _baseUrl = 'http://localhost:5000/api/';
 constructor(private httpClient: HttpClient) { }
 getBreakingNewsfromAPI(country: string = null, category: string = null,
     sources: string = null, q: string = null, pageSize: number = null, page: number = null ): Observable<HttpResponse<TopHeadlines>> {
 
-        this._baseUrl  = this._baseUrl + 'TopUSNews?';
+      let url = this._baseUrl + 'TopUSNews?';
         if (category != null && category.toLocaleLowerCase() !== 'null') {
-            this._baseUrl = this._baseUrl + 'category=' + category;
+            url = url + 'category=' + category;
         }
         if (country != null && country.toLocaleLowerCase() !== 'null') {
-            this._baseUrl = this._baseUrl + 'country=' + country;
+            url = url + 'country=' + country;
         }
         if (sources != null && sources.toLocaleLowerCase() !== 'null') {
-            this._baseUrl = this._baseUrl + '?sources=' + sources;
+            url = url + '?sources=' + sources;
         }
         if (q != null && q.toLocaleLowerCase() !== 'null') {
-            this._baseUrl = this._baseUrl + '&q=' + q;
+            url = url + '&q=' + q;
         }
         if (pageSize != null) {
-            this._baseUrl = this._baseUrl + '&pageSize=' + pageSize;
+            url = url + '&pageSize=' + pageSize;
         }
         if (page != null ) {
-            this._baseUrl = this._baseUrl + '?page=' + page;
+            url = url + '?page=' + page;
         }
-    return this.httpClient.get<TopHeadlines>( this._baseUrl , { observe : 'response' } );
+    return this.httpClient.get<TopHeadlines>(url , { observe : 'response' } );
+}
+getTopNewsByCategoryfromAPI(country: string = null, category: string = null,
+    sources: string = null, q: string = null, pageSize: number = null, page: number = null ): Observable<HttpResponse<TopHeadlines>> {
+
+       let url = this._baseUrl + 'TopNewsByCategory?';
+        if (category != null && category.toLocaleLowerCase() !== 'null') {
+            url = url + 'category=' + category;
+        }
+        if (country != null && country.toLocaleLowerCase() !== 'null') {
+            url = url + '&country=' + country;
+        }
+        if (sources != null && sources.toLocaleLowerCase() !== 'null') {
+            url = url + '?sources=' + sources;
+        }
+        if (q != null && q.toLocaleLowerCase() !== 'null') {
+            url = url + '&q=' + q;
+        }
+        if (pageSize != null) {
+            url = url + '&pageSize=' + pageSize;
+        }
+        if (page != null ) {
+            url = url + '?page=' + page;
+        }
+        console.log(url);
+    return this.httpClient.get<TopHeadlines>(url , { observe : 'response' } );
 }
 
 getSourcesfromAPI(category: string = null, language: string = null, country: string = null): Observable<HttpResponse<SourceWrapper>> {
-    this._baseUrl = this._baseUrl + 'Source';
+   let url = this._baseUrl + 'Source';
     if (category != null && category.toLocaleLowerCase() !== 'null') {
-        this._baseUrl = this._baseUrl + '?category=' + category;
+        url = url + + '?category=' + category;
     }
     if (language != null && language.toLocaleLowerCase() !== 'null') {
-        this._baseUrl = this._baseUrl + '?language=' + language;
+        url = url + + '?language=' + language;
     }
     if (country != null && country.toLocaleLowerCase() !== 'null') {
-        this._baseUrl = this._baseUrl + '?country=' + country;
+        url = url + + '?country=' + country;
     }
     return this.httpClient.get<SourceWrapper>(
-        this._baseUrl ,
+       url ,
         { observe : 'response'} );
 }
 
@@ -55,36 +80,36 @@ getSourcesfromAPI(category: string = null, language: string = null, country: str
 getQueryResultfromAPI(q: string = null, sources: string = null, domain: string = null,
     from: string = null, to: string = null, language: string = null, sortBy: string = null,
     pageSize: number = null, page: number = null ): Observable<HttpResponse<SearchQueryModal>> {
-    this._baseUrl = this._baseUrl + 'Source';
+    let url = this._baseUrl + 'Source';
     if (q != null && q.toLocaleLowerCase() !== 'null') {
-        this._baseUrl = this._baseUrl + '?q=' + q;
+        url = url + + '?q=' + q;
     }
     if (sources != null && sources.toLocaleLowerCase() !== 'null') {
-        this._baseUrl = this._baseUrl + '?sources=' + sources;
+        url = url + + '?sources=' + sources;
     }
     if (domain != null && domain.toLocaleLowerCase() !== 'null') {
-        this._baseUrl = this._baseUrl + '?domain=' + domain;
+        url = url + + '?domain=' + domain;
     }
     if (from != null && from.toLocaleLowerCase() !== 'null') {
-        this._baseUrl = this._baseUrl + '?from=' + from;
+        url = url + + '?from=' + from;
     }
     if (to != null && to.toLocaleLowerCase() !== 'null') {
-        this._baseUrl = this._baseUrl + '?to=' + to;
+        url = url + + '?to=' + to;
     }
     if (language != null && language.toLocaleLowerCase() !== 'null') {
-        this._baseUrl = this._baseUrl + '?language=' + language;
+        url = url  + '?language=' + language;
     }
     if (sortBy != null && sortBy.toLocaleLowerCase() !== 'null') {
-        this._baseUrl = this._baseUrl + '?sortBy=' + sortBy;
+        url = url + + '?sortBy=' + sortBy;
     }
     if (pageSize != null) {
-        this._baseUrl = this._baseUrl + '?domain=' + pageSize;
+        url = url + + '?domain=' + pageSize;
     }
     if (page != null) {
-        this._baseUrl = this._baseUrl + '?page=' + page;
+        url = url + + '?page=' + page;
     }
     return this.httpClient.get<SearchQueryModal>(
-        this._baseUrl ,
+      url ,
         { observe : 'response'} );
 }
 }

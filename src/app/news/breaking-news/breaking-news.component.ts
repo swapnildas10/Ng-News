@@ -34,7 +34,6 @@ export class BreakingNewsComponent implements OnInit {
         // this.newsData = response.map(key =>
         //   `${key}: ${response.headers.get(key)}`);
         this.sourceData = response.body;
-       console.log(this.sourceData);
       }
     );
   }

@@ -13,6 +13,8 @@ import { BreakingNewsComponent } from './news/breaking-news/breaking-news.compon
 import { HttpClientModule } from '@angular/common/http';
 import { ApiConnectionService } from './shared/services/apiconnection.service';
 import { BreakingNewsArticleComponent } from './news/breaking-news/breaking-news-article/breaking-news-article.component';
+import { CategoryNewsArticleComponent } from './news/category-news/category-news-article/category-news-article.component';
+import { SourceComponent } from './source/source.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +24,9 @@ import { BreakingNewsArticleComponent } from './news/breaking-news/breaking-news
     TopnavComponent,
     CategoryNewsComponent,
     BreakingNewsComponent,
-    BreakingNewsArticleComponent
+    BreakingNewsArticleComponent,
+    CategoryNewsArticleComponent,
+    SourceComponent
   ],
   imports: [
     BrowserModule,

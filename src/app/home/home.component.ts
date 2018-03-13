@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Article } from '../shared/modals/article';
+import { ArticleSharingService } from '../shared/services/article-sharing.service';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
-  constructor() { }
+articles: Article[];
+  constructor(
+    private articlesSharingService: ArticleSharingService
+  ) { }
 
   ngOnInit() {
+    this.articlesSharingService.articleObserved.subscribe(
+      (articles: Article[]) => {
+        this.articles = articles;
+      }
+    );
   }
-
 }

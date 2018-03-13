@@ -15,6 +15,14 @@ import { ApiConnectionService } from './shared/services/apiconnection.service';
 import { BreakingNewsArticleComponent } from './news/breaking-news/breaking-news-article/breaking-news-article.component';
 import { CategoryNewsArticleComponent } from './news/category-news/category-news-article/category-news-article.component';
 import { SourceComponent } from './source/source.component';
+import { RouterModule, Routes } from '@angular/router';
+import { ArticleSharingService } from './shared/services/article-sharing.service';
+const appRoutes: Routes = [
+  {path: 'TopUSNews', component: BreakingNewsComponent},
+  {path: 'category/:id', component: CategoryNewsComponent},
+  {path: 'Dashboard', component: DashboardComponent},
+  {path: '', redirectTo: '/Dashboard', pathMatch: 'full'}
+];
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,9 +39,12 @@ import { SourceComponent } from './source/source.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    RouterModule.forRoot(
+      appRoutes, {enableTracing: true}
+    )
   ],
-  providers: [ApiConnectionService],
+  providers: [ApiConnectionService, ArticleSharingService],
   bootstrap: [AppComponent],
   schemas: [ NO_ERRORS_SCHEMA ]
 })

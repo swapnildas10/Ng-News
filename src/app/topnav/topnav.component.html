@@ -7,14 +7,27 @@
         <links>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active waves-light" mdbRippleRadius>
-                    <a class="nav-link">Home <span class="sr-only">(current)</span></a>
+                    <a routerLink="/Dashboard" class="nav-link">Home<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item waves-light" mdbRippleRadius>
-                    <a class="nav-link">Link</a>
+                    <a routerLink="/TopUSNews" class="nav-link">Top News</a>
                 </li>
-                <li class="nav-item waves-light" mdbRippleRadius>
-                    <a class="nav-link">Profile</a>
-                </li>
+                <!-- Dropdown -->
+            <li class="nav-item dropdown" dropdown>
+                <a dropdownToggle mdbRippleRadius type="button" class="nav-link dropdown-toggle waves-light" mdbRippleRadius>
+                Categories<span class="caret"></span></a>
+                <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+                    <a (click)='navigateToBusiness()' class="dropdown-item waves-light" mdbRippleRadius >Business</a>
+                    <a class="dropdown-item waves-light" mdbRippleRadius [routerLink]="['/category', 'sports']">Sports</a>
+                    <a class="dropdown-item waves-light" mdbRippleRadius routerLink='/category/technology'>Technology</a>
+                    <a class="dropdown-item waves-light" mdbRippleRadius routerLink='/category/Science'>Science</a>
+                    <a class="dropdown-item waves-light" mdbRippleRadius routerLink='/category/entertainment'>Entertainment</a>
+                    <a class="dropdown-item waves-light" mdbRippleRadius routerLink='/category/general'>General</a>
+                    <a class="dropdown-item waves-light" mdbRippleRadius routerLink='/category/health'>Health</a>
+                    <div class="divider dropdown-divider"></div>
+                    <a class="dropdown-item waves-light" mdbRippleRadius href="#">Separated link</a>
+                </div>
+            </li>
             </ul>
         </links>
     </mdb-navbar>

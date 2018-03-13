@@ -14,6 +14,7 @@ import { ArticleSharingService } from '../../shared/services/article-sharing.ser
 })
 export class CategoryNewsComponent implements OnInit, OnChanges {
 responseData: TopHeadlines;
+TopFive;
 @Output() topArticlesByCategory = new EventEmitter<Article[]>();
  category: string;
   constructor(
@@ -36,7 +37,9 @@ ngOnChanges(changes: SimpleChanges) {
         // this.newsData = response.map(key =>
         //   `${key}: ${response.headers.get(key)}`);
         this.responseData = response.body;
+        this.TopFive = this.responseData.articles.splice(0, 5);
         this.articlesSharingService.shareArticleByCategory(this.responseData.articles.slice(0, 3));
+        this.articlesSharingService.shareTotalArticle(this.responseData.totalResults);
       }
     );
   }

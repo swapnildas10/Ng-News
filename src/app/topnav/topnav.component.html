@@ -17,8 +17,8 @@
                 <a dropdownToggle mdbRippleRadius type="button" class="nav-link dropdown-toggle waves-light" mdbRippleRadius>
                 Categories<span class="caret"></span></a>
                 <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-                    <a (click)='navigateToBusiness()' class="dropdown-item waves-light" mdbRippleRadius >Business</a>
-                    <a class="dropdown-item waves-light" mdbRippleRadius [routerLink]="['/category', 'sports']">Sports</a>
+                    <a (click)='navigateToBusiness()' class="dropdown-item waves-light" mdbRippleRadius routerLink='/category/business'>Business</a>
+                    <a class="dropdown-item waves-light" mdbRippleRadius routerLink='/category/sports'>Sports</a>
                     <a class="dropdown-item waves-light" mdbRippleRadius routerLink='/category/technology'>Technology</a>
                     <a class="dropdown-item waves-light" mdbRippleRadius routerLink='/category/Science'>Science</a>
                     <a class="dropdown-item waves-light" mdbRippleRadius routerLink='/category/entertainment'>Entertainment</a>

@@ -4,9 +4,14 @@ import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class ArticleSharingService {
-private articleObservable = new Subject<Article[]>();
-articleObserved = this.articleObservable.asObservable();
+private articleSubject = new Subject<Article[]>();
+private totalArticlesSubject = new Subject<number>();
+articleObserved = this.articleSubject.asObservable();
+totalArticlesObserved = this.totalArticlesSubject.asObservable();
 shareArticleByCategory(articles: Article[]) {
-    this.articleObservable.next(articles);
+    this.articleSubject.next(articles);
+}
+shareTotalArticle(totalArticles: number) {
+this.totalArticlesSubject.next(totalArticles);
 }
 }

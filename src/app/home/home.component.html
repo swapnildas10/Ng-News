@@ -2,79 +2,21 @@
 <app-topnav></app-topnav>
 </header>
 <body>
+       
         <main>
-                <section class="section">
-        <div class="view intro hm-purple-light">
-            <div class="full-bg-img flex-center px-5">
-                <div class="row">
-        <div class="container px-5 justify-content-center">
-          <div class="row justify-content-center">
-               <div class="row justify-content-center" *ngIf='articles'>
-                   <div class="col-xs-12 col-sm-6 col-md-4 col-xl-4 col-lg-3" *ngFor='let article of articles'>
-                       <!-- Card -->
-<div style="max-width:13rem" class="card card-image mb-3" style="background-image: url(https://mdbootstrap.com/img/Photos/Horizontal/Work/4-col/img%20%2814%29.jpg);">
-
-    <!-- Content -->
-    <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
-        <div>
-            <h5 class="pink-text"><i class="fa fa-pie-chart"></i> Marketing</h5>
-            <h3 class="card-title pt-2"><strong>{{article.title}}</strong></h3>
-            <p>{{article.description}}</p>
-            <h5 class="pink-text">By {{article.author}}</h5>
-            <!-- <a class="btn btn-pink waves-light" mdbRippleRadius><i class="fa fa-clone left"></i> View project</a> -->
-        </div>
-    </div>
-    <!-- Content -->
-</div>
-<!-- Card -->
-                   </div>
-               </div> 
-        
-        </div>
-        </div>
-        
-        </div>
-        
-        </div></div>
-        </section>
-         <section class="section">
-             <!--Navbar-->
-<mdb-navbar SideClass="navbar navbar-light blue-grey lighten-5" [containerInside]="false"> 
-        <!-- Navbar brand -->
-    <logo><a class="navbar-brand" href="#">Navbar</a></logo>
-
-    <!-- Collapsible content -->
-    <links>
-
-        <!-- Links -->
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link waves-light" mdbRippleRadius>Home<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link waves-light" mdbRippleRadius>Features</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link waves-light" mdbRippleRadius>Pricing</a>
-            </li>
-
              
-        </ul>
-        <!-- Links -->
+         <section class="section container-fluid">
+         <!--Navbar-->
 
-        <!-- Search form -->
-        <form class="form-inline  waves-light" mdbRippleRadius>
-            <input class="form-control mr-sm-2" type="text" placeholder="Search">
-        </form>
-    </links>
-    <!-- Collapsible content -->
-
-        </mdb-navbar>
-        <!--/.Navbar-->
+                
                         
-             <div class="container px-3">
-                    <router-outlet></router-outlet>
-             </div>
+              
+                 <div class="row justify-content-center">
+                        <router-outlet></router-outlet>
+                 </div>
+                
+                  
+             
                
          </section>
        

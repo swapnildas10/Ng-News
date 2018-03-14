@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChange, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChange, SimpleChanges, Output, EventEmitter, HostListener } from '@angular/core';
 import { ApiConnectionService } from '../../shared/services/apiconnection.service';
 import { SearchQueryModal } from '../../shared/modals/searchquerymodal';
 import { TopHeadlines } from '../../shared/modals/top-headlines';
@@ -15,8 +15,11 @@ import { ArticleSharingService } from '../../shared/services/article-sharing.ser
 export class CategoryNewsComponent implements OnInit, OnChanges {
 responseData: TopHeadlines;
 TopFive;
+
 @Output() topArticlesByCategory = new EventEmitter<Article[]>();
  category: string;
+ topnav; styleName;
+ className = 'navbar navbar-expand-lg navbar-dark indigo';
   constructor(
     private apiConnectionService: ApiConnectionService,
     private articlesSharingService: ArticleSharingService,
@@ -26,6 +29,7 @@ TopFive;
   ngOnInit() {
     this.category = this.route.snapshot.paramMap.get('id');
     this.getCategoryNewsData(this.category);
+    this.topnav = (<HTMLInputElement>document.getElementsByTagName('nav')[0]);
   }
 ngOnChanges(changes: SimpleChanges) {
 // this.getCategoryNewsData(changes.category.currentValue);
@@ -43,6 +47,25 @@ ngOnChanges(changes: SimpleChanges) {
       }
     );
   }
+  @HostListener('window:scroll', ['$event'])
+  onScrollEvent($event) {
+    const number = $event.target.documentElement.scrollTop;
+   const bottomnav = (<HTMLInputElement>document.getElementsByTagName('nav')[1]).getBoundingClientRect().top;
+   if ((<HTMLInputElement>document.getElementById('navtop')).getBoundingClientRect().top <=
+    ((<HTMLInputElement>document.getElementsByTagName('nav')[0]).offsetHeight +
+    (<HTMLInputElement>document.getElementsByTagName('nav')[1]).offsetHeight)
+   ) {
+    (<HTMLInputElement>document.getElementsByTagName('nav')[1]).style.marginTop =
+    (<HTMLInputElement>document.getElementsByTagName('nav')[0]).offsetHeight.toString() + 'px';
+this.className = 'navbar navbar-expand-lg navbar-dark indigo fixed-top scrolling-navbar';
+(<HTMLInputElement>document.getElementById('navtop')).style.paddingTop =
 
+(+(<HTMLInputElement>document.getElementsByTagName('nav')[1]).offsetHeight).toString() + 'px';
+   } else {
+    (<HTMLInputElement>document.getElementsByTagName('nav')[1]).style.marginTop = '0';
+    (<HTMLInputElement>document.getElementById('navtop')).style.paddingTop = '0';
+    this.className = 'navbar navbar-expand-lg navbar-dark indigo';
+   }
 
+  }
 }

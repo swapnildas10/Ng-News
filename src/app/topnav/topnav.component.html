@@ -1,11 +1,12 @@
 
        
-    <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar intro-fixed-nav" [containerInside]="false">
+    <mdb-navbar id="topnav" SideClass="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar bg-primary" [containerInside]="false">
         <logo>
             <a class="logo navbar-brand" href="#"><strong>Navbar</strong></a>
         </logo>
         <links>
             <ul class="navbar-nav mr-auto">
+                 
                 <li class="nav-item active waves-light" mdbRippleRadius>
                     <a routerLink="/Dashboard" class="nav-link">Home<span class="sr-only">(current)</span></a>
                 </li>
@@ -17,7 +18,7 @@
                 <a dropdownToggle mdbRippleRadius type="button" class="nav-link dropdown-toggle waves-light" mdbRippleRadius>
                 Categories<span class="caret"></span></a>
                 <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-                    <a (click)='navigateToBusiness()' class="dropdown-item waves-light" mdbRippleRadius routerLink='/category/business'>Business</a>
+                    <a (click)='navigateToBusiness()' class="dropdown-item waves-light" mdbRippleRadius >Business</a>
                     <a class="dropdown-item waves-light" mdbRippleRadius routerLink='/category/sports'>Sports</a>
                     <a class="dropdown-item waves-light" mdbRippleRadius routerLink='/category/technology'>Technology</a>
                     <a class="dropdown-item waves-light" mdbRippleRadius routerLink='/category/Science'>Science</a>
@@ -34,3 +35,53 @@
         
     
 <!--Main Navigation-->
+
+<div mdbModal #fluid="mdb-modal" class="modal fade left" id="fullHeightModalLeft" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-full-height modal-left" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title w-100" id="myModalLabel">Modal title</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="fluid.hide()">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente magnam, sunt, ea dolore
+                        eum quod. Minima fugiat enim aut soluta est reprehenderit reiciendis quos, qui, amet
+                        possimus laborum assumenda voluptate.
+                    </p>
+    
+                    <ul class="list-group z-depth-0">
+                        <li class="list-group-item justify-content-between">
+                            Cras justo odio
+                            <span class="badge badge-primary badge-pill">14</span>
+                        </li>
+                        <li class="list-group-item justify-content-between">
+                            Dapibus ac facilisis in
+                            <span class="badge badge-primary badge-pill">2</span>
+                        </li>
+                        <li class="list-group-item justify-content-between">
+                            Morbi leo risus
+                            <span class="badge badge-primary badge-pill">1</span>
+                        </li>
+                        <li class="list-group-item justify-content-between">
+                            Cras justo odio
+                            <span class="badge badge-primary badge-pill">14</span>
+                        </li>
+                        <li class="list-group-item justify-content-between">
+                            Dapibus ac facilisis in
+                            <span class="badge badge-primary badge-pill">2</span>
+                        </li>
+                        <li class="list-group-item justify-content-between">
+                            Morbi leo risus
+                            <span class="badge badge-primary badge-pill">1</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary waves-light" data-dismiss="modal" (click)="fluid.hide()" mdbRippleRadius>Close</button>
+                    <button type="button" class="btn btn-primary waves-light" mdbRippleRadius>Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>

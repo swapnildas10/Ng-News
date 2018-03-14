@@ -16,6 +16,6 @@ export class TopnavComponent implements OnInit {
   ngOnInit() {
   }
   navigateToBusiness() {
-this.router.navigate(['/category', 'business']);
+this.router.navigate(['/category/business']);
   }
 }

@@ -17,6 +17,7 @@ import { CategoryNewsArticleComponent } from './news/category-news/category-news
 import { SourceComponent } from './source/source.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ArticleSharingService } from './shared/services/article-sharing.service';
+import { SafePipe } from './shared/Pipes/safe-pipe';
 const appRoutes: Routes = [
   {path: 'TopUSNews', component: BreakingNewsComponent},
   {path: 'category/:id', component: CategoryNewsComponent},
@@ -34,7 +35,8 @@ const appRoutes: Routes = [
     BreakingNewsComponent,
     BreakingNewsArticleComponent,
     CategoryNewsArticleComponent,
-    SourceComponent
+    SourceComponent,
+    SafePipe
   ],
   imports: [
     BrowserModule,

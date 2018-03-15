@@ -5,6 +5,7 @@ import { Article } from '../modals/article';
 import { TopHeadlines } from '../modals/top-headlines';
 import { Source, SourceWrapper } from '../modals/source';
 import { SearchQueryModal } from '../modals/searchquerymodal';
+import { WeatherWrapper } from '../modals/weather';
 
 @Injectable()
 export class ApiConnectionService {
@@ -111,5 +112,10 @@ getQueryResultfromAPI(q: string = null, sources: string = null, domain: string =
     return this.httpClient.get<SearchQueryModal>(
       url ,
         { observe : 'response'} );
+}
+
+getWeatherDataByZipCodeAPI(zipcode: string = '90815 ') {
+ const url = this._baseUrl + 'weeklyweather?zipcode=' + zipcode;
+ return this.httpClient.get<WeatherWrapper>(url, {observe : 'response'});
 }
 }

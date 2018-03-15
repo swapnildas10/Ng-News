@@ -18,6 +18,7 @@ import { SourceComponent } from './source/source.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ArticleSharingService } from './shared/services/article-sharing.service';
 import { SafePipe } from './shared/Pipes/safe-pipe';
+import { TemperatureConverterPipe } from './shared/Pipes/temperature-converter-pipe';
 const appRoutes: Routes = [
   {path: 'TopUSNews', component: BreakingNewsComponent},
   {path: 'category/:id', component: CategoryNewsComponent},
@@ -36,7 +37,8 @@ const appRoutes: Routes = [
     BreakingNewsArticleComponent,
     CategoryNewsArticleComponent,
     SourceComponent,
-    SafePipe
+    SafePipe,
+    TemperatureConverterPipe
   ],
   imports: [
     BrowserModule,

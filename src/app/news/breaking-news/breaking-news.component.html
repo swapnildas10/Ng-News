@@ -1,6 +1,9 @@
+<div class="container justify-content-center px-auto py-auto">
 
-<div *ngIf="newsData">
-<div class="row">
-    <app-breaking-news-article class="col"  *ngFor="let article of newsData.articles" [article]="article"></app-breaking-news-article>
-</div>
+    <div *ngIf="newsData">
+        <div class="row">
+            <app-breaking-news-article class="col-sm-6 col-xs-12 col-md-6 col-lg-3 col-xl-3 py-3"  *ngFor="let article of newsData.articles" [article]="article"></app-breaking-news-article>
+        </div>
+        </div>
+
 </div>

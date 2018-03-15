@@ -1,0 +1,46 @@
+<div  class="container-fluid">
+    
+    <!--Intro Section-->
+    <section class="view intro-2 hm-gradient">
+        <div class="full-bg-img">
+            <div class="container">
+                    <div  class="row flex-center pt-5 mt-3">
+                            <form class="form-inline md-form form-sm flex-center mt-2">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                                <input class="form-control form-control-sm ml-3 w-100" type="text" placeholder="Search" aria-label="Search">
+                            </form> 
+                        </div>
+                <div class="row flex-center">
+                    
+                        <div class="white-text">
+                            <h1 class="h1-responsive wow fadeInLeft" data-wow-delay="0.3s">Welcome </h1>
+                                 
+                                 
+                        </div>
+                   
+                    
+                   
+                </div>
+                <div *ngIf='weatherWrapper' class="row flex-center">
+                    <div class="col" *ngFor='let weatherData of weatherWrapper.list'>
+                        <div class="white-text">
+                            <div class="row flex-center">{{weatherData.dt_txt | date: 'EEE'}}</div>
+                            <div class="row flex-center">
+                                    <img [src]='weatherData.weather[0].icon'/>   
+                            </div>
+                            <div class="row flex-center">
+                                <div class="col">{{weatherData.main.temp_min | tempConverter:'f' | number: '2.0-0'}}</div>
+                                <div class="col">{{weatherData.main.temp_max | tempConverter: 'f' | number: '2.0-0'}}</div>
+                            </div>
+                              
+                                 
+                        </div>
+                   
+                    </div>
+                   
+                </div>
+               
+            </div>
+        </div>
+    </section>
+</div>

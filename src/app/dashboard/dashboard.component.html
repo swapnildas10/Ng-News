@@ -3,7 +3,7 @@
     <!--Intro Section-->
     <section class="view intro-2 hm-gradient">
         <div id="dashboard-weather" class="full-bg-img pb-3">
-            <div class="container">
+            <div style="background: linear-gradient(45deg, rgba(42, 27, 161, 0.6), rgba(29, 210, 177, 0.6) 100%);" class="container-fluid">
                     <div  class="row flex-center pt-5 mt-3">
                             <form class="form-inline md-form form-sm flex-center mt-2">
                                 <i class="fa fa-search" aria-hidden="true"></i>
@@ -41,8 +41,10 @@
                 </div>
                
             </div>
-            <div class="container">
-                    <app-dashboard-article></app-dashboard-article>
+            <div *ngIf="topHeadlines" class="container row px-5 py-5">
+                <div *ngFor="let article of topHeadlines.articles" class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
+                    <app-dashboard-article [article]="article"></app-dashboard-article>
+                </div>
             </div>
         </div>
         

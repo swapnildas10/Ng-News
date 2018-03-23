@@ -71,3 +71,11 @@ input[type=text]{
     padding-right: 3.0rem;
      
 }
+
+.full-bg-img[_ngcontent-c3] {
+    background: none;
+}
+
+.hm-gradient[_ngcontent-c3] .full-bg-img[_ngcontent-c3] {
+    background: none;
+}

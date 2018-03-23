@@ -1,3 +1,39 @@
-<p>
-  dashboard-article works!
-</p>
+<!--Card-->
+<div class="card mx-2 my-2">
+
+    <!--Card image-->
+    <div class="view hm-white-slight waves-light" mdbRippleRadius>
+        <img [src]="article['urLtoImage']" class="img-fluid" alt="">
+        <a>
+            <div class="mask"></div>
+        </a>
+    </div>
+    <!--/.Card image-->
+
+    <!--Button-->
+    <a class="btn-floating btn-action waves-light" mdbRippleRadius><i class="fa fa-chevron-right"></i></a>
+
+    <!--Card content-->
+    <div class="card-body">
+        <!--Title-->
+        <h4 class="card-title">{{article.title}}</h4>
+        <hr>
+        <!--Text-->
+        <p class="card-text">{{article.source.name}}</p>
+    </div>
+    <!--/.Card content-->
+
+    <!-- Card footer -->
+    <div class="card-data">
+        <ul>
+            <li><i class="fa fa-clock-o"></i> 05/10/2015</li>
+            <li><a href="#"><i class="fa fa-comments-o"></i>12</a></li>
+            <li><a href="#"><i class="fa fa-facebook"> </i>21</a></li>
+            <li><a href="#"><i class="fa fa-twitter"> </i>5</a></li>
+        </ul>
+    </div>
+    <!-- Card footer -->
+
+</div>
+<!--Card-->
+            

@@ -27,7 +27,8 @@ weatherWrapper = new WeatherWrapper{
     
     city = rawData.city,
     list = rawData.list.Where(element=> (rawData.list.IndexOf(element) % 8 == 0)? true : false).
-    Select(element => {element.weather[0].icon = "http://openweathermap.org/img/w/"+ element.weather[0].icon+".png"; return element;}).ToList()};
+    Select(element => {element.weather[0].icon = "http://openweathermap.org/img/w/"+ element.weather[0].icon+".png"; return element;}).ToList(),
+    };
 return Ok(weatherWrapper);
 }
 catch(HttpRequestException httpRequestException) {

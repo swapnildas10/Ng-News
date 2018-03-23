@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
     this.apiConnectionService.getWeatherDataByZipCodeAPI().subscribe(
       response => {
         this.weatherWrapper = response.body;
+       
       }
     );
   }

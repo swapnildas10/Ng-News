@@ -19,6 +19,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ArticleSharingService } from './shared/services/article-sharing.service';
 import { SafePipe } from './shared/Pipes/safe-pipe';
 import { TemperatureConverterPipe } from './shared/Pipes/temperature-converter-pipe';
+import { DashboardArticleComponent } from './dashboard/dashboard-article/dashboard-article.component';
 const appRoutes: Routes = [
   {path: 'TopUSNews', component: BreakingNewsComponent},
   {path: 'category/:id', component: CategoryNewsComponent},
@@ -38,7 +39,8 @@ const appRoutes: Routes = [
     CategoryNewsArticleComponent,
     SourceComponent,
     SafePipe,
-    TemperatureConverterPipe
+    TemperatureConverterPipe,
+    DashboardArticleComponent
   ],
   imports: [
     BrowserModule,

@@ -5,7 +5,7 @@ import { Article } from '../modals/article';
 import { TopHeadlines } from '../modals/top-headlines';
 import { Source, SourceWrapper } from '../modals/source';
 import { SearchQueryModal } from '../modals/searchquerymodal';
-import { WeatherWrapper } from '../modals/weather';
+import { WeatherWrapper, CurrentWeather } from '../modals/weather';
 
 @Injectable()
 export class ApiConnectionService {
@@ -19,7 +19,7 @@ getBreakingNewsfromAPI(country: string = null, category: string = null,
             url = url + 'category=' + category;
         }
         if (country != null && country.toLocaleLowerCase() !== 'null') {
-            url = url + 'country=' + country;
+            url = url + '&country=' + country;
         }
         if (sources != null && sources.toLocaleLowerCase() !== 'null') {
             url = url + '?sources=' + sources;
@@ -117,5 +117,10 @@ getQueryResultfromAPI(q: string = null, sources: string = null, domain: string =
 getWeatherDataByZipCodeAPI(zipcode: string = '90815 ') {
  const url = this._baseUrl + 'weeklyweather?zipcode=' + zipcode;
  return this.httpClient.get<WeatherWrapper>(url, {observe : 'response'});
+}
+
+getCurrentWeatherDataByZipCodeAPI(zipcode: string = '90815 ') {
+ const url = this._baseUrl + 'currentweather?zipcode=' + zipcode;
+ return this.httpClient.get<CurrentWeather>(url, {observe : 'response'});
 }
 }

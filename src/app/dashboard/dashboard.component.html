@@ -21,7 +21,17 @@
                     
                    
                 </div>
-                <div *ngIf='weatherWrapper' class="row flex-center">
+                <div style='margin: auto;
+                max-width: 35.8rem;
+                overflow: hidden;
+                justify-content: center;' *ngIf='weatherWrapper' class="row flex-center">
+                <div class="col">
+                   <div *ngIf='currentWeather' class="row">
+                       <div class="col-6 flex-center"><img [src]= 'currentWeather.weather[0].icon' /></div>
+                       <div class="col-6 flex-center my-auto white-text">{{currentWeather.main.temp | tempConverter: 'f' | number: '2.0-0'}}</div>
+                   </div>
+                   <div class="row flex-center white-text">{{weatherWrapper.city.name}}</div>
+                </div>
                     <div class="col" *ngFor='let weatherData of weatherWrapper.list'>
                         <div class="white-text">
                             <div class="row flex-center">{{weatherData.dt_txt | date: 'EEE'}}</div>

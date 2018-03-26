@@ -20,6 +20,7 @@ import { ArticleSharingService } from './shared/services/article-sharing.service
 import { SafePipe } from './shared/Pipes/safe-pipe';
 import { TemperatureConverterPipe } from './shared/Pipes/temperature-converter-pipe';
 import { DashboardArticleComponent } from './dashboard/dashboard-article/dashboard-article.component';
+import {TimeAgoPipe} from 'time-ago-pipe';
 const appRoutes: Routes = [
   {path: 'TopUSNews', component: BreakingNewsComponent},
   {path: 'category/:id', component: CategoryNewsComponent},
@@ -40,7 +41,8 @@ const appRoutes: Routes = [
     SourceComponent,
     SafePipe,
     TemperatureConverterPipe,
-    DashboardArticleComponent
+    DashboardArticleComponent,
+    TimeAgoPipe
   ],
   imports: [
     BrowserModule,

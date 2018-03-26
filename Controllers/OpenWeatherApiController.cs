@@ -38,4 +38,33 @@ catch(HttpRequestException httpRequestException) {
 }
 
 }
+
+[HttpGet]
+[Route("/api/currentweather/{zipcode?}")]
+public async Task<IActionResult> getCurrentWeatherByZipCode(string zipcode = "90815") {
+CurrentWeather currentweather = null;
+using(var httpClient = new HttpClient()) {
+try{
+string url = "https://api.openweathermap.org/data/2.5/weather?zip=" + zipcode + "&APPID=" + API_KEY;
+
+var response = await httpClient.GetAsync(new Uri(url)).ConfigureAwait(false);
+
+response.EnsureSuccessStatusCode();
+
+var stringResult = await response.Content.ReadAsStringAsync();
+var rawData =  JsonConvert.DeserializeObject<CurrentWeather>(stringResult);
+currentweather = new CurrentWeather{
+    weather = rawData.weather.Select(element => {element.icon = "http://openweathermap.org/img/w/"+ element.icon+".png"; return element;}).ToList(),
+    main = rawData.main 
+    
+    };
+return Ok(currentweather);
+}
+catch(HttpRequestException httpRequestException) {
+ return BadRequest($"Error getting data: {httpRequestException.Message}");
+}
+
+}
+
+}
 }

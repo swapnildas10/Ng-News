@@ -11,7 +11,7 @@
     <!--/.Card image-->
 
     <!--Button-->
-    <a class="btn-floating btn-action waves-light" mdbRippleRadius><i class="fa fa-chevron-right"></i></a>
+    <a class="btn-floating btn-action waves-light" data-toggle="modal" data-target="#basicExample" (click)="demoBasic.show()" mdbRippleRadius><i class="fa fa-chevron-right"></i></a>
 
     <!--Card content-->
     <div class="card-body">
@@ -34,4 +34,24 @@
 
 </div>
 <!--Card-->
+<div mdbModal #demoBasic="mdb-modal" class="modal fade" id="basicExample" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg " role="document">
+        <div  class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title w-100" id="myModalLabel">{{article.title}}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="demoBasic.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div  class="modal-body">
+               <!-- <div [innerHTML]="article.url | safe" width="100%" height="100%"  ></div> -->
+               <iframe style="min-height:70vh" [src]="article.url | safe" width="100%" height="100%"></iframe>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="demoBasic.hide()" mdbRippleRadius>Close</button>
+                <button type="button" class="btn btn-primary btn-sm waves-light" mdbRippleRadius>Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
             

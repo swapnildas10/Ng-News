@@ -41,6 +41,7 @@ ngOnChanges(changes: SimpleChanges) {
         // this.newsData = response.map(key =>
         //   `${key}: ${response.headers.get(key)}`);
         this.responseData = response.body;
+        console.log(this.responseData.totalResults);
         this.TopFive = this.responseData.articles.splice(0, 5);
         this.articlesSharingService.shareArticleByCategory(this.responseData.articles.slice(0, 3));
         this.articlesSharingService.shareTotalArticle(this.responseData.totalResults);

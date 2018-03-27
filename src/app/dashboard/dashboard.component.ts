@@ -27,6 +27,7 @@ export class DashboardComponent implements OnInit {
     this.apiConnectionService.getBreakingNewsfromAPI('us', 'business').subscribe(
       response => {
         this.topHeadlines = response.body;
+        console.log(this.topHeadlines.totalResults);
       }
     );
     this.apiConnectionService.getCurrentWeatherDataByZipCodeAPI().subscribe(

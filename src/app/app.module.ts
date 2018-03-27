@@ -21,6 +21,7 @@ import { SafePipe } from './shared/Pipes/safe-pipe';
 import { TemperatureConverterPipe } from './shared/Pipes/temperature-converter-pipe';
 import { DashboardArticleComponent } from './dashboard/dashboard-article/dashboard-article.component';
 import {TimeAgoPipe} from 'time-ago-pipe';
+import { LoopDirective } from './shared/custom-directives/loop-directive.directive';
 const appRoutes: Routes = [
   {path: 'TopUSNews', component: BreakingNewsComponent},
   {path: 'category/:id', component: CategoryNewsComponent},
@@ -42,7 +43,8 @@ const appRoutes: Routes = [
     SafePipe,
     TemperatureConverterPipe,
     DashboardArticleComponent,
-    TimeAgoPipe
+    TimeAgoPipe,
+    LoopDirective
   ],
   imports: [
     BrowserModule,
@@ -54,6 +56,9 @@ const appRoutes: Routes = [
   ],
   providers: [ApiConnectionService, ArticleSharingService],
   bootstrap: [AppComponent],
-  schemas: [ NO_ERRORS_SCHEMA ]
+  schemas: [ NO_ERRORS_SCHEMA ],
+  exports: [
+    LoopDirective
+  ]
 })
 export class AppModule { }

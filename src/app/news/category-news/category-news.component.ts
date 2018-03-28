@@ -1,10 +1,12 @@
-import { Component, OnInit, Input, OnChanges, SimpleChange, SimpleChanges, Output, EventEmitter, HostListener } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChange, SimpleChanges, Output, EventEmitter,
+  HostListener, ViewChild } from '@angular/core';
 import { ApiConnectionService } from '../../shared/services/apiconnection.service';
 import { SearchQueryModal } from '../../shared/modals/searchquerymodal';
 import { TopHeadlines } from '../../shared/modals/top-headlines';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Article } from '../../shared/modals/article';
 import { ArticleSharingService } from '../../shared/services/article-sharing.service';
+import { ModalDirective } from 'angular-bootstrap-md';
 
 
 @Component({
@@ -15,8 +17,9 @@ import { ArticleSharingService } from '../../shared/services/article-sharing.ser
 export class CategoryNewsComponent implements OnInit, OnChanges {
 responseData: TopHeadlines;
 TopFive;
-
+article: Article;
 @Output() topArticlesByCategory = new EventEmitter<Article[]>();
+@ViewChild('demoBasic') modal: ModalDirective;
  category: string;
  topnav; styleName;
  className = 'navbar navbar-expand-lg navbar-dark indigo';
@@ -33,6 +36,17 @@ TopFive;
   }
 ngOnChanges(changes: SimpleChanges) {
 // this.getCategoryNewsData(changes.category.currentValue);
+}
+onShowModal(event: Boolean) {
+  if (event) {
+    this.modal.show();
+  }
+}
+onHidden() {
+this.article = null;
+}
+onDisplayArticleOnModal(event: Article) {
+  this.article = event;
 }
   getCategoryNewsData(category: string) {
    // console.log(inputcategory);

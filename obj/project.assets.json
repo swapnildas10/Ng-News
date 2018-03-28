@@ -12535,23 +12535,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\swapn\\.nuget\\packages\\": {},
+    "C:\\Users\\QAuser\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\swapn\\Desktop\\ng-news\\Ng-News\\ng-news.csproj",
+      "projectUniqueName": "C:\\Users\\QAuser\\Downloads\\ng-news\\ng-news.csproj",
       "projectName": "ng-news",
-      "projectPath": "C:\\Users\\swapn\\Desktop\\ng-news\\Ng-News\\ng-news.csproj",
-      "packagesPath": "C:\\Users\\swapn\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\swapn\\Desktop\\ng-news\\Ng-News\\obj\\",
+      "projectPath": "C:\\Users\\QAuser\\Downloads\\ng-news\\ng-news.csproj",
+      "packagesPath": "C:\\Users\\QAuser\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\QAuser\\Downloads\\ng-news\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\swapn\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\QAuser\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -12559,7 +12559,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Users\\swapn\\Desktop\\simplifycommerce-sdk-dotnet-1.6.0-src\\packages": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

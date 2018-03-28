@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Article } from '../../../shared/modals/article';
 
 @Component({
@@ -8,9 +8,14 @@ import { Article } from '../../../shared/modals/article';
 })
 export class BreakingNewsArticleComponent implements OnInit {
   @Input() article: Article;
+  @Output() outArticle = new EventEmitter<Article>();
+  @Output() showModal = new EventEmitter<Boolean>();
   constructor() { }
 
   ngOnInit() {
   }
-
+  onClickEmit() {
+    this.outArticle.emit(this.article);
+    this.showModal.emit(true);
+  }
 }

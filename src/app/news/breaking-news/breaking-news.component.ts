@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiConnectionService } from '../../shared/services/apiconnection.service';
 import { Article } from '../../shared/modals/article';
 import { TopHeadlines } from '../../shared/modals/top-headlines';
 import { Source, SourceWrapper } from '../../shared/modals/source';
+import { ModalDirective } from 'angular-bootstrap-md';
 
 @Component({
   selector: 'app-breaking-news',
@@ -13,7 +14,9 @@ export class BreakingNewsComponent implements OnInit {
 
   constructor(private apiConnectionService: ApiConnectionService) { }
    newsData: TopHeadlines;
+   article: Article;
   private sourceData: SourceWrapper;
+  @ViewChild('demoBasic') modal: ModalDirective;
   ngOnInit() {
     this.getBreakingNewsData();
   }
@@ -36,5 +39,18 @@ export class BreakingNewsComponent implements OnInit {
         this.sourceData = response.body;
       }
     );
+  }
+
+  displayArticleOnModal(event: Article) {
+    this.article = event;
+  }
+
+  initiateModal(event: Boolean) {
+    if (event) {
+    this.modal.show();
+    }
+  }
+  onHidden() {
+    this.article = null;
   }
 }

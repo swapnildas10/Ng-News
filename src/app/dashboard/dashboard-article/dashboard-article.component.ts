@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, Input } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { Article } from '../../shared/modals/article';
 
 @Component({
@@ -8,9 +8,14 @@ import { Article } from '../../shared/modals/article';
 })
 export class DashboardArticleComponent implements OnInit {
 @Input() article: Article;
+@Output() initiate = new EventEmitter<boolean>();
+@Output() outArticle = new EventEmitter<Article>();
   constructor() { }
 
   ngOnInit() {
   }
-
+onclickEmit() {
+  this.initiate.emit(true);
+  this.outArticle.emit(this.article);
+}
 }

@@ -1,8 +1,10 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit, HostBinding, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiConnectionService } from '../shared/services/apiconnection.service';
 import { WeatherWrapper, CurrentWeather } from '../shared/modals/weather';
 import { TopHeadlines } from '../shared/modals/top-headlines';
+import { Article } from '../shared/modals/article';
+import { ModalDirective } from 'angular-bootstrap-md';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,6 +15,8 @@ export class DashboardComponent implements OnInit {
   weatherWrapper: WeatherWrapper;
   topHeadlines: TopHeadlines;
   currentWeather: CurrentWeather;
+  article: Article;
+  @ViewChild('demoBasic') modal: ModalDirective;
   constructor(
     private router: Router,
     private apiConnectionService: ApiConnectionService
@@ -37,4 +41,15 @@ export class DashboardComponent implements OnInit {
     );
   }
 
+  initiateModal(event: Boolean) {
+    if (event) {
+     this.modal.show();
+    }
+  }
+  displayArticleOnModal(event: Article) {
+this.article = event;
+  }
+  onHidden() {
+    this.article = null;
+  }
 }

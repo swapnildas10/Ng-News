@@ -22,6 +22,8 @@ import { TemperatureConverterPipe } from './shared/Pipes/temperature-converter-p
 import { DashboardArticleComponent } from './dashboard/dashboard-article/dashboard-article.component';
 import {TimeAgoPipe} from 'time-ago-pipe';
 import { LoopDirective } from './shared/custom-directives/loop-directive.directive';
+import { PaginationComponent } from './shared/pagination/pagination.component';
+import { FormsModule } from '@angular/forms';
 const appRoutes: Routes = [
   {path: 'TopUSNews', component: BreakingNewsComponent},
   {path: 'category/:id', component: CategoryNewsComponent},
@@ -44,10 +46,12 @@ const appRoutes: Routes = [
     TemperatureConverterPipe,
     DashboardArticleComponent,
     TimeAgoPipe,
-    LoopDirective
+    LoopDirective,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     HttpClientModule,
     MDBBootstrapModule.forRoot(),
     RouterModule.forRoot(

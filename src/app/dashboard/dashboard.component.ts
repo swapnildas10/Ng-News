@@ -52,4 +52,7 @@ this.article = event;
   onHidden() {
     this.article = null;
   }
+  onPageClicked(event: number) {
+
+  }
 }

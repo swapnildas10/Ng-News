@@ -19,19 +19,56 @@ getBreakingNewsfromAPI(country: string = null, category: string = null,
             url = url + 'category=' + category;
         }
         if (country != null && country.toLocaleLowerCase() !== 'null') {
-            url = url + '&country=' + country;
+            if (category) {
+                url = url + '&country=' + country;
+            } else {
+                url = url + 'country=' + country;
+            }
         }
         if (sources != null && sources.toLocaleLowerCase() !== 'null') {
-            url = url + '?sources=' + sources;
+            if (category) {
+                url = url + '&sources=' + sources;
+            } else {
+                if (country) {
+                    url = url + '&sources=' + sources;
+                } else {
+                    url = url + 'sources=' + sources;
+                }
+            }
         }
         if (q != null && q.toLocaleLowerCase() !== 'null') {
-            url = url + '&q=' + q;
+            if (category) {
+                url = url + '&q=' + q;
+            } else {
+                if (sources || category || country) {
+                    url = url + '&q=' + q;
+                } else {
+                    url = url + 'q=' + q;
+                }
+            }
         }
         if (pageSize != null) {
-            url = url + '&pageSize=' + pageSize;
+            if (category) {
+                url = url + '&pageSize=' + pageSize;
+            } else {
+                if (sources || q || category || country) {
+                    url = url + '&pageSize=' + pageSize;
+                } else {
+                    url = url + 'pageSize=' + pageSize;
+                }
+            }
         }
         if (page != null ) {
-            url = url + '?page=' + page;
+           
+            if (category) {
+                url = url + '&page=' + page;
+            } else {
+                if (sources || q || category || pageSize || country) {
+                    url = url + 'page=' + page;
+                } else {
+                    url = url + 'page=' + page;
+                }
+            }
         }
     return this.httpClient.get<TopHeadlines>(url , { observe : 'response' } );
 }

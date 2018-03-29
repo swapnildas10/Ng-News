@@ -83,4 +83,8 @@ this.className = 'navbar navbar-expand-lg navbar-dark indigo fixed-top scrolling
    }
 
   }
+
+  onPageClick(event: number) {
+
+  }
 }

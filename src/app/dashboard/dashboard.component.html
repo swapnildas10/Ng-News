@@ -56,7 +56,7 @@
                     <app-dashboard-article (outArticle)='displayArticleOnModal($event)' (initiate)='initiateModal($event)' [article]="article"></app-dashboard-article>
                 </div>
             </div>
-            <app-pagination [pageCount]="topHeadlines.totalResults/20" [pageSize]="20" (pageClicked)="onPageClicked($event)" *ngIf="topHeadlines"></app-pagination>
+            <app-pagination (pageClicked)="onPageClick($event)" [pageCount]="5" [pageSize]="20"  *ngIf="topHeadlines"></app-pagination>
         </div>
         
     </section>

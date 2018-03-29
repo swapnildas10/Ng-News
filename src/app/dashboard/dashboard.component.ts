@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
         this.weatherWrapper = response.body;
       }
     );
-    this.apiConnectionService.getBreakingNewsfromAPI('us', 'business').subscribe(
+    this.apiConnectionService.getBreakingNewsfromAPI('us', null, null, null, 30, 1).subscribe(
       response => {
         this.topHeadlines = response.body;
         console.log(this.topHeadlines.totalResults);
@@ -52,7 +52,7 @@ this.article = event;
   onHidden() {
     this.article = null;
   }
-  onPageClicked(event: number) {
-
+  onPageClick(event: number) {
+console.log(event);
   }
 }

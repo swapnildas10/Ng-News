@@ -15,7 +15,7 @@
           
           
           <!--Numbers-->
-          <div   *appLoop = "5;let j = index"><li  class="page-item active">
+          <div   *appLoop = "pageCount;let j = index"><li  class="page-item active">
             <a (click)="onpageClick(j+1)" class="page-link" mdbRippleRadius>{{j+1}}</a></li></div>
          
               

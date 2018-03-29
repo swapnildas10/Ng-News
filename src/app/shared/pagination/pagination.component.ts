@@ -20,7 +20,6 @@ export class PaginationComponent implements OnInit {
     this.pageClicked.emit(event);
   }
   onIndex(event: number) {
-    console.log(event);
 this.num = event;
   }
 }

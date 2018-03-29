@@ -15,7 +15,9 @@
           
           
           <!--Numbers-->
-          <li [attr.id] = "num"  (index) = "onIndex($event)"  *appLoop = "5" class="page-item active"><a (click)="onpageClick(num)" class="page-link" mdbRippleRadius>{{num}}</a></li>
+          <div   *appLoop = "5;let j = index"><li  class="page-item active">
+            <a (click)="onpageClick(j+1)" class="page-link" mdbRippleRadius>{{j+1}}</a></li></div>
+         
               
   
           <!--Arrow right-->

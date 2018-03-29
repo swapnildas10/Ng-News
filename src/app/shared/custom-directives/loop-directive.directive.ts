@@ -1,13 +1,19 @@
 import { Directive, Input, TemplateRef, ViewContainerRef, Output, EventEmitter } from '@angular/core';
-import {  } from 'selenium-webdriver';
 
-@Directive({ selector: '[appLoop]', exportAs: 'appLoop'})
+
+
+@Directive({
+    selector: '[appLoop]'
+})
 export class LoopDirective {
-    @Output() index = new EventEmitter<number>();
-    @Input() set appLoop(count: number) {
+    index: number;
+     @Input() set appLoop(count: number) {
         for ( let i = 0; i < count; i++) {
-           this.viewContainer.createEmbeddedView(this.templateRef);
-          this.index.emit(i);
+            this.index = i;
+           this.viewContainer.createEmbeddedView(this.templateRef, {
+               $implicit: i,
+               index: this.index
+            });
         }
     }
     constructor(

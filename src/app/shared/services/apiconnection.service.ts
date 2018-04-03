@@ -6,7 +6,9 @@ import { TopHeadlines } from '../modals/top-headlines';
 import { Source, SourceWrapper } from '../modals/source';
 import { SearchQueryModal } from '../modals/searchquerymodal';
 import { WeatherWrapper, CurrentWeather } from '../modals/weather';
-
+import { CompanyLogo } from '../modals/company-logo';
+import 'rxjs/add/operator/map';
+import { DomainLogo } from '../modals/domain-logo';
 @Injectable()
 export class ApiConnectionService {
    private  _baseUrl = 'http://localhost:5000/api/';
@@ -59,7 +61,6 @@ getBreakingNewsfromAPI(country: string = null, category: string = null,
             }
         }
         if (page != null ) {
-           
             if (category) {
                 url = url + '&page=' + page;
             } else {
@@ -159,5 +160,12 @@ getWeatherDataByZipCodeAPI(zipcode: string = '90815 ') {
 getCurrentWeatherDataByZipCodeAPI(zipcode: string = '90815 ') {
  const url = this._baseUrl + 'currentweather?zipcode=' + zipcode;
  return this.httpClient.get<CurrentWeather>(url, {observe : 'response'});
+}
+
+
+getCompanyLogo(name: string) {
+    console.log(name);
+    const url = this._baseUrl + 'companylogo?name=' + name;
+    return this.httpClient.get(url, {observe: 'response'});
 }
 }

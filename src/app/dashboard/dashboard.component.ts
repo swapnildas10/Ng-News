@@ -5,6 +5,8 @@ import { WeatherWrapper, CurrentWeather } from '../shared/modals/weather';
 import { TopHeadlines } from '../shared/modals/top-headlines';
 import { Article } from '../shared/modals/article';
 import { ModalDirective } from 'angular-bootstrap-md';
+import { CompanyLogo } from '../shared/modals/company-logo';
+import { DomainLogo } from '../shared/modals/domain-logo';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,6 +23,13 @@ export class DashboardComponent implements OnInit {
     private router: Router,
     private apiConnectionService: ApiConnectionService
   ) { }
+  isCompanyLogo(input: any): input is CompanyLogo {
+    return input.constructor.name === 'Object';
+  }
+  isDomainLogo(input: any): input is string {
+    return input.constructor.name === 'String';
+  }
+
 
   ngOnInit() {
     this.apiConnectionService.getWeatherDataByZipCodeAPI().subscribe(
@@ -31,7 +40,20 @@ export class DashboardComponent implements OnInit {
     this.apiConnectionService.getBreakingNewsfromAPI('us', null, null, null, 30, 1).subscribe(
       response => {
         this.topHeadlines = response.body;
-        console.log(this.topHeadlines.totalResults);
+        this.topHeadlines.articles.forEach(element => {
+        this.apiConnectionService.getCompanyLogo(decodeURIComponent(element.source.name)).subscribe(
+          (logoresponse)  => {
+            console.log(logoresponse);
+          if (this.isDomainLogo(logoresponse)) {
+            element.domainLogo = logoresponse;
+            console.log(logoresponse);
+          } else if (this.isCompanyLogo(logoresponse.body)) {
+            element.companyLogo = logoresponse.body;
+            console.log(element.companyLogo);
+          }
+          }
+        );
+        });
       }
     );
     this.apiConnectionService.getCurrentWeatherDataByZipCodeAPI().subscribe(

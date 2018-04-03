@@ -19,7 +19,8 @@
         <h4 class="card-title">{{article.title}}</h4>
         <hr>
         <!--Text-->
-        <p class="card-text">{{article.source.name}}</p>
+        <p class="card-text"><img *ngIf="article.companyLogo;else elseBlock" [src]="article.companyLogo.logo">{{article.source.name}}</p>
+         <ng-template #elseBlock><img *ngIf="article.domainLogo" [src]="article.domainLogo"/></ng-template>
     </div>
     <!--/.Card content-->
 

@@ -1,6 +1,6 @@
 import { Article } from './article';
 
-export class SearchQueryModal {
+export interface SearchQueryModal {
     status: string;
     totalResult: number;
     articles: Article[];

@@ -42,3 +42,5 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+bin/Debug/netcoreapp2.0/ng-news.pdb
+bin/Debug/netcoreapp2.0/ng-news.dll

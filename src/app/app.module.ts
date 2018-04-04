@@ -23,8 +23,10 @@ import { DashboardArticleComponent } from './dashboard/dashboard-article/dashboa
 import {TimeAgoPipe} from 'time-ago-pipe';
 import { LoopDirective } from './shared/custom-directives/loop-directive.directive';
 import { PaginationComponent } from './shared/pagination/pagination.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchBoxComponent } from './shared/search-box/search-box.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MaterialModule } from './shared/modules/material/material.module';
 const appRoutes: Routes = [
   {path: 'TopUSNews', component: BreakingNewsComponent},
   {path: 'category/:id', component: CategoryNewsComponent},
@@ -54,11 +56,14 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     MDBBootstrapModule.forRoot(),
     RouterModule.forRoot(
       appRoutes, {enableTracing: true}
-    )
+    ),
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [ApiConnectionService, ArticleSharingService],
   bootstrap: [AppComponent],

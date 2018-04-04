@@ -1,0 +1,25 @@
+
+.form-control:focus {
+    background: white;
+}
+
+input[type=text]{
+    background-color: rgba(255, 255, 255, 0.39);
+}
+
+.fa{
+    position: absolute;
+    left: 30px;
+    top: 15px;
+}
+
+.md-form{
+    min-width: 70%;
+}
+
+.md-form.form-sm input {
+     
+    padding-left: 3.0rem;
+    padding-right: 3.0rem;
+     
+}

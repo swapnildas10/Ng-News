@@ -24,6 +24,7 @@ import {TimeAgoPipe} from 'time-ago-pipe';
 import { LoopDirective } from './shared/custom-directives/loop-directive.directive';
 import { PaginationComponent } from './shared/pagination/pagination.component';
 import { FormsModule } from '@angular/forms';
+import { SearchBoxComponent } from './shared/search-box/search-box.component';
 const appRoutes: Routes = [
   {path: 'TopUSNews', component: BreakingNewsComponent},
   {path: 'category/:id', component: CategoryNewsComponent},
@@ -47,7 +48,8 @@ const appRoutes: Routes = [
     DashboardArticleComponent,
     TimeAgoPipe,
     LoopDirective,
-    PaginationComponent
+    PaginationComponent,
+    SearchBoxComponent
   ],
   imports: [
     BrowserModule,

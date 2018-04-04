@@ -1,0 +1,4 @@
+<form class="form-inline md-form form-sm flex-center mt-2">
+    <i class="fa fa-search" aria-hidden="true"></i>
+    <input id="input_text" type="text" length="50" mdbCharCounter mdbActive #inputbox (keyup.enter) ="onEnterPressed(inputbox.value)" (blur) ="inputbox.value = ''"  (keyup)="onKeyPressed(inputbox.value)" class="form-control form-control-sm ml-3 w-100" type="text" placeholder="Search" aria-label="Search">
+</form>

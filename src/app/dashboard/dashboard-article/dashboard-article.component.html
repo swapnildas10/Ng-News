@@ -19,9 +19,14 @@
         <h4 class="card-title">{{article.title}}</h4>
         <hr>
         <!--Text-->
-        <p class="card-text"><img *ngIf="article.companyLogo;else elseBlock" [src]="article.companyLogo.logo">{{article.source.name}}</p>
-         <ng-template #elseBlock><img *ngIf="article.domainLogo" [src]="article.domainLogo"/></ng-template>
-    </div>
+        <div class="row">
+            <div class="col-2 col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                <p class="card-text justify-content-center"><img *ngIf="article.companyLogo;else elseBlock" [src]="article.companyLogo.logo+'?size=40'"></p>
+                <ng-template #elseBlock><img *ngIf="article.domainLogo" [src]="article.domainLogo.url"/></ng-template>       
+            </div>
+            <div style="text-align:center" class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10">{{article.source.name}}</div>
+        </div>
+      </div>
     <!--/.Card content-->
 
     <!-- Card footer -->

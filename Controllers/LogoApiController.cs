@@ -10,7 +10,7 @@ public class LogoApiController: Controller {
 private const string API_KEY = "sk_acf260caf5f1c9f12e95c38cc721228a";
 [HttpGet]
 [Route("/api/companylogo/{name?}/{size?}/{greyscale?}")]
-public  async Task<IActionResult> getCompanyLogo(string name, int size = 200, bool greyscale = false) {
+public  async Task<IActionResult> getCompanyLogo(string name, int size = 40, bool greyscale = false) {
 using(var httpClient = new HttpClient()) {
     if(name.Contains(".")) {
         LogoByDomain logoByDomain = null;
@@ -19,14 +19,12 @@ using(var httpClient = new HttpClient()) {
        
         var response = await httpClient.GetAsync(new Uri(url)).ConfigureAwait(false);
         response.EnsureSuccessStatusCode();
-        // var stringResult = await response.Content.ReadAsStringAsync();
-        //   var rawData = JsonConvert.DeserializeObject<LogoByDomain>(stringResult);
-        // logoByDomain = new LogoByDomain {
-        //     Size = rawData.Size,
-        //     Format = rawData.Format,
-        //     GreyScale = rawData.GreyScale
-        // };
-        return Ok(url);
+        var stringResult = await response.Content.ReadAsStringAsync();
+         // var rawData = JsonConvert.DeserializeObject<LogoByDomain>(stringResult);
+        logoByDomain = new LogoByDomain {
+            url = url
+        };
+        return Ok(logoByDomain);
     }
     catch(HttpRequestException httpRequestException) {
          return BadRequest($"Error getting data: {httpRequestException.Message}");

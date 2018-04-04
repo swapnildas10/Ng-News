@@ -24,10 +24,10 @@ export class DashboardComponent implements OnInit {
     private apiConnectionService: ApiConnectionService
   ) { }
   isCompanyLogo(input: any): input is CompanyLogo {
-    return input.constructor.name === 'Object';
+    return input.constructor.name === 'CompanyLogo';
   }
-  isDomainLogo(input: any): input is string {
-    return input.constructor.name === 'String';
+  isDomainLogo(input: any): input is DomainLogo {
+    return input.constructor.name === 'DomainLogo';
   }
 
 
@@ -41,18 +41,19 @@ export class DashboardComponent implements OnInit {
       response => {
         this.topHeadlines = response.body;
         this.topHeadlines.articles.forEach(element => {
-        this.apiConnectionService.getCompanyLogo(decodeURIComponent(element.source.name)).subscribe(
-          (logoresponse)  => {
-            console.log(logoresponse);
-          if (this.isDomainLogo(logoresponse)) {
-            element.domainLogo = logoresponse;
-            console.log(logoresponse);
-          } else if (this.isCompanyLogo(logoresponse.body)) {
-            element.companyLogo = logoresponse.body;
-            console.log(element.companyLogo);
+          if (!element.source.name.includes('.')) {
+            this.apiConnectionService.getCompanyLogo(decodeURIComponent(element.source.name)).subscribe(
+              logo => {
+                element.companyLogo = logo.body;
+              }
+            );
+          } else {
+            this.apiConnectionService.getCompanyLogoByDomain(decodeURIComponent(element.source.name)).subscribe(
+              logo => {
+                element.domainLogo = logo.body;
+              }
+            );
           }
-          }
-        );
         });
       }
     );

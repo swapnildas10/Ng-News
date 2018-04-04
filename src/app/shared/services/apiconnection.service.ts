@@ -164,8 +164,11 @@ getCurrentWeatherDataByZipCodeAPI(zipcode: string = '90815 ') {
 
 
 getCompanyLogo(name: string) {
-    console.log(name);
+    const url = this._baseUrl + 'companylogo?name='.concat(name);
+        return this.httpClient.get<CompanyLogo>(url, {observe : 'response'});
+}
+getCompanyLogoByDomain(name: string) {
     const url = this._baseUrl + 'companylogo?name=' + name;
-    return this.httpClient.get(url, {observe: 'response'});
+    return this.httpClient.get<DomainLogo>(url, {observe : 'response'});
 }
 }

@@ -119,34 +119,35 @@ getSourcesfromAPI(category: string = null, language: string = null, country: str
 getQueryResultfromAPI(q: string = null, sources: string = null, domain: string = null,
     from: string = null, to: string = null, language: string = null, sortBy: string = null,
     pageSize: number = null, page: number = null ): Observable<HttpResponse<SearchQueryModal>> {
-    let url = this._baseUrl + 'Source';
+    let url = this._baseUrl + 'Query';
     if (q != null && q.toLocaleLowerCase() !== 'null') {
-        url = url + + '?q=' + q;
+        url = url  + '?q=' + q;
     }
     if (sources != null && sources.toLocaleLowerCase() !== 'null') {
-        url = url + + '?sources=' + sources;
+        url = url  + '?sources=' + sources;
     }
     if (domain != null && domain.toLocaleLowerCase() !== 'null') {
-        url = url + + '?domain=' + domain;
+        url = url  + '?domain=' + domain;
     }
     if (from != null && from.toLocaleLowerCase() !== 'null') {
-        url = url + + '?from=' + from;
+        url = url  + '?from=' + from;
     }
     if (to != null && to.toLocaleLowerCase() !== 'null') {
-        url = url + + '?to=' + to;
+        url = url  + '?to=' + to;
     }
     if (language != null && language.toLocaleLowerCase() !== 'null') {
-        url = url  + '?language=' + language;
+        url = url  + '&language=' + language;
     }
     if (sortBy != null && sortBy.toLocaleLowerCase() !== 'null') {
-        url = url + + '?sortBy=' + sortBy;
+        url = url  + '?sortBy=' + sortBy;
     }
     if (pageSize != null) {
-        url = url + + '?domain=' + pageSize;
+        url = url  + '?domain=' + pageSize;
     }
     if (page != null) {
-        url = url + + '?page=' + page;
+        url = url  + '?page=' + page;
     }
+    console.log(url);
     return this.httpClient.get<SearchQueryModal>(
       url ,
         { observe : 'response'} );

@@ -32,36 +32,36 @@ export class DashboardComponent implements OnInit {
 
 
   ngOnInit() {
-    this.apiConnectionService.getWeatherDataByZipCodeAPI().subscribe(
-      response => {
-        this.weatherWrapper = response.body;
-      }
-    );
-    this.apiConnectionService.getBreakingNewsfromAPI('us', null, null, null, 30, 1).subscribe(
-      response => {
-        this.topHeadlines = response.body;
-        this.topHeadlines.articles.forEach(element => {
-          if (!element.source.name.includes('.')) {
-            this.apiConnectionService.getCompanyLogo(decodeURIComponent(element.source.name)).subscribe(
-              logo => {
-                element.companyLogo = logo.body;
-              }
-            );
-          } else {
-            this.apiConnectionService.getCompanyLogoByDomain(decodeURIComponent(element.source.name)).subscribe(
-              logo => {
-                element.domainLogo = logo.body;
-              }
-            );
-          }
-        });
-      }
-    );
-    this.apiConnectionService.getCurrentWeatherDataByZipCodeAPI().subscribe(
-      response => {
-        this.currentWeather = response.body;
-      }
-    );
+    // this.apiConnectionService.getWeatherDataByZipCodeAPI().subscribe(
+    //   response => {
+    //     this.weatherWrapper = response.body;
+    //   }
+    // );
+    // this.apiConnectionService.getBreakingNewsfromAPI('us', null, null, null, 30, 1).subscribe(
+    //   response => {
+    //     this.topHeadlines = response.body;
+    //     this.topHeadlines.articles.forEach(element => {
+    //       if (!element.source.name.includes('.')) {
+    //         this.apiConnectionService.getCompanyLogo(decodeURIComponent(element.source.name)).subscribe(
+    //           logo => {
+    //             element.companyLogo = logo.body;
+    //           }
+    //         );
+    //       } else {
+    //         this.apiConnectionService.getCompanyLogoByDomain(decodeURIComponent(element.source.name)).subscribe(
+    //           logo => {
+    //             element.domainLogo = logo.body;
+    //           }
+    //         );
+    //       }
+    //     });
+    //   }
+    // );
+    // this.apiConnectionService.getCurrentWeatherDataByZipCodeAPI().subscribe(
+    //   response => {
+    //     this.currentWeather = response.body;
+    //   }
+    // );
   }
 
   initiateModal(event: Boolean) {

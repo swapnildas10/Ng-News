@@ -1,9 +1,17 @@
 <form class="form-inline md-form form-sm flex-center mt-2">
     <i class="fa fa-search" aria-hidden="true"></i>
     <i (click) ="toggleAdvancedSearch()" class="fa cogs fa-cogs" aria-hidden="true"></i>
-    <input id="input_text" type="text" length="50" mdbCharCounter mdbActive #inputbox (keyup.enter) ="onEnterPressed(inputbox.value)" (blur) ="inputbox.value = ''"  (keyup)="onKeyPressed(inputbox.value)" class="form-control form-control-sm ml-3 w-100" type="text" placeholder="Search" aria-label="Search">
-     
-           
+      
+    
+      <input  class="form-control form-control-sm ml-3 w-100"
+      (keyup.enter) ="onEnterPressed(inputbox.value)" (blur) ="inputbox.value = ''"  (keyup)="onKeyPressed(inputbox.value)"
+       id="input_text" type="text" placeholder="Search" #inputbox aria-label="Assignee" matInput [formControl]="searchBox" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option.title">
+          {{ option.title }}
+        </mat-option>
+      </mat-autocomplete>
+    
       
                  
                   
@@ -23,20 +31,20 @@
                     <mat-datepicker #picker2></mat-datepicker>
                   </mat-form-field>
                   <mat-form-field>
-                        <mat-select placeholder="Popularity">
+                        <mat-select placeholder="Sort By">
                           <mat-option>None</mat-option>
-                          <mat-option *ngFor="let state of [1,2,3,4]" [value]="state">{{state}}</mat-option>
+                          <mat-option *ngFor="let state of sortBy" [value]="state">{{state}}</mat-option>
                         </mat-select>
                       </mat-form-field>  
-                      <mat-form-field>
-                            <mat-select placeholder="Toppings" [formControl]="toppings" multiple>
+                      <mat-form-field *ngIf="sourceWrapper">
+                            <mat-select placeholder="Publishers" [formControl]="publishers" multiple>
                               <mat-select-trigger>
-                                {{toppings.value ? toppings.value[0] : ''}}
-                                <span *ngIf="toppings.value?.length > 1" class="example-additional-selection">
-                                  (+{{toppings.value.length - 1}} others)
+                                {{publishers.value ? publishers.value[0] : ''}}
+                                <span *ngIf="publishers.value?.length > 1" class="example-additional-selection">
+                                  (+{{publishers.value.length - 1}} others)
                                 </span>
                               </mat-select-trigger>
-                              <mat-option *ngFor="let topping of [1,2,3,4,5]" [value]="topping">{{topping}}</mat-option>
+                              <mat-option *ngFor="let source of sourceWrapper.sources" [value]="source.name">{{source.name}}</mat-option>
                             </mat-select>
                           </mat-form-field>
 </form>    

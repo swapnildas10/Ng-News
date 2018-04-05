@@ -104,12 +104,21 @@ getSourcesfromAPI(category: string = null, language: string = null, country: str
     if (category != null && category.toLocaleLowerCase() !== 'null') {
         url = url + + '?category=' + category;
     }
-    if (language != null && language.toLocaleLowerCase() !== 'null') {
-        url = url + + '?language=' + language;
+    if (language != null && language.toLocaleLowerCase() !== 'null' ) {
+        if (category == null) {
+            url = url + + '?language=' + language;
+        } else {
+            url = url + + '&language=' + language;
+        }
     }
     if (country != null && country.toLocaleLowerCase() !== 'null') {
-        url = url + + '?country=' + country;
+        if (category == null && language == null) {
+            url = url + + '?country=' + country;
+        } else {
+            url = url + + '&country=' + country;
+        }
     }
+    console.log(url);
     return this.httpClient.get<SourceWrapper>(
        url ,
         { observe : 'response'} );
@@ -124,28 +133,61 @@ getQueryResultfromAPI(q: string = null, sources: string = null, domain: string =
         url = url  + '?q=' + q;
     }
     if (sources != null && sources.toLocaleLowerCase() !== 'null') {
-        url = url  + '?sources=' + sources;
+        if (q == null) {
+            url = url  + '?sources=' + sources;
+        } else {
+            url = url  + '&sources=' + sources;
+        }
     }
     if (domain != null && domain.toLocaleLowerCase() !== 'null') {
-        url = url  + '?domain=' + domain;
+        if (q == null && sources == null) {
+            url = url  + '?domain=' + domain;
+        } else {
+            url = url  + '&domain=' + domain;
+        }
     }
     if (from != null && from.toLocaleLowerCase() !== 'null') {
-        url = url  + '?from=' + from;
+        if (q == null && sources == null && domain == null) {
+            url = url  + '?from=' + from;
+        } else {
+            url = url  + '&from=' + from;
+        }
     }
     if (to != null && to.toLocaleLowerCase() !== 'null') {
-        url = url  + '?to=' + to;
+        if (q == null && sources == null && domain == null && from == null) {
+            url = url  + '?to=' + to;
+        } else {
+            url = url  + '&to=' + to;
+        }
     }
     if (language != null && language.toLocaleLowerCase() !== 'null') {
-        url = url  + '&language=' + language;
+        if (q == null && sources == null && domain == null && from == null && to == null) {
+            url = url  + '?language=' + language;
+        } else {
+            url = url  + '&language=' + language;
+        }
     }
     if (sortBy != null && sortBy.toLocaleLowerCase() !== 'null') {
-        url = url  + '?sortBy=' + sortBy;
+        if (q == null && sources == null && domain == null && from == null && to == null && language == null) {
+            url = url  + '?sortBy=' + sortBy;
+        } else {
+            url = url  + '&sortBy=' + sortBy;
+        }
     }
     if (pageSize != null) {
-        url = url  + '?domain=' + pageSize;
+        if (q == null && sources == null && domain == null && from == null && to == null && language == null && sortBy == null) {
+            url = url  + '?domain=' + pageSize;
+        } else {
+            url = url  + '&domain=' + pageSize;
+        }
     }
     if (page != null) {
-        url = url  + '?page=' + page;
+        if (q == null && sources == null && domain == null && from == null && to == null && 
+            language == null && sortBy == null && pageSize == null) {
+            url = url  + '?page=' + page;
+        } else {
+            url = url  + '&page=' + page;
+        }
     }
     console.log(url);
     return this.httpClient.get<SearchQueryModal>(

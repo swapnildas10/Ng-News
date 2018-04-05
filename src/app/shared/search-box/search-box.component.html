@@ -4,10 +4,10 @@
       
     
       <input  class="form-control form-control-sm ml-3 w-100"
-      (keyup.enter) ="onEnterPressed(inputbox.value)" (blur) ="inputbox.value = ''"  (keyup)="onKeyPressed(inputbox.value)"
+      (keyup.enter) ="onEnterPressed(inputbox.value)"   (keyup)="onKeyPressed(inputbox.value)"
        id="input_text" type="text" placeholder="Search" #inputbox aria-label="Assignee" matInput [formControl]="searchBox" [matAutocomplete]="auto">
       <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-        <mat-option *ngFor="let option of filteredOptions | async" [value]="option.title">
+        <mat-option (click) = "onSelectArticle(option)" *ngFor="let option of filteredOptions | async" [value]="option">
           {{ option.title }}
         </mat-option>
       </mat-autocomplete>
@@ -19,21 +19,21 @@
 </form>
 <form  [ngStyle]="!flag && {'visibility':'hidden'}">
         <mat-form-field>
-                <input matInput [matDatepicker]="picker1" placeholder="From"
-                       (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)">
+                <input matInput [max]="maxDate" [matDatepicker]="picker1" placeholder="From"
+                       (dateInput)="addEvent('input', $event)" (dateChange)="fromdateChanged('change', $event)">
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                 <mat-datepicker #picker1></mat-datepicker>
               </mat-form-field>  
               <mat-form-field>
-                    <input matInput [matDatepicker]="picker2" placeholder="To"
-                           (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)">
+                    <input matInput [max]="maxDate" [min]="minDate" [matDatepicker]="picker2" placeholder="To"
+                           (dateInput)="addEvent('input', $event)" (dateChange)="todateChanged('change', $event)">
                     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                     <mat-datepicker #picker2></mat-datepicker>
                   </mat-form-field>
                   <mat-form-field>
-                        <mat-select placeholder="Sort By">
+                        <mat-select [formControl] = "selectedSortByValue" placeholder="Sort By">
                           <mat-option>None</mat-option>
-                          <mat-option *ngFor="let state of sortBy" [value]="state">{{state}}</mat-option>
+                          <mat-option *ngFor="let state of sortBy" [value]="state.value">{{state.name}}</mat-option>
                         </mat-select>
                       </mat-form-field>  
                       <mat-form-field *ngIf="sourceWrapper">
@@ -44,7 +44,7 @@
                                   (+{{publishers.value.length - 1}} others)
                                 </span>
                               </mat-select-trigger>
-                              <mat-option *ngFor="let source of sourceWrapper.sources" [value]="source.name">{{source.name}}</mat-option>
+                              <mat-option *ngFor="let source of sourceWrapper.sources" [value]="source.id">{{source.name}}</mat-option>
                             </mat-select>
                           </mat-form-field>
 </form>    

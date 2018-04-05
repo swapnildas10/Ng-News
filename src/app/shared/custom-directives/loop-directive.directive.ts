@@ -8,7 +8,11 @@ import { Directive, Input, TemplateRef, ViewContainerRef, Output, EventEmitter }
 export class LoopDirective {
     index: number;
      @Input() set appLoop(count: number) {
+         this.viewContainer.clear();
         for ( let i = 0; i < count; i++) {
+            if (i > 5 && i < count - 1) {
+                continue;
+            }
             this.index = i;
            this.viewContainer.createEmbeddedView(this.templateRef, {
                $implicit: i,

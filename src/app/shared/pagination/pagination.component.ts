@@ -8,11 +8,14 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef }
 export class PaginationComponent implements OnInit {
   element: HTMLElement;
   num;
+  Math: any;
   @Input() pageSize: number;
   @Input() pageCount: number;
   @Output() pageClicked = new EventEmitter<number>();
   @ViewChild('index') pageLink: ElementRef;
-  constructor() { }
+  constructor() {
+    this.Math = Math;
+  }
 
   ngOnInit() {
   }
@@ -22,4 +25,5 @@ export class PaginationComponent implements OnInit {
   onIndex(event: number) {
 this.num = event;
   }
+  
 }

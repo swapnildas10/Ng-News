@@ -21,7 +21,8 @@ export class SearchBoxComponent implements OnInit {
   maxDate = new Date();
   minDate = this.maxDate;
   @Output() articleSelected = new EventEmitter<Article>();
-  @Output() articlesSelected = new EventEmitter<Article[]>();
+  @Output() articlesSelected = new EventEmitter<SearchQueryModal>();
+  @Output() displayQueryResult = new EventEmitter<boolean>();
   events: string[] = [];
   private searchUpdated: Subject<string> = new Subject<string>();
   private articlesFetched: Subject<Article[]> = new Subject<Article[]>();
@@ -49,11 +50,12 @@ export class SearchBoxComponent implements OnInit {
     this.queriedArticles.subscribe(
       input => {if (input.trim().length) {
         this.apiConnectionService.getQueryResultfromAPI(input,
-          this.publishers.value.toString(), this.domain, this.from, this.to, 'en', this.selectedSortByValue.value)
+          this.publishers.value ? this.publishers.value.toString() : null,
+           this.domain, this.from, this.to, 'en', this.selectedSortByValue.value)
           .subscribe(
           response => {this.searchQueryModel = response.body;
             this.articlesFetched.next(this.searchQueryModel.articles);
-            this.articlesSelected.emit(this.searchQueryModel.articles);
+            this.articlesSelected.emit(this.searchQueryModel);
             this.filteredOptions = this.searchBox.valueChanges
             .pipe(
               startWith<string | Article>(''),
@@ -69,6 +71,10 @@ export class SearchBoxComponent implements OnInit {
     this.searchUpdated.next(value.trim());
   }
   onEnterPressed(input: string) {
+    this.displayQueryResult.emit(true);
+    if (input.trim().length === 0) {
+      this.displayQueryResult.emit(false);
+    }
   }
   displayFn(article?: Article): string | undefined {
     return article ? article.title : undefined;

@@ -5,7 +5,7 @@
         <div id="dashboard-weather" class="full-bg-img pb-3">
             <div style="background: linear-gradient(45deg, rgba(42, 27, 161, 0.6), rgba(29, 210, 177, 0.6) 100%);" class="container-fluid">
                     <div  class="row flex-center pt-5 mt-3">
-                            <app-search-box style="min-width: 40rem;"></app-search-box> 
+                            <app-search-box (displayQueryResult)="enableQueryResultDisplay($event)"(articleSelected)="searchResult($event)" (articlesSelected)="searchResults($event)" style="min-width: 40rem;"></app-search-box> 
                         </div>
                 <div class="row flex-center">
                     
@@ -48,12 +48,30 @@
                 </div>
                
             </div>
-            <div *ngIf="topHeadlines" class="container mx-auto   row px-5 py-5">
-                <div *ngFor="let article of topHeadlines.articles" class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
-                    <app-dashboard-article (outArticle)='displayArticleOnModal($event)' (initiate)='initiateModal($event)' [article]="article"></app-dashboard-article>
+            <div *ngIf="topHeadlines && !onQueryDisplay; then thenBlock; else elseBlock" ></div>
+    <ng-template #thenBlock>
+        <div  class="container mx-auto   row px-5 py-5">
+
+      
+        <div *ngFor="let article of topHeadlines.articles" class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
+            <app-dashboard-article (outArticle)='displayArticleOnModal($event)' (initiate)='initiateModal($event)' [article]="article"></app-dashboard-article>
+        </div>
+    </div>
+    </ng-template>
+     
+    <ng-template #elseBlock>
+            <div *ngIf="queryResults" class="container mx-auto   row px-5 py-5">
+
+      
+                    <div *ngFor="let article of queryResults.articles" class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
+                        <app-dashboard-article (outArticle)='displayArticleOnModal($event)' (initiate)='initiateModal($event)' [article]="article"></app-dashboard-article>
+                    </div>
                 </div>
-            </div>
-            <app-pagination (pageClicked)="onPageClick($event)" [pageCount]="5" [pageSize]="20"  *ngIf="topHeadlines"></app-pagination>
+    </ng-template>
+                   <app-pagination  (pageClicked)="onPageClick($event)" [pageCount]="pageCalculate(topHeadlines.totalResults)" [pageSize]="20"  *ngIf="topHeadlines && !onQueryDisplay"></app-pagination>
+            
+                <app-pagination (pageClicked)="onPageClick($event)" [pageCount]="pageCalculate(queryResults.totalResults)" [pageSize]="20"  *ngIf="queryResults && onQueryDisplay"></app-pagination>
+              
         </div>
         
     </section>

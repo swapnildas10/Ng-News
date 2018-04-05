@@ -16,8 +16,11 @@
           
           <!--Numbers-->
           <div   *appLoop = "pageCount;let j = index"><li  class="page-item active">
-            <a (click)="onpageClick(j+1)" class="page-link" mdbRippleRadius>{{j+1}}</a></li></div>
-         
+            <a *ngIf="j < 5 && j < (pageCount-3);" (click)="onpageClick(j+1)" class="page-link" mdbRippleRadius>{{j+1}}</a>
+            <div *ngIf="j == 5 || j == (pageCount-1);" class="page-link" >...</div></li>
+            
+        </div>
+           
               
   
           <!--Arrow right-->

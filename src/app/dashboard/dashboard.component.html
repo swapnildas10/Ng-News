@@ -68,9 +68,9 @@
                     </div>
                 </div>
     </ng-template>
-                   <app-pagination  (pageClicked)="onPageClick($event)" [pageCount]="pageCalculate(topHeadlines.totalResults)" [pageSize]="20"  *ngIf="topHeadlines && !onQueryDisplay"></app-pagination>
+                   <app-pagination  (pageClicked)="onPageClick($event)" [pageCount]="pageCalculate(topHeadlines.totalResults)" [pageSize]="topHeadlines.totalResults"  *ngIf="topHeadlines && !onQueryDisplay"></app-pagination>
             
-                <app-pagination (pageClicked)="onPageClick($event)" [pageCount]="pageCalculate(queryResults.totalResults)" [pageSize]="20"  *ngIf="queryResults && onQueryDisplay"></app-pagination>
+                <app-pagination (pageClicked)="onPageClick($event)" [pageCount]="pageCalculate(queryResults.totalResults)" [pageSize]="queryResults.totalResults"  *ngIf="queryResults && onQueryDisplay"></app-pagination>
               
         </div>
         

@@ -16,12 +16,14 @@
           
           <!--Numbers--><div style="display: -webkit-inline-box; display: -webkit-box" #pagination>
           <div  *appLoop = "pageCount;let j = index"><li [ngClass]="j == 0 ? 'active':''" class="page-item">
-            <a  [id] ="'page_id_'+j" *ngIf="(j < 5 || j > (pageCount-2)); else elseTemplate" (click)="onpageClick(j)" class="page-link" mdbRippleRadius>{{j+1}}</a>
-            <ng-template *ngIf="j == 5; then anotherElseTemplate" #elseTemplate  ></ng-template>
+            <a  [id] ="'page_id_'+j" *ngIf="(j < 5); else elseTemplate" (click)="onpageClick(j + pagestart)" class="page-link" mdbRippleRadius>{{j+1 + pagestart}}</a>
+            <ng-template *ngIf="j == 5; then anotherElseTemplate else RestOftemplate" #elseTemplate  ></ng-template>
+            <ng-template style="margin:0 10px" #anotherElseTemplate>...</ng-template>
+            <ng-template *ngIf="j > (pageCount-2);" style="margin:0 10px" #RestOftemplate>{{j + 1}}</ng-template>
         </li>
         </div>
     </div>
-           <ng-template style="margin:0 10px" #anotherElseTemplate>...</ng-template>
+          
        
   
           <!--Arrow right-->

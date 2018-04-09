@@ -8,7 +8,6 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef }
 export class PaginationComponent implements OnInit {
   element: HTMLElement;
   num;
-  pageNumber: number;
   @Input() pageSize: number;
   @Input() pageCount: number;
   @Output() pageClicked = new EventEmitter<number>();
@@ -21,26 +20,8 @@ export class PaginationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.pageNumber = 0;
-  }
-  goToLastPage() {
-this.pageNumber = this.pageCount;
-this.onpageClick(this.pageNumber - 1);
-  }
-  goToFirstPage() {
-    this.pageNumber = 1;
-    this.onpageClick(0);
-  }
-  goToPreviousPage() {
-    this.pageNumber = this.pageNumber - 1;
-    this.onpageClick(this.pageNumber);
-  }
-  goToNextPage() {
-    this.pageNumber = this.pageNumber + 1;
-    this.onpageClick(this.pageNumber);
   }
   onpageClick(event: number) {
-    this.pageNumber = event;
     if (event === 0) {
       (<DOMTokenList>this.first.nativeElement.classList).add('disabled');
       (<DOMTokenList>this.firstLogo.nativeElement.classList).add('disabled');
@@ -58,6 +39,16 @@ this.onpageClick(this.pageNumber - 1);
         if (!(<DOMTokenList>element.classList).contains('active')) {
           (<DOMTokenList>element.classList).add('active');
       }
+      }
+
+      if (event + 2 > index) {
+        (<HTMLAnchorElement>element.children[0]).innerText = (+(<HTMLAnchorElement>element.children[0]).innerText + 1).toString();
+        console.log((<HTMLAnchorElement>element.children[0]));
+      }
+
+      if (event - 2 < index) {
+        (<HTMLAnchorElement>element.children[0]).innerText = (+(<HTMLAnchorElement>element.children[0]).innerText - 1).toString();
+        console.log((<HTMLAnchorElement>element.children[0]).innerText);
       }
       if (event === (<HTMLCollection>this.pagination.nativeElement.children).length - 1) {
         if (!(<DOMTokenList>this.last.nativeElement.classList).contains('disabled')) {

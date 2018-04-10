@@ -15,6 +15,7 @@ export class BreakingNewsArticleComponent implements OnInit {
   ngOnInit() {
   }
   onClickEmit() {
+    console.log(this.article);
     this.outArticle.emit(this.article);
     this.showModal.emit(true);
   }

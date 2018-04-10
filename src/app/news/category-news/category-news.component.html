@@ -5,22 +5,35 @@
     <div class="py-5 justify-content-center">
       <div class="container justify-content-center">
            <div class="row justify-content-center" *ngIf='TopFive'>
-               <div class="col-xs-12 col-sm-12 col-md-6 col-xl-4 col-lg-3" *ngFor='let article of TopFive'>
+               <div class="col-xs-12 col-sm-12 col-md-6 col-xl-4 col-lg-3 flex-center" *ngFor='let article of TopFive'>
                    <!-- Card -->
-<div style="max-width:12rem" class="card card-image mb-3" style="background-image: url(https://mdbootstrap.com/img/Photos/Horizontal/Work/4-col/img%20%2814%29.jpg);">
-
-<!-- Content -->
-<div class="text-white text-center d-flex align-items-center rgba-black-strong py-2 px-2">
-    <div>
-        <h5 class="pink-text"><i class="fa fa-pie-chart"></i> Marketing</h5>
-        <h3 class="card-title pt-2"><strong>{{article.title}}</strong></h3>
-        <!-- <p>{{article.description}}</p> -->
-        <h5 class="pink-text">By {{article.author}}</h5>
-        <!-- <a class="btn btn-pink waves-light" mdbRippleRadius><i class="fa fa-clone left"></i> View project</a> -->
-    </div>
-</div>
-<!-- Content -->
-</div>
+                   <div style="max-width:23rem" class="card  mb-3" >
+                        <!--Card image-->
+                        <div class="view hm-white-slight waves-light" mdbRippleRadius>
+                                <img *ngIf="article['urLtoImage']; else altImage" [src]="article['urLtoImage']" class="img-fluid" alt="Card image with a tree in a middle of a lake.">
+                                <ng-template #altImage *ngIf="article.companyLogo; else domainImage" >
+                                    <img [src]="article.companyLogo.logo"  class="img-fluid"/>
+                               </ng-template>
+                                <ng-template #domainImage *ngIf="article.domainLogo;">
+                                        <img [src]="article.domainLogo.url"  class="img-fluid"/>
+                                </ng-template>
+                                    <a >
+                                    <div class="mask"></div>
+                                </a>
+                            </div>
+                        
+                            <!--Card content-->
+                            <div class="card-body">
+                                <!--Title-->
+                                <h4 class="card-title">{{article.title}}</h4>
+                                <!--Text-->
+                                <p class="card-text">{{article.description}}</p>
+                                 
+                         
+                        <!-- Content -->
+                        </div>
+                        <!-- Card -->
+                                       </div>
 <!-- Card -->
                </div>
            </div> 
@@ -36,42 +49,17 @@
 <mdb-navbar [ngStyle]="styleName" #bottomnavVar (scroll)="onScrollEvent($event)" [SideClass]="className">
            
     <!-- Navbar brand -->
-    <logo><a class="navbar-brand" href="#">{{category}}</a></logo>
+    <logo><a class="navbar-brand" href="#">{{category | uppercase}}</a></logo>
 
     <!-- Collapsible content -->
     <links>
 
         <!-- Links -->
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link waves-light" mdbRippleRadius>Home<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link waves-light" mdbRippleRadius>Features</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link waves-light" mdbRippleRadius>Pricing</a>
-            </li>
-
-            <!-- Dropdown -->
-            <li class="nav-item dropdown" dropdown>
-                <a dropdownToggle mdbRippleRadius type="button" class="nav-link dropdown-toggle waves-light" mdbRippleRadius>
-                Sort By<span class="caret"></span></a>
-                <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-                    <a class="dropdown-item waves-light" mdbRippleRadius href="#">relevancy</a>
-                    <a class="dropdown-item waves-light" mdbRippleRadius href="#">popularity</a>
-                    <a class="dropdown-item waves-light" mdbRippleRadius href="#">publishedAt</a>
-                   
-                </div>
-            </li>
-
-        </ul>
+        
         <!-- Links -->
 
         <!-- Search form -->
-        <form class="form-inline  waves-light" mdbRippleRadius>
-            <input class="form-control mr-sm-2" type="text" placeholder="Search">
-        </form>
+        <app-search-box style="    position: relative;" class="mx-auto w-100 flex-center row"></app-search-box>
     </links>
     <!-- Collapsible content -->
 
@@ -86,6 +74,9 @@
 <div class="row">
   
   <div *ngIf='responseData' >
+      <div class="row">
+            <app-pagination (pageClicked)="onPageClick($event)" [pageSize]="pageCalculate(responseData.totalResults)" [pageCount]="responseData.totalResults" ></app-pagination>
+      </div>
   <div class="row">
 
     <div *ngFor='let article of responseData.articles;let i = index' class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 px-2 py-2">    
@@ -94,7 +85,7 @@
   </div>
 </div>
 </div>
- <app-pagination (pageClicked)="onPageClick($event)" [pageSize]="20" [pageCount]="6" ></app-pagination>
+
 </div>
 <div mdbModal (onHidden)="onHidden()" #demoBasic="mdb-modal" class="modal fade" id="basicExample" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">

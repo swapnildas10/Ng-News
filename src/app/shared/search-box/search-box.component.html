@@ -1,4 +1,6 @@
-<form class="form-inline md-form form-sm flex-center mt-2">
+
+ <div class="col-12 flex-center">
+<form class="form-inline md-form form-sm flex-center">
     <i class="fa fa-search" aria-hidden="true"></i>
     <i (click) ="toggleAdvancedSearch()" class="fa cogs fa-cogs" aria-hidden="true"></i>
       
@@ -17,7 +19,9 @@
                   
      
 </form>
-<form  [ngStyle]="!flag && {'visibility':'hidden'}">
+</div>
+<div class="col-12 flex-center">
+<form  [ngStyle]="!flag && {'display':'none'}">
         <mat-form-field>
                 <input matInput [max]="maxDate" [matDatepicker]="picker1" placeholder="From"
                        (dateInput)="addEvent('input', $event)" (dateChange)="fromdateChanged('change', $event)">
@@ -48,6 +52,6 @@
                             </mat-select>
                           </mat-form-field>
 </form>    
-
+</div>
        
      

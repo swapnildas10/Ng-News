@@ -24,6 +24,8 @@ export class PaginationComponent implements OnInit {
 
   ngOnInit() {
     this.currentPage = 0;
+    this.pagestart = 0;
+    this.pageNumberIndex = 0;
   }
   onpageClick(event: number) {
     console.log('current page: ' +
@@ -120,6 +122,7 @@ this.num = event;
     }
   }
   goToFirstPage() {
+    this.pagestart = 0;
     this.onpageClick(0);
   }
 }

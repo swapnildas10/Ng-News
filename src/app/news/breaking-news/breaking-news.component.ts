@@ -26,6 +26,21 @@ export class BreakingNewsComponent implements OnInit {
         // this.newsData = response.map(key =>
         //   `${key}: ${response.headers.get(key)}`);
         this.newsData = response.body;
+        this.newsData.articles.forEach(element => {
+          if (!element.source.name.includes('.')) {
+            this.apiConnectionService.getCompanyLogo(decodeURIComponent(element.source.name)).subscribe(
+              logo => {
+                element.companyLogo = logo.body;
+              }
+            );
+          } else {
+            this.apiConnectionService.getCompanyLogoByDomain(decodeURIComponent(element.source.name)).subscribe(
+              logo => {
+                element.domainLogo = logo.body;
+              }
+            );
+          }
+        });
       }
     );
   }

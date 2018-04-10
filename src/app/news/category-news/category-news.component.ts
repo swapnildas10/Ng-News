@@ -18,6 +18,7 @@ export class CategoryNewsComponent implements OnInit, OnChanges {
 responseData: TopHeadlines;
 TopFive;
 article: Article;
+
 @Output() topArticlesByCategory = new EventEmitter<Article[]>();
 @ViewChild('demoBasic') modal: ModalDirective;
  category: string;
@@ -50,13 +51,28 @@ onDisplayArticleOnModal(event: Article) {
 }
   getCategoryNewsData(category: string) {
    // console.log(inputcategory);
-    this.apiConnectionService.getTopNewsByCategoryfromAPI('us', category, null, null, 10, 1).subscribe(
+    this.apiConnectionService.getTopNewsByCategoryfromAPI('us', category, null, null, 20, 1).subscribe(
       (response) => {
         // this.newsData = response.map(key =>
         //   `${key}: ${response.headers.get(key)}`);
         this.responseData = response.body;
-        console.log(this.responseData.totalResults);
+        this.responseData.articles.forEach(element => {
+          if (!element.source.name.includes('.')) {
+            this.apiConnectionService.getCompanyLogo(decodeURIComponent(element.source.name)).subscribe(
+              logo => {
+                element.companyLogo = logo.body;
+              }
+            );
+          } else {
+            this.apiConnectionService.getCompanyLogoByDomain(decodeURIComponent(element.source.name)).subscribe(
+              logo => {
+                element.domainLogo = logo.body;
+              }
+            );
+          }
+        });
         this.TopFive = this.responseData.articles.splice(0, 5);
+        console.log(this.TopFive);
         this.articlesSharingService.shareArticleByCategory(this.responseData.articles.slice(0, 3));
         this.articlesSharingService.shareTotalArticle(this.responseData.totalResults);
       }
@@ -86,5 +102,9 @@ this.className = 'navbar navbar-expand-lg navbar-dark indigo fixed-top scrolling
 
   onPageClick(event: number) {
 
+  }
+
+  pageCalculate(totalArticles) {
+    return  Math.floor(totalArticles / 20);
   }
 }

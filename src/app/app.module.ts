@@ -27,6 +27,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchBoxComponent } from './shared/search-box/search-box.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/modules/material/material.module';
+import { UpperCasePipe, CommonModule } from '@angular/common';
 const appRoutes: Routes = [
   {path: 'TopUSNews', component: BreakingNewsComponent},
   {path: 'category/:id', component: CategoryNewsComponent},
@@ -63,7 +64,8 @@ const appRoutes: Routes = [
       appRoutes, {enableTracing: true}
     ),
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    CommonModule
   ],
   providers: [ApiConnectionService, ArticleSharingService],
   bootstrap: [AppComponent],

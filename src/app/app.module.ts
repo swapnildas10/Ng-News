@@ -28,6 +28,7 @@ import { SearchBoxComponent } from './shared/search-box/search-box.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/modules/material/material.module';
 import { UpperCasePipe, CommonModule } from '@angular/common';
+import { CategoryHomeComponent } from './news/category-news/category-home/category-home.component';
 const appRoutes: Routes = [
   {path: 'TopUSNews', component: BreakingNewsComponent},
   {path: 'category/:id', component: CategoryNewsComponent},
@@ -52,7 +53,8 @@ const appRoutes: Routes = [
     TimeAgoPipe,
     LoopDirective,
     PaginationComponent,
-    SearchBoxComponent
+    SearchBoxComponent,
+    CategoryHomeComponent
   ],
   imports: [
     BrowserModule,

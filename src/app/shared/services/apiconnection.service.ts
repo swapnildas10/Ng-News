@@ -81,19 +81,39 @@ getTopNewsByCategoryfromAPI(country: string = null, category: string = null,
             url = url + 'category=' + category;
         }
         if (country != null && country.toLocaleLowerCase() !== 'null') {
-            url = url + '&country=' + country;
+            if (category === null) {
+                url = url + 'country=' + country;
+            } else {
+                url = url + '&country=' + country;
+            }
         }
         if (sources != null && sources.toLocaleLowerCase() !== 'null') {
-            url = url + '?sources=' + sources;
+            if ( category === null && country === null) {
+                url = url + 'sources=' + sources;
+            } else {
+                url = url + '&sources=' + sources;
+            }
         }
         if (q != null && q.toLocaleLowerCase() !== 'null') {
-            url = url + '&q=' + q;
+            if ( category === null && country === null && sources === null) {
+                url = url + 'q=' + q;
+            } else {
+                url = url + '&q=' + q;
+            }
         }
         if (pageSize != null) {
-            url = url + '&pageSize=' + pageSize;
+            if ( category === null && country === null && sources === null && q === null) {
+                url = url + 'pageSize=' + pageSize;
+            } else {
+                url = url + '&pageSize=' + pageSize;
+            }
         }
         if (page != null ) {
-            url = url + '?page=' + page;
+            if ( category === null && country === null && sources === null && q === null && pageSize === null) {
+                url = url + 'page=' + page;
+            } else {
+                url = url + '&page=' + page;
+            }
         }
         console.log(url);
     return this.httpClient.get<TopHeadlines>(url , { observe : 'response' } );

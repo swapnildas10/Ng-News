@@ -15,3 +15,18 @@ form:last-child {
     position: absolute;
     visibility: hidden;
 }
+.card .card-data {
+    background-color: #929fba;
+    color: #fff;
+    text-align: center;
+    height: auto;
+    padding: 10px;
+}
+
+.card .card-data ul {
+    margin-bottom: 0;
+    font-size: .9rem;
+}
+.card .card-data ul li {
+    display: inline;
+}

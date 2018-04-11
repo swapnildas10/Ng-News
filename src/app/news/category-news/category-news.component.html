@@ -7,7 +7,7 @@
            <div class="row justify-content-center" *ngIf='TopFive'>
                <div class="col-xs-12 col-sm-12 col-md-6 col-xl-4 col-lg-3 flex-center" *ngFor='let article of TopFive'>
                    <!-- Card -->
-                   <div style="max-width:23rem" class="card  mb-3" >
+                   <div style="width:18rem" class="card  mb-3" >
                         <!--Card image-->
                         <div class="view hm-white-slight waves-light" mdbRippleRadius>
                                 <img *ngIf="article['urLtoImage']; else altImage" [src]="article['urLtoImage']" class="img-fluid" alt="Card image with a tree in a middle of a lake.">
@@ -17,7 +17,7 @@
                                 <ng-template #domainImage *ngIf="article.domainLogo;">
                                         <img [src]="article.domainLogo.url"  class="img-fluid"/>
                                 </ng-template>
-                                    <a >
+                                    <a (click)="onShowModal(true);onDisplayArticleOnModal(article)" >
                                     <div class="mask"></div>
                                 </a>
                             </div>
@@ -27,10 +27,28 @@
                                 <!--Title-->
                                 <h4 class="card-title">{{article.title}}</h4>
                                 <!--Text-->
-                                <p class="card-text">{{article.description}}</p>
+                                <div class="card-text">
+                                    <div class="row mb-3 px-3"> {{article.description}}</div>
+                                    <div class="row">
+                                            <div class="col-2 col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <p class=" justify-content-center"><img *ngIf="article.companyLogo;else elseBlock" [src]="article.companyLogo.logo+'?size=40'">
+                                                <ng-template #elseBlock><img *ngIf="article.domainLogo" [src]="article.domainLogo.url"/></ng-template>
+                                            </p>       
+                                            </div>
+                                            <div style="text-align:center" *ngIf="article.companyLogo;else elseName" class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10 mx-auto my-auto">
+                                                <p style="text-align:left;padding-left:1rem">{{article.companyLogo.name}}</p></div>
+                                            <ng-template #elseName><div class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10 mx-auto my-auto"><p style="text-align:left;padding-left:1rem">{{article.source.name}}</p></div></ng-template>
+                                        </div>
+                                    </div>
                                  
                          
                         <!-- Content -->
+                        </div>
+                        <div class="card-data  justify-content-center flex-center">
+                            <ul  class="row">
+                                <li><i class="fa fa-clock-o"></i>{{article.publishedAt | timeAgo}}</li>
+                                 
+                            </ul>
                         </div>
                         <!-- Card -->
                                        </div>
@@ -75,7 +93,7 @@
   
   <div *ngIf='responseData' >
       <div class="row">
-            <app-pagination (pageClicked)="onPageClick($event)" [pageSize]="pageCalculate(responseData.totalResults)" [pageCount]="responseData.totalResults" ></app-pagination>
+            <app-pagination (pageClicked)="onPageClick($event)" [pageSize]="(responseData.totalResults)" [pageCount]="pageCalculate(responseData.totalResults)" ></app-pagination>
       </div>
   <div class="row">
 

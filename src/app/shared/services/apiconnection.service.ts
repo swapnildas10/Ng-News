@@ -152,7 +152,7 @@ getQueryResultfromAPI(q: string = null, sources: string = null, domain: string =
     if (q != null && q.toLocaleLowerCase() !== 'null') {
         url = url  + '?q=' + q;
     }
-    if (sources != null && sources.toLocaleLowerCase() !== 'null') {
+    if (sources != null && sources.toLocaleLowerCase() !== 'null' ) {
         if (q == null) {
             url = url  + '?sources=' + sources;
         } else {

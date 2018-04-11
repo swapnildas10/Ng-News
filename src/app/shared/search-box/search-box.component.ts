@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, Input } from '@angular/core';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import {FormsModule, ReactiveFormsModule, FormControl, NgControl} from '@angular/forms';
 import { ApiConnectionService } from '../services/apiconnection.service';
@@ -23,6 +23,7 @@ export class SearchBoxComponent implements OnInit {
   @Output() articleSelected = new EventEmitter<Article>();
   @Output() articlesSelected = new EventEmitter<SearchQueryModal>();
   @Output() displayQueryResult = new EventEmitter<boolean>();
+  @Input() category: string  = null;
   events: string[] = [];
   private searchUpdated: Subject<string> = new Subject<string>();
   private articlesFetched: Subject<Article[]> = new Subject<Article[]>();
@@ -42,6 +43,39 @@ export class SearchBoxComponent implements OnInit {
   selectedSortByValue = new FormControl();
   sources = null; from = null; to = null; language = null; sortby = null; domain = null;
   ngOnInit() {
+    if (this.category) {
+      this.getResultsByCategory(this.category);
+    } else {
+      this.getResultsbyFilter();
+    }
+  }
+  getResultsByCategory(category: string) {
+    this.apiConnectionService.getSourcesfromAPI().subscribe(
+      response => {this.sourceWrapper = response.body;
+      }
+    );
+    this.queriedArticles = this.searchUpdated.asObservable().debounceTime(2000).distinctUntilChanged();
+    this.queriedArticles.subscribe(
+      input => {if (input.trim().length) {
+        this.apiConnectionService.getQueryResultfromAPI(input,
+          this.publishers.value ? this.publishers.value.toString() : null,
+           this.domain, this.from, this.to, 'en', this.selectedSortByValue.value)
+          .subscribe(
+          response => {this.searchQueryModel = response.body;
+            this.articlesFetched.next(this.searchQueryModel.articles);
+            this.articlesSelected.emit(this.searchQueryModel);
+            this.filteredOptions = this.searchBox.valueChanges
+            .pipe(
+              startWith<string | Article>(''),
+              map(value => typeof value === 'string' ? value : value.title),
+              map(name => name ? this.filter(name) : this.searchQueryModel.articles.slice())
+            );
+          }
+        );
+      }}
+    );
+  }
+  getResultsbyFilter() {
     this.apiConnectionService.getSourcesfromAPI().subscribe(
       response => {this.sourceWrapper = response.body;
       }

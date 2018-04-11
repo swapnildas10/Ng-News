@@ -52,8 +52,6 @@ export class PaginationComponent implements OnInit {
       }
     }
     this.currentPage =  event;
-    console.log('current page: ' +
-     this.currentPage + 'page start: ' + this.pagestart + 'event: ' + event + 'page number index:' + this.pageNumberIndex);
     if ( this.currentPage === 0) {
       (<DOMTokenList>this.first.nativeElement.classList).add('disabled');
       (<DOMTokenList>this.firstLogo.nativeElement.classList).add('disabled');

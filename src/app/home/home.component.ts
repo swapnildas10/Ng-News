@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
 articles: Article[];
 totalPage: number;
 routeparam: string;
+toggleSideBarMain = false;
   constructor(
     private articlesSharingService: ArticleSharingService,
     private route: ActivatedRoute,
@@ -30,5 +31,9 @@ routeparam: string;
         this.totalPage = Math.ceil(totalResults / 20);
       }
     );
+  }
+
+  toggleSiddeNavBarMain(event) {
+     this.toggleSideBarMain = event;
   }
 }

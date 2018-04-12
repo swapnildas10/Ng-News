@@ -1,10 +1,12 @@
 <header>
-<app-topnav></app-topnav>
+<app-topnav (toggleSideNavBar)="toggleSiddeNavBarMain($event)"></app-topnav>
+<app-sidenav></app-sidenav>  
+
 </header>
 <body>
        
         <main>
-             
+                        <app-sidenav-main [toggleSideNav]="toggleSideBarMain"></app-sidenav-main>
          <section class="section container-fluid justify-content-center py-5">
          <!--Navbar-->
                  <div class="row justify-content-center py-4">

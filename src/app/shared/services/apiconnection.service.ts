@@ -150,7 +150,7 @@ getQueryResultfromAPI(q: string = null, sources: string = null, domain: string =
     pageSize: number = null, page: number = null ): Observable<HttpResponse<SearchQueryModal>> {
     let url = this._baseUrl + 'Query';
     if (q != null && q.toLocaleLowerCase() !== 'null') {
-        url = url  + '?q=' + q;
+        url = url  + '?q=' + encodeURIComponent(q);
     }
     if (sources != null && sources.toLocaleLowerCase() !== 'null' ) {
         if (q == null) {
@@ -202,7 +202,7 @@ getQueryResultfromAPI(q: string = null, sources: string = null, domain: string =
         }
     }
     if (page != null) {
-        if (q == null && sources == null && domain == null && from == null && to == null && 
+        if (q == null && sources == null && domain == null && from == null && to == null &&
             language == null && sortBy == null && pageSize == null) {
             url = url  + '?page=' + page;
         } else {

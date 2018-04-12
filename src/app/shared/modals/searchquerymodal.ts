@@ -2,6 +2,6 @@ import { Article } from './article';
 
 export interface SearchQueryModal {
     status: string;
-    totalResult: number;
+    totalResults: number;
     articles: Article[];
 }

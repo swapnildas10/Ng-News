@@ -9,6 +9,8 @@ import { CompanyLogo } from '../shared/modals/company-logo';
 import { DomainLogo } from '../shared/modals/domain-logo';
 import { ArticleSource } from '../shared/modals/article-source';
 import { SearchQueryModal } from '../shared/modals/searchquerymodal';
+import { SearchBoxQueryParameters } from '../shared/modals/searchboxquery-modal';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,6 +25,9 @@ export class DashboardComponent implements OnInit {
   queryResults: SearchQueryModal;
   queryArticle: Article;
   onQueryDisplay = false;
+  pageClicked: number;
+  pageNumberChanged = new Subject<number>();
+  searchBoxQueryParameters: SearchBoxQueryParameters;
   @ViewChild('demoBasic') modal: ModalDirective;
   constructor(
     private router: Router,
@@ -37,6 +42,8 @@ export class DashboardComponent implements OnInit {
 
 
   ngOnInit() {
+    this.pageClicked = 1;
+    this.pageNumberChanged.asObservable().distinctUntilChanged();
     this.apiConnectionService.getWeatherDataByZipCodeAPI().subscribe(
       response => {
         this.weatherWrapper = response.body;
@@ -67,6 +74,21 @@ export class DashboardComponent implements OnInit {
         this.currentWeather = response.body;
       }
     );
+    this.pageNumberChanged.subscribe(
+      (pageNo) => {
+        console.log(pageNo);
+        if (this.onQueryDisplay) {
+          this.apiConnectionService.getQueryResultfromAPI(this.searchBoxQueryParameters.Query, this.searchBoxQueryParameters.Publishers,
+            null, this.searchBoxQueryParameters.FromDate, this.searchBoxQueryParameters.ToDate, this.searchBoxQueryParameters.Language,
+            this.searchBoxQueryParameters.SortBy, 20, pageNo).subscribe(
+              (response) => {
+                this.queryResults = response.body;
+                console.log(this.queryResults);
+              }
+            );
+        }
+      }
+    );
   }
 
   initiateModal(event: Boolean) {
@@ -81,23 +103,38 @@ this.article = event;
     this.article = null;
   }
   onPageClick(event: number) {
-console.log(event);
+if (this.pageClicked !== event) {
+  this.pageClicked = event;
+  this.pageNumberChanged.next(event);
+}
+
+
   }
   searchResults( results: SearchQueryModal) {
-    this.queryResults = results;
-    console.log(results);
   }
   searchResult( result: Article) {
     this.queryArticle = result;
   }
   enableQueryResultDisplay(onDisplay: boolean) {
-    console.log(onDisplay);
     this.onQueryDisplay = onDisplay;
     if (!onDisplay) {
       this.queryResults = null;
     }
   }
   pageCalculate(totalArticles) {
-    return  Math.floor(totalArticles / 20);
+    return  Math.ceil(totalArticles / 20);
+  }
+
+  fetchQueryResults() {
+
+  }
+  fetchQueryParameters($event: SearchBoxQueryParameters) {
+    this.searchBoxQueryParameters = $event;
+    this.apiConnectionService.getQueryResultfromAPI($event.Query, $event.Publishers,
+      null, $event.FromDate, $event.ToDate, $event.Language, $event.SortBy, 20, this.pageClicked).subscribe(
+        (response) => {
+          this.queryResults = response.body;
+        }
+      );
   }
 }

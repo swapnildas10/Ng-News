@@ -196,9 +196,9 @@ getQueryResultfromAPI(q: string = null, sources: string = null, domain: string =
     }
     if (pageSize != null) {
         if (q == null && sources == null && domain == null && from == null && to == null && language == null && sortBy == null) {
-            url = url  + '?domain=' + pageSize;
+            url = url  + '?pageSize=' + pageSize;
         } else {
-            url = url  + '&domain=' + pageSize;
+            url = url  + '&pageSize=' + pageSize;
         }
     }
     if (page != null) {

@@ -12,6 +12,7 @@ import { EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
+import { SearchBoxQueryParameters } from '../modals/searchboxquery-modal';
 @Component({
   selector: 'app-search-box',
   templateUrl: './search-box.component.html',
@@ -21,9 +22,11 @@ export class SearchBoxComponent implements OnInit {
   maxDate = new Date();
   minDate = this.maxDate;
   @Output() articleSelected = new EventEmitter<Article>();
-  @Output() articlesSelected = new EventEmitter<SearchQueryModal>();
   @Output() displayQueryResult = new EventEmitter<boolean>();
+  @Output() QueryParameters = new EventEmitter<SearchBoxQueryParameters>();
+  query: string;
   @Input() category: string  = null;
+  searchBoxQueryParameters: SearchBoxQueryParameters;
   events: string[] = [];
   private searchUpdated: Subject<string> = new Subject<string>();
   private articlesFetched: Subject<Article[]> = new Subject<Article[]>();
@@ -63,7 +66,6 @@ export class SearchBoxComponent implements OnInit {
           .subscribe(
           response => {this.searchQueryModel = response.body;
             this.articlesFetched.next(this.searchQueryModel.articles);
-            this.articlesSelected.emit(this.searchQueryModel);
             this.filteredOptions = this.searchBox.valueChanges
             .pipe(
               startWith<string | Article>(''),
@@ -83,13 +85,13 @@ export class SearchBoxComponent implements OnInit {
     this.queriedArticles = this.searchUpdated.asObservable().debounceTime(2000).distinctUntilChanged();
     this.queriedArticles.subscribe(
       input => {if (input.trim().length) {
+        this.query = input.trim();
         this.apiConnectionService.getQueryResultfromAPI(input,
           this.publishers.value ? this.publishers.value.toString() : null,
            this.domain, this.from, this.to, 'en', this.selectedSortByValue.value)
           .subscribe(
           response => {this.searchQueryModel = response.body;
             this.articlesFetched.next(this.searchQueryModel.articles);
-            this.articlesSelected.emit(this.searchQueryModel);
             this.filteredOptions = this.searchBox.valueChanges
             .pipe(
               startWith<string | Article>(''),
@@ -98,6 +100,9 @@ export class SearchBoxComponent implements OnInit {
             );
           }
         );
+      this.emitQueryParameters(this.from, this.to,
+        this.query, this.publishers.value ? this.publishers.value.toString() : null,
+        this.selectedSortByValue.value ? this.selectedSortByValue.value : null, 'en' );
       }}
     );
   }
@@ -134,5 +139,19 @@ this.from = this.minDate.toISOString();
   todateChanged(type: string, event: MatDatepickerInputEvent<Date>) {
   this.minDate = event.value;
   this.to = this.minDate.toISOString();
+  }
+
+  emitQueryParameters(from, to , query, publishers, sortby, language) {
+    this.searchBoxQueryParameters = {
+      ToDate: to,
+      FromDate: from,
+      Query: query,
+      Publishers: publishers,
+      SortBy: sortby,
+      Language: language
+    };
+    this.QueryParameters.emit(
+      this.searchBoxQueryParameters
+    );
   }
 }

@@ -113,7 +113,6 @@ this.className = 'navbar navbar-expand-lg navbar-dark indigo fixed-top scrolling
   }
 
   pageCalculate(totalArticles) {
-    console.log(Math.floor(totalArticles / 20));
     return  Math.floor(totalArticles / 20);
   }
 }

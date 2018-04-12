@@ -126,7 +126,7 @@ namespace NewsApi
                          var response = await httpClient.GetAsync(new Uri(url)).ConfigureAwait(false);
                         response.EnsureSuccessStatusCode();
                         var stringResult = await response.Content.ReadAsStringAsync();
-                        Console.WriteLine(stringResult);
+                         
                         var rawData = JsonConvert.DeserializeObject<SourceWrapper>(stringResult);
                         sources = new SourceWrapper{
                            

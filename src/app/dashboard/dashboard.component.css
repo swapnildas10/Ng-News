@@ -19,9 +19,7 @@
 h6 {
     line-height: 1.7;
 }
-.hm-gradient .full-bg-img {
-    background: linear-gradient(45deg, rgba(42, 27, 161, 0.6), rgba(29, 210, 177, 0.6) 100%); 
-}
+ 
 @media (max-width: 450px) {
     .margins {
         margin-right: 1rem;
@@ -79,3 +77,7 @@ input[type=text]{
 .hm-gradient[_ngcontent-c3] .full-bg-img[_ngcontent-c3] {
     background: none;
 }
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }

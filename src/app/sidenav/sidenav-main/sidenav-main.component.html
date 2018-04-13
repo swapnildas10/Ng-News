@@ -1,13 +1,27 @@
 <mat-sidenav-container class="example-container">
     <mat-sidenav #sidenav mode="over">
-        <p><button mat-button (click)="sidenav.toggle()">Toggle</button></p>
-    <p>
-      <mat-radio-group class="example-radio-group" [formControl]="mode">
-        <label>Mode:</label>
-        <mat-radio-button value="over">Over</mat-radio-button>
-        <mat-radio-button value="side">Side</mat-radio-button>
-        <mat-radio-button value="push">Push</mat-radio-button>
-      </mat-radio-group>
+      <p><a mat-button class="flex-center py-2" (click)="sidenav.toggle()"><h1>NgNews</h1></a></p>  
+      <mat-divider></mat-divider>
+    <p class="my-3">
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Categories
+              </mat-panel-title>
+               
+            </mat-expansion-panel-header>
+          
+            <p class="flex-center"><a mat-button><mat-icon>business</mat-icon>&nbsp;Business</a></p>
+            <p class="flex-center"><a mat-button><mat-icon>rowing</mat-icon>&nbsp;Sports</a></p>
+            <p class="flex-center"><a mat-button><mat-icon>memory</mat-icon>&nbsp;Technology</a></p>
+            <p class="flex-center"><a mat-button><mat-icon>device_hub</mat-icon>&nbsp;Science</a></p>
+            <p class="flex-center"><a mat-button><mat-icon>theaters</mat-icon>&nbsp;Science</a></p>
+            <p class="flex-center"><a mat-button><mat-icon>people</mat-icon>&nbsp;General</a></p>
+            <p class="flex-center"><a mat-button><mat-icon>healing</mat-icon>&nbsp;Science</a></p>
+          
+          </mat-expansion-panel>
+          <a mat-button>Home</a>
+          <a mat-button>Top News</a>
     </p>
     </mat-sidenav>
   

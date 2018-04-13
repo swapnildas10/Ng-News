@@ -3,7 +3,10 @@
 <form class="form-inline md-form form-sm flex-center">
     <i class="fa fa-search" aria-hidden="true"></i>
     <i (click) ="toggleAdvancedSearch()" class="fa cogs fa-cogs" aria-hidden="true"></i>
-      
+    <i *ngIf="searchBoxQueryParameters" style="top: 25%;
+    right: 2.5rem;
+    position: absolute;
+    left: auto;" (click)="clearSearchData()" class="material-icons fa">clear</i>
     
       <input  class="form-control form-control-sm ml-3 w-100"
       (keyup.enter) ="onEnterPressed(inputbox.value)"   (keyup)="onKeyPressed(inputbox.value)"

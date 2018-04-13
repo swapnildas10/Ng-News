@@ -1,7 +1,12 @@
 <section class="section">
     <div class="view intro hm-purple-light">
-        <div class="full-bg-img flex-center">
-            <div class="row py-5">
+        <div class="full-bg-img">
+            <div style="background-color: red; height: 20vh;" class="row">
+                <div style="width: 100%" class="row"><mat-icon class="mx-auto mt-5">cloud</mat-icon></div>
+                <div style="width: 100%" class="row">  <h2 class="mx-auto mb-5">{{category | uppercase}}</h2></div>
+              
+            </div>
+            <div class="row py-5 flex-center">
     <div class="py-5 justify-content-center">
       <div class="container justify-content-center">
            <div class="row justify-content-center" *ngIf='TopFive'>

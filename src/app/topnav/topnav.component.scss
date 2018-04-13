@@ -9,10 +9,13 @@
     background-color: #4285F4;
 }
 @media only screen and (max-width: 768px) {
-    .navbar {
+    .navbar.scrolling-navbar {
         background-color: #4285F4;
     }
 }
 h4, .h4 {
     font-size: 1.0rem;
+}
+.navbar.scrolling-navbar{
+    background-color: violet;
 }

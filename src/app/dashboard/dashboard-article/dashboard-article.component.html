@@ -26,9 +26,15 @@
                             <ng-template #elseBlock><img *ngIf="article.domainLogo" [src]="article.domainLogo.url"/></ng-template>
                         </p>       
                         </div>
-                        <div style="text-align:center" *ngIf="article.companyLogo;else elseName" class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10 mx-auto my-auto">
-                            <p style="text-align:left;padding-left:1rem">{{article.companyLogo.name}}</p></div>
-                        <ng-template #elseName><div class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10 mx-auto my-auto"><p style="text-align:left;padding-left:1rem">{{article.source.name}}</p></div></ng-template>
+                        <div style="text-align:center" *ngIf="article.companyLogo;else elseName" class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                            <div class="row">   <p class="my-auto" style="text-align:left;padding-left:1rem">{{article.companyLogo.name}}</p></div>
+                            <div class="row"> <p class="my-auto" style="text-align:left;padding-left:1rem">{{article.publishedAt | timeAgo}}</p></div></div>
+                         
+                        <ng-template #elseName><div class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10 ">
+                            <div class="row"> <p class="my-auto" style="text-align:left;padding-left:1rem">{{article.source.name}}</p></div>
+                            <div class="row"> <p class="my-auto" style="text-align:left;padding-left:1rem">{{article.publishedAt | timeAgo}}</p></div></div>
+                           
+                        </ng-template>
                     </div>
         </div>
         
@@ -73,10 +79,16 @@
                                       <ng-template #elseBlock><img *ngIf="article.domainLogo" [src]="article.domainLogo.url"/></ng-template>
                                   </p>       
                                   </div>
-                                  <div style="text-align:center" *ngIf="article.companyLogo;else elseName" class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10 mx-auto my-auto">
-                                      <p style="text-align:left;padding-left:1rem">{{article.companyLogo.name}}</p></div>
-                                  <ng-template #elseName><div class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10 mx-auto my-auto"><p style="text-align:left;padding-left:1rem">{{article.source.name}}</p></div></ng-template>
-                              </div>
+                                
+                                  <div style="text-align:center" *ngIf="article.companyLogo;else elseName" class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                                        <div class="row">   <p class="my-auto" style="text-align:left;padding-left:1rem">{{article.companyLogo.name}}</p></div>
+                                        <div class="row"> <p class="my-auto" style="text-align:left;padding-left:1rem">{{article.publishedAt | timeAgo}}</p></div></div>
+                                    </div>
+                                    <ng-template #elseName><div class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10 ">
+                                        <div class="row"> <p class="my-auto" style="text-align:left;padding-left:1rem">{{article.source.name}}</p></div>
+                                        <div class="row"> <p class="my-auto" style="text-align:left;padding-left:1rem">{{article.publishedAt | timeAgo}}</p></div></div>
+                                       
+                                    </ng-template>
                   </div>
                         
                         

@@ -3,8 +3,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 4rem;
+    width: 3rem;
     background: rgba(0, 0, 0, 0.9);
+    overflow: hidden;
   }
   
   .example-header {

@@ -25,7 +25,7 @@ article: Article;
  topnav; styleName;
  categoryArtice$;
  articlesToDisplay: Article[];
- className = 'navbar navbar-expand-lg navbar-dark indigo';
+ className = 'navbar navbar-expand-sm navbar-dark indigo';
   constructor(
     private apiConnectionService: ApiConnectionService,
     private articlesSharingService: ArticleSharingService,
@@ -92,14 +92,15 @@ onDisplayArticleOnModal(event: Article) {
    ) {
     (<HTMLInputElement>document.getElementsByTagName('nav')[1]).style.marginTop =
     (<HTMLInputElement>document.getElementsByTagName('nav')[0]).offsetHeight.toString() + 'px';
-this.className = 'navbar navbar-expand-lg navbar-dark indigo fixed-top scrolling-navbar';
+this.className = 'navbar navbar-expand-sm navbar-dark indigo fixed-top scrolling-navbar';
+(<HTMLInputElement>document.getElementsByTagName('nav')[1]).style.zIndex = '1';
 (<HTMLInputElement>document.getElementById('navtop')).style.paddingTop =
 
 (+(<HTMLInputElement>document.getElementsByTagName('nav')[1]).offsetHeight).toString() + 'px';
    } else {
     (<HTMLInputElement>document.getElementsByTagName('nav')[1]).style.marginTop = '0';
     (<HTMLInputElement>document.getElementById('navtop')).style.paddingTop = '0';
-    this.className = 'navbar navbar-expand-lg navbar-dark indigo';
+    this.className = 'navbar navbar-expand-sm navbar-dark indigo';
    }
 
   }

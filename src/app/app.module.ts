@@ -30,10 +30,17 @@ import { MaterialModule } from './shared/modules/material/material.module';
 import { UpperCasePipe, CommonModule } from '@angular/common';
 import { CategoryHomeComponent } from './news/category-news/category-home/category-home.component';
 import { SidenavMainComponent } from './sidenav/sidenav-main/sidenav-main.component';
+import { LoginComponent } from './user/login/login.component';
+import { SignupComponent } from './user/signup/signup.component';
+import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material';
+import { getAuthServiceConfigs } from '../socialloginConfig';
+import { SocialLoginModule, AuthServiceConfig } from 'angular5-social-login';
 const appRoutes: Routes = [
   {path: 'TopUSNews', component: BreakingNewsComponent},
   {path: 'category/:id', component: CategoryNewsComponent},
   {path: 'Dashboard', component: DashboardComponent},
+  {path: 'Login', component: LoginComponent},
+  {path: 'SignUp', component: SignupComponent},
   {path: '', redirectTo: '/Dashboard', pathMatch: 'full'}
 ];
 @NgModule({
@@ -56,7 +63,9 @@ const appRoutes: Routes = [
     PaginationComponent,
     SearchBoxComponent,
     CategoryHomeComponent,
-    SidenavMainComponent
+    SidenavMainComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -69,9 +78,13 @@ const appRoutes: Routes = [
     ),
     BrowserAnimationsModule,
     MaterialModule,
-    CommonModule
+    CommonModule,
+    SocialLoginModule
   ],
-  providers: [ApiConnectionService, ArticleSharingService],
+  providers: [ApiConnectionService, ArticleSharingService, {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}, {
+    provide: AuthServiceConfig,
+    useFactory: getAuthServiceConfigs
+  }],
   bootstrap: [AppComponent],
   schemas: [ NO_ERRORS_SCHEMA ],
   exports: [

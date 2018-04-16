@@ -1,6 +1,7 @@
 
 
-
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<meta name="496273594722-9k50hk5h04q7u6v35i2728fd21svmg73" content="496273594722-9k50hk5h04q7u6v35i2728fd21svmg73.apps.googleusercontent.com">
 <mat-card class="example-card mx-auto my-5">
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
@@ -40,7 +41,7 @@
       <div style="margin-left:0;" class="row w-100 justify-content-center">
         <div class="button-row flex-center">
             <button (click)="facebookLogin()" class="col-6" mat-button color="primary">Facebook</button>
-            <button class="col-6" mat-button color="warn">Google+</button>
+            <button (click)="googleLogin()" class="col-6" mat-button color="warn">Google+</button>
           </div>
       </div>
     </form>

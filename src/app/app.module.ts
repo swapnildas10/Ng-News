@@ -35,6 +35,7 @@ import { SignupComponent } from './user/signup/signup.component';
 import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material';
 import { getAuthServiceConfigs } from '../socialloginConfig';
 import { SocialLoginModule, AuthServiceConfig } from 'angular5-social-login';
+import { SocialAuthService } from './shared/services/auth.service';
 const appRoutes: Routes = [
   {path: 'TopUSNews', component: BreakingNewsComponent},
   {path: 'category/:id', component: CategoryNewsComponent},
@@ -84,7 +85,7 @@ const appRoutes: Routes = [
   providers: [ApiConnectionService, ArticleSharingService, {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}, {
     provide: AuthServiceConfig,
     useFactory: getAuthServiceConfigs
-  }],
+  }, SocialAuthService],
   bootstrap: [AppComponent],
   schemas: [ NO_ERRORS_SCHEMA ],
   exports: [

@@ -9,7 +9,7 @@ import { SocialAuthService } from '../../shared/services/auth.service';
 })
 export class LoginComponent implements OnInit {
   hide = true;
-  constructor(private authService: AuthService) { }
+  constructor(private socialAuthService: SocialAuthService, private authService: AuthService) { }
 
   ngOnInit() {
   }
@@ -35,7 +35,22 @@ export class LoginComponent implements OnInit {
       (userData) => {
               // this will return user data from facebook. What you need is a user token which you will send it to the server
               console.log(userData);
-              // this.socialAuthService.faceBookAuthMethod(userData.token);
+                this.socialAuthService.faceBookAuthMethod(userData.token);
+       }
+    );
+}
+  public googleLogin() {
+    this.authService.authState.subscribe(
+      (response) => {
+        console.log(response);
+      }
+    );
+    const socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
+    this.authService.signIn(socialPlatformProvider).then(
+      (response) => {
+              // this will return user data from facebook. What you need is a user token which you will send it to the server
+              console.log(response);
+               // this.socialAuthService.faceBookAuthMethod(userData.token);
        }
     );
 }

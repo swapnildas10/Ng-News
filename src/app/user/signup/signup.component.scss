@@ -19,3 +19,17 @@ input.example-right-align {
   .example-right-align {
     text-align: right;
   }
+  .example-full-width {
+    width: 100%;
+  }
+
+  input[type=password], input[type=text]{
+    border-bottom: none;
+    height: 100%;
+}
+
+input[type = password]:focus:not([readonly]),input[type = text]:focus:not([readonly]) {
+  border-bottom: none;
+  border-radius: 0%;
+  box-shadow: 0 0 0 0 transparent;
+}

@@ -36,6 +36,7 @@ import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/materi
 import { getAuthServiceConfigs } from '../socialloginConfig';
 import { SocialLoginModule, AuthServiceConfig } from 'angular5-social-login';
 import { SocialAuthService } from './shared/services/auth.service';
+import { PlacesAPIService } from './shared/services/places-api.service';
 const appRoutes: Routes = [
   {path: 'TopUSNews', component: BreakingNewsComponent},
   {path: 'category/:id', component: CategoryNewsComponent},
@@ -82,10 +83,13 @@ const appRoutes: Routes = [
     CommonModule,
     SocialLoginModule
   ],
-  providers: [ApiConnectionService, ArticleSharingService, {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}, {
+  providers: [
+    ApiConnectionService, ArticleSharingService, {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}, {
     provide: AuthServiceConfig,
     useFactory: getAuthServiceConfigs
-  }, SocialAuthService],
+  }, SocialAuthService,
+PlacesAPIService
+],
   bootstrap: [AppComponent],
   schemas: [ NO_ERRORS_SCHEMA ],
   exports: [

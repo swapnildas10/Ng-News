@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, HostBinding, ViewChild, ElementRef, SimpleChange } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiConnectionService } from '../shared/services/apiconnection.service';
 import { WeatherWrapper, CurrentWeather } from '../shared/modals/weather';
@@ -11,6 +11,7 @@ import { ArticleSource } from '../shared/modals/article-source';
 import { SearchQueryModal } from '../shared/modals/searchquerymodal';
 import { SearchBoxQueryParameters } from '../shared/modals/searchboxquery-modal';
 import { Subject } from 'rxjs/Subject';
+import { MatTab, MatTabGroup, MatTabChangeEvent } from '@angular/material';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,11 +28,14 @@ export class DashboardComponent implements OnInit {
   onQueryDisplay = false;
   pageClicked: number;
   pageNumberChanged = new Subject<number>();
+  MatTabClicked = new Subject<number>();
   searchBoxQueryParameters: SearchBoxQueryParameters;
   @ViewChild('demoBasic') modal: ModalDirective;
+  @ViewChild('MatTabAdd') MatTabAdd: MatTab;
+  @ViewChild('matTabGroup') matTabGroup: MatTabGroup;
   constructor(
     private router: Router,
-    private apiConnectionService: ApiConnectionService
+    private apiConnectionService: ApiConnectionService,
   ) { }
   isCompanyLogo(input: any): input is CompanyLogo {
     return input.constructor.name === 'CompanyLogo';
@@ -42,6 +46,11 @@ export class DashboardComponent implements OnInit {
 
 
   ngOnInit() {
+    this.matTabGroup.selectChange.subscribe((response) => {
+      console.log((<MatTab>(response.tab)));
+      console.log(this.matTabGroup._tabs.length);
+      
+    });
     this.pageClicked = 1;
     this.pageNumberChanged.asObservable().distinctUntilChanged();
     this.apiConnectionService.getWeatherDataByZipCodeAPI().subscribe(

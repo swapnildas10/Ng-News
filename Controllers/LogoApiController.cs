@@ -32,6 +32,8 @@ using(var httpClient = new HttpClient()) {
     } else {
         CompanyLogo companyLogo = null;
     try {
+        if ( name.Contains("The Washington Post"))
+        name = name.Split("The")[1].Trim();
         String url = "https://company.clearbit.com/v1/domains/find?name=" + name;
         httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic",
         Convert.ToBase64String(Encoding.ASCII.GetBytes(API_KEY+":")));

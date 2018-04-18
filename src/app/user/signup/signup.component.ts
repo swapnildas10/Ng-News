@@ -6,6 +6,8 @@ import { startWith } from 'rxjs/operators/startWith';
 import { map } from 'rxjs/operators/map';
 import { PlacesAPIService } from '../../shared/services/places-api.service';
 import { PredictionsWrapper } from '../../shared/modals/cities-search';
+import { FacebookLoginProvider, AuthService, GoogleLoginProvider } from 'angular5-social-login';
+import { SocialAuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -23,7 +25,8 @@ export class SignupComponent implements OnInit, ErrorStateMatcher {
   SignUpForm: FormGroup;
   filteredStates: Observable<any[]>;
   cities: string[] = [];
-  constructor(private cityAPIService: PlacesAPIService, private fb: FormBuilder) {
+  constructor(private cityAPIService: PlacesAPIService, private fb: FormBuilder,
+    private socialAuthService: SocialAuthService, private authService: AuthService) {
     this.createForm();
     this.filteredStates = this.SignUpForm.controls.city.valueChanges
       .pipe(
@@ -63,10 +66,24 @@ export class SignupComponent implements OnInit, ErrorStateMatcher {
       state.toLowerCase().indexOf(name.toLowerCase()) === 0);
   }
   facebookSignup() {
-
+    const socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
+    this.authService.signIn(socialPlatformProvider).then(
+      (userData) => {
+              // this will return user data from facebook. What you need is a user token which you will send it to the server
+              console.log(userData);
+                this.socialAuthService.faceBookAuthMethod(userData.token);
+       }
+    );
   }
   googleSignup() {
-
+    const socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
+    this.authService.signIn(socialPlatformProvider).then(
+      (response) => {
+              // this will return user data from facebook. What you need is a user token which you will send it to the server
+              console.log(response);
+               // this.socialAuthService.faceBookAuthMethod(userData.token);
+       }
+    );
   }
 
   onFormSubmit(form: FormGroup) {

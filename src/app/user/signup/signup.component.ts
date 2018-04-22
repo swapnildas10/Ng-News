@@ -8,6 +8,7 @@ import { PlacesAPIService } from '../../shared/services/places-api.service';
 import { PredictionsWrapper } from '../../shared/modals/cities-search';
 import { FacebookLoginProvider, AuthService, GoogleLoginProvider } from 'angular5-social-login';
 import { SocialAuthService } from '../../shared/services/auth.service';
+import { UserInfo } from '../../shared/modals/userinfo';
 
 @Component({
   selector: 'app-signup',
@@ -15,6 +16,7 @@ import { SocialAuthService } from '../../shared/services/auth.service';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit, ErrorStateMatcher {
+  userInfo: UserInfo;
   hide = true;
   firstName = new FormControl('', Validators.required);
   lastName = new FormControl('', Validators.required);
@@ -87,7 +89,12 @@ export class SignupComponent implements OnInit, ErrorStateMatcher {
   }
 
   onFormSubmit(form: FormGroup) {
-   console.log(form);
+    this.userInfo = new UserInfo();
+    this.userInfo.email = form.value.email;
+    this.userInfo.firstname = form.value.firstName;
+    this.userInfo.lastname = form.value.lastName;
+    this.userInfo.location = form.value.city;
+  this.socialAuthService.userSignUp(form.value.email, form.value.password, this.userInfo);
 
   }
 }

@@ -1,7 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
-
-
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -76,7 +74,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     MDBBootstrapModule.forRoot(),
     RouterModule.forRoot(
-      appRoutes, {enableTracing: true}
+      appRoutes
     ),
     BrowserAnimationsModule,
     MaterialModule,

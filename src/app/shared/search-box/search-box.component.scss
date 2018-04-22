@@ -1,0 +1,59 @@
+
+
+.form-control:focus {
+    background: white;
+}
+
+input[type=text]{
+    background-color: rgba(255, 255, 255, 0.39);
+    min-height: 2.5rem;
+
+}
+
+.fa{
+    position: absolute;
+    left: 30px;
+    top: 30%;
+}
+
+.md-form{
+    min-width: 70%;
+    margin-bottom: 0;
+}
+
+.md-form.form-sm input {
+     
+    padding-left: 3.0rem;
+    padding-right: 3.0rem;
+     
+}
+.cogs {
+  right: 20px;
+  left:auto;  
+}
+
+/* fallback */
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/materialicons/v36/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+  }
+  
+  .material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+  }
+
+  

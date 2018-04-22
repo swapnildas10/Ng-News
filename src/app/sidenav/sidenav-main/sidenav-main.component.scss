@@ -1,0 +1,20 @@
+.example-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .mat-drawer-container{
+      background-color: transparent;
+      visibility: hidden;
+      z-index: 100;
+      position: fixed;
+  }
+  .mat-expansion-panel-body{
+      padding: 0;
+  }
+  p a {
+      width: 100%;
+  }

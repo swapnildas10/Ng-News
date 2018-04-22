@@ -1,0 +1,45 @@
+<div style="max-width:18rem;" class="card card-dark mx-auto my-auto">
+  <!--Card image-->
+  <div class="view hm-white-slight waves-light" mdbRippleRadius>
+      <img [src]="article['urLtoImage']" class="img-fluid" alt="">
+      <a>
+          <div class="mask"></div>
+      </a>
+  </div>
+  <!--/.Card image-->
+  <a class="btn-floating btn-action waves-light"  data-toggle="modal" data-target="#basicExample" (click)="onClickEmit()" mdbRippleRadius><i class="fa fa-chevron-right"></i></a>
+  <!--Card content-->
+  <div class="card-body">
+      
+      <!--Title-->
+      <h4 class="card-title">{{article.title}}</h4>
+      <hr>
+      <!--Text-->
+      <div class="card-text">
+        <div class="row">
+                <div class="col-2 col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                    <p class=" justify-content-center"><img *ngIf="article.companyLogo;else elseBlock" [src]="article.companyLogo.logo+'?size=40'">
+                    <ng-template #elseBlock><img *ngIf="article.domainLogo" [src]="article.domainLogo.url"/></ng-template>
+                </p>       
+                </div>
+                <div style="text-align:center" *ngIf="article.companyLogo;else elseName" class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10 mx-auto my-auto">
+                    <p style="text-align:left;padding-left:1rem">{{article.companyLogo.name}}</p></div>
+                <ng-template #elseName><div class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10 mx-auto my-auto"><p style="text-align:left;padding-left:1rem">{{article.source.name}}</p></div></ng-template>
+            </div>
+</div>
+       
+  </div>
+  
+  <!--/.Card content-->
+  <!-- Card footer -->
+  <div class="card-data  justify-content-center">
+    <ul class="row">
+        <li><i class="fa fa-clock-o"></i>{{article.publishedAt | timeAgo}}</li>
+         
+    </ul>
+    
+</div>
+<!-- Card footer -->
+</div>
+<!--/.Card Dark--> 
+          

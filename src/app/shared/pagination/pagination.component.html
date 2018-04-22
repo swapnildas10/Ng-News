@@ -1,0 +1,42 @@
+<div  class="row justify-content-end px-5 py-5 mx-auto"><!--Pagination -->
+  <nav class="my-4">
+      <ul class="pagination pagination-circle pg-blue mb-0">
+  
+          <!--First-->
+          <li #first class="page-item disabled"><a (click)="goToFirstPage()" class="page-link" mdbRippleRadius>First</a></li>
+  
+          <!--Arrow left-->
+          <li #firstlogo class="page-item disabled">
+              <a (click)="goToPreviousPage()" class="page-link" mdbRippleRadius aria-label="Previous">
+                  <span aria-hidden="true">«</span>
+                  <span class="sr-only">Previous</span>
+              </a>
+          </li>
+          
+          
+          <!--Numbers--><div style="display: -webkit-inline-box; display: -webkit-box" #pagination>
+          <div  *appLoop = "pageCount;let j = index"><li [ngClass]="j == 0 ? 'active':''" class="page-item">
+            <a  [id] ="'page_id_'+j" *ngIf="(j < 5); else elseTemplate" (click)="onpageClick(j + pagestart)" class="page-link" mdbRippleRadius>{{j+1 + pagestart}}</a>
+            <ng-template *ngIf="j == 5; then anotherElseTemplate else RestOftemplate" #elseTemplate  ></ng-template>
+            <ng-template style="margin:0 10px" #anotherElseTemplate>...</ng-template>
+            <ng-template *ngIf="j > (pageCount-2);" style="margin:0 10px" #RestOftemplate>{{j + 1}}</ng-template>
+        </li>
+        </div>
+    </div>
+          
+       
+  
+          <!--Arrow right-->
+          <li #lastlogo class="page-item">
+              <a (click)="goToNextPage()"  class="page-link" mdbRippleRadius aria-label="Next">
+                  <span aria-hidden="true">»</span>
+                  <span class="sr-only">Next</span>
+              </a>
+          </li>
+  
+          <!--First-->
+          <li #last class="page-item"><a (click)="goToLastPage()" class="page-link disabled"></a></li>
+  
+      </ul>
+  </nav>
+  <!--/Pagination --></div>

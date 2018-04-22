@@ -1,0 +1,81 @@
+<div class="container-fluid pt-3">
+    <section class="view intro-2 hm-gradient">
+            <div  class="full-bg-img pb-3">
+                <div style="min-height: 40vh" class="row">
+                        <div style="background: linear-gradient(45deg, rgba(42, 27, 161, 0.6), rgba(29, 210, 177, 0.6) 100%);" class="container-fluid">
+                                <div style="position:relative;" class="row h-100 pt-5 mt-3">
+                                    <div class="row w-100">
+                                            <app-search-box  (QueryParameters)="getQueryParameters($event)" (displayQueryResult)="getQueryResult($event)" (articleSelected)="getArticleSelected($event)"  class="row pt-3"   style="min-width: 100%;position: absolute;"></app-search-box> 
+                                    </div>
+                                    <div style="position: absolute; bottom: 0;  left:0; right:0;" class="row justify-content-center d-flex align-items-baseline w-100">
+                                            <mat-card style="box-shadow: none; background:transparent">
+                                                    <mat-card-content>
+                                                     
+                                                      <mat-tab-group #matTabGroup class="demo-tab-group">
+                                                        <mat-tab label="General">
+                                                           
+                                                        </mat-tab>
+                                                        <mat-tab label="Business">
+                                                           
+                                                        </mat-tab>
+                                                        <mat-tab label="Entertainment">
+                                                           
+                                                        </mat-tab>
+                                                         
+                                                        <mat-tab label="Health">
+                                                         
+                                                        </mat-tab>
+                                                        <mat-tab label="Science">
+                                                         
+                                                        </mat-tab>
+                                                        <mat-tab label="Technology">
+                                                         
+                                                        </mat-tab>
+                                                        
+                                                      </mat-tab-group>
+                                                    </mat-card-content>
+                                                  </mat-card>
+                                    </div>
+                                  
+                                    </div>
+                                    
+                        </div>
+                </div>
+                <div class="row">
+                <div class="container">
+                        <div *ngIf="newsData">
+                                <div class="card-deck">
+                                    <app-breaking-news-article (outArticle)='displayArticleOnModal($event)' (showModal)='initiateModal($event)' class="col-sm-6 col-xs-12 col-md-6 col-lg-3 col-xl-3 py-3"  *ngFor="let article of newsData.articles" [article]="article"></app-breaking-news-article>
+                                </div>
+                                </div>
+                </div>
+                        
+                            </div>
+                 
+            </div>
+    </section>
+      
+       
+  
+
+<div mdbModal (onHidden)='onHidden()' #demoBasic="mdb-modal" class="modal fade" id="basicExample" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div *ngIf='article' class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title w-100" id="myModalLabel">{{article.title}}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="demoBasic.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+               <iframe style="min-height:70vh"  [src]="article.url | safe" width="100%" height="100%"  ></iframe>
+               
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="demoBasic.hide()" mdbRippleRadius>Close</button>
+                <button type="button" class="btn btn-primary btn-sm waves-light" mdbRippleRadius>Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,132 @@
+<section class="section">
+    <div class="view intro hm-purple-light">
+        <div class="full-bg-img">
+            <div style="background-color: red; height: 20vh;" class="row">
+                <div style="width: 100%" class="row"><mat-icon class="mx-auto mt-5">cloud</mat-icon></div>
+                <div style="width: 100%" class="row">  <h2 class="mx-auto mb-5">{{category | uppercase}}</h2></div>
+              
+            </div>
+            <div class="row py-5 flex-center">
+    <div class="py-5 justify-content-center">
+      <div class="container justify-content-center">
+           <div class="row justify-content-center" *ngIf='TopFive'>
+               <div class="col-xs-12 col-sm-12 col-md-6 col-xl-4 col-lg-3 flex-center" *ngFor='let article of TopFive'>
+                   <!-- Card -->
+                   <div style="width:18rem" class="card  mb-3" >
+                        <!--Card image-->
+                        <div class="view hm-white-slight waves-light" mdbRippleRadius>
+                                <img *ngIf="article['urLtoImage']; else altImage" [src]="article['urLtoImage']" class="img-fluid" alt="Card image with a tree in a middle of a lake.">
+                                <ng-template #altImage *ngIf="article.companyLogo; else domainImage" >
+                                    <img [src]="article.companyLogo.logo"  class="img-fluid"/>
+                               </ng-template>
+                                <ng-template #domainImage *ngIf="article.domainLogo;">
+                                        <img [src]="article.domainLogo.url"  class="img-fluid"/>
+                                </ng-template>
+                                    <a (click)="onShowModal(true);onDisplayArticleOnModal(article)" >
+                                    <div class="mask"></div>
+                                </a>
+                            </div>
+                        
+                            <!--Card content-->
+                            <div class="card-body">
+                                <!--Title-->
+                                <h4 class="card-title">{{article.title}}</h4>
+                                <!--Text-->
+                                <div class="card-text">
+                                    <div class="row mb-3 px-3"> {{article.description}}</div>
+                                    <div class="row">
+                                            <div class="col-2 col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <p class=" justify-content-center"><img *ngIf="article.companyLogo;else elseBlock" [src]="article.companyLogo.logo+'?size=40'">
+                                                <ng-template #elseBlock><img *ngIf="article.domainLogo" [src]="article.domainLogo.url"/></ng-template>
+                                            </p>       
+                                            </div>
+                                            <div style="text-align:center" *ngIf="article.companyLogo;else elseName" class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10 mx-auto my-auto">
+                                                <p style="text-align:left;padding-left:1rem">{{article.companyLogo.name}}</p></div>
+                                            <ng-template #elseName><div class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10 mx-auto my-auto"><p style="text-align:left;padding-left:1rem">{{article.source.name}}</p></div></ng-template>
+                                        </div>
+                                    </div>
+                                 
+                         
+                        <!-- Content -->
+                        </div>
+                        <div class="card-data  justify-content-center flex-center">
+                            <ul  class="row">
+                                <li><i class="fa fa-clock-o"></i>&nbsp;{{article.publishedAt | timeAgo}}</li>
+                                 
+                            </ul>
+                        </div>
+                        <!-- Card -->
+                                       </div>
+<!-- Card -->
+               </div>
+           </div> 
+    
+    </div>
+    </div>
+    
+    </div>
+    
+    </div></div>
+    </section>
+
+<mdb-navbar [ngStyle]="styleName" #bottomnavVar (scroll)="onScrollEvent($event)" [SideClass]="className">
+           
+    <!-- Navbar brand -->
+    <logo><a class="navbar-brand" href="#">{{category | uppercase}}</a></logo>
+
+    <!-- Collapsible content -->
+    <links>
+
+        <!-- Links -->
+        
+        <!-- Links -->
+
+        <!-- Search form -->
+        <app-search-box  [category]="category" style="position: relative;" class="mx-auto w-100 flex-center row"></app-search-box>
+    </links>
+    <!-- Collapsible content -->
+
+</mdb-navbar>
+<!--/.Navbar-->
+
+
+
+<div id="navtop" class="container px-3">
+    <div class="row">
+
+<div class="row">
+  
+  <div *ngIf='responseData' >
+      <div class="row">
+            <app-pagination (pageClicked)="onPageClick($event)" [pageSize]="(responseData.totalResults)" [pageCount]="pageCalculate(responseData.totalResults)" ></app-pagination>
+      </div>
+  <div class="row">
+
+    <div *ngFor='let article of responseData.articles;let i = index' class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 px-2 py-2">    
+      <app-category-news-article  (showModal)="onShowModal($event)" (outArticle)="onDisplayArticleOnModal($event)" [article]='article'></app-category-news-article></div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div>
+<div mdbModal (onHidden)="onHidden()" #demoBasic="mdb-modal" class="modal fade" id="basicExample" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div *ngIf="article" class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title w-100" id="myModalLabel">{{article.title}}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="demoBasic.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+               <!-- <div [innerHTML]="article.url | safe" width="100%" height="100%"  ></div> -->
+               <iframe style="min-height:70vh"  [src]="article.url | safe" width="100%" height="100%"  ></iframe>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="demoBasic.hide()" mdbRippleRadius>Close</button>
+                 
+            </div>
+        </div>
+    </div>
+</div>

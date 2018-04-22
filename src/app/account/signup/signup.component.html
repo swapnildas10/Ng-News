@@ -1,0 +1,32 @@
+<div style=" display: flex;
+flex-direction: column;" class="container">
+    <div class="row">
+      <div class="col-6">
+          <mat-form-field>
+              <input matInput placeholder="Enter your First Name" [formControl]="firstname" required>
+              <mat-error *ngIf="firstname.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+      </div>
+      <div class="col-6">
+          <mat-form-field>
+              <input matInput placeholder="Enter your Last Name" [formControl]="lastname" required>
+              <mat-error *ngIf="lastname.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+        <mat-form-field>
+            <input matInput placeholder="Enter your email" [formControl]="email" required>
+            <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+    </div>
+    <div class="row">
+        <mat-form-field>
+            <input matInput placeholder="Enter your password" [formControl]="password" [type]="hide ? 'password' : 'text'">
+            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+          </mat-form-field>
+    </div>
+    <div class="row">
+      
+    </div>
+  </div>

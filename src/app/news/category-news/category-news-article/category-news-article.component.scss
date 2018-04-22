@@ -1,0 +1,76 @@
+h4, .h4 {
+    font-size: 1.0rem;
+}
+.card .card-data {
+    background-color: #929fba;
+    color: #fff;
+    text-align: center;
+    height: auto;
+    padding: 10px;
+}
+.card .card-data ul {
+    margin-bottom: 0;
+    font-size: .9rem;
+}
+.card .card-data ul li {
+    display: inline;
+}
+.card .card-data ul li .fa-clock-o {
+    margin-left: 10px;
+}
+
+.card.card-dark .card-body hr {
+    background-color: #666;
+}
+
+.btn-floating {
+    position: relative;
+    z-index: 1;
+    vertical-align: middle;
+    display: inline-block;
+    overflow: hidden;
+    width: 47px;
+    height: 47px;
+    padding: 0;
+    border-radius: 50%;
+    margin: 10px;
+    background-color: #a6c;
+    color: #fff;
+    cursor: pointer;
+    -webkit-transition: .3s;
+    transition: .3s;
+}
+
+.btn-floating i {
+    display: inline-block;
+    width: inherit;
+    color: #fff;
+    font-size: 1.25rem;
+    line-height: 47px;
+    text-align: center;
+}
+
+.card .btn-action {
+    margin: -23px 20px;
+    margin-left: auto;
+    background-color: #929fba;
+    height: 47px;
+    width: 47px;
+    line-height: 0;
+}
+.card .btn-action .fa {
+    font-size: 18px;
+}
+.card .btn-action .fa.fa-chevron-right {
+    margin-top: 2px;
+    margin-left: 2px;
+}
+.view .mask, .view .full-bg-img {
+     
+    height: auto;
+     
+   
+    /* bottom: 0; */
+}
+
+

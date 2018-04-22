@@ -1,0 +1,108 @@
+<!--Card-->
+<div *ngIf="article['urLtoImage']; else withoutImageTemplate" class="card mx-2 my-2">
+
+    <!--Card image-->
+    <div class="view hm-white-slight waves-light" mdbRippleRadius>
+        <img [src]="article['urLtoImage']" class="img-fluid" alt="">
+        <a>
+            <div class="mask"></div>
+        </a>
+    </div>
+    <!--/.Card image-->
+
+    <!--Button-->
+    <a class="btn-floating btn-action waves-light" data-toggle="modal" data-target="#basicExample" (click)="onclickEmit()" mdbRippleRadius><i class="fa fa-chevron-right"></i></a>
+
+    <!--Card content-->
+    <div class="card-body">
+        <!--Title-->
+        <h4 class="card-title">{{article.title}}</h4>
+        <hr>
+        <!--Text-->
+        <div class="card-text">
+                <div class="row">
+                        <div class="col-2 col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                            <p class=" justify-content-center"><img *ngIf="article.companyLogo;else elseBlock" [src]="article.companyLogo.logo+'?size=40'">
+                            <ng-template #elseBlock><img *ngIf="article.domainLogo" [src]="article.domainLogo.url"/></ng-template>
+                        </p>       
+                        </div>
+                        <div style="text-align:center" *ngIf="article.companyLogo;else elseName" class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                            <div class="row">   <p class="my-auto" style="text-align:left;padding-left:1rem">{{article.companyLogo.name}}</p></div>
+                            <div class="row"> <p class="my-auto" style="text-align:left;padding-left:1rem">{{article.publishedAt | timeAgo}}</p></div></div>
+                         
+                        <ng-template #elseName><div class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10 ">
+                            <div class="row"> <p class="my-auto" style="text-align:left;padding-left:1rem">{{article.source.name}}</p></div>
+                            <div class="row"> <p class="my-auto" style="text-align:left;padding-left:1rem">{{article.publishedAt | timeAgo}}</p></div></div>
+                           
+                        </ng-template>
+                    </div>
+        </div>
+        
+      </div>
+    <!--/.Card content-->
+
+    <!-- Card footer -->
+    <div class="card-data flex-center">
+        <ul>
+            <li><i class="fa fa-clock-o"></i> &nbsp;{{article.publishedAt | timeAgo}}</li>
+            
+        </ul>
+    </div>
+    <!-- Card footer -->
+
+</div>
+<!--Card-->
+
+<ng-template #withoutImageTemplate>
+        <a (click)="onclickEmit()" >
+    
+      
+            <div class="card">
+    
+                   
+                
+                    <!--Card content-->
+                    <div class="card-body">
+                        <!--Title-->
+                        <h4 class="card-title">{{article.title}}</h4>
+                        <!--Text-->
+                       
+                        <hr>
+                        <!--Text-->
+                        <div class="card-text">
+                                <div class="row">
+                                        <p class=" justify-content-center">{{article.description}}</p>
+                                </div>
+                          <div class="row">
+                                  <div class="col-2 col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                      <p class=" justify-content-center"><img *ngIf="article.companyLogo;else elseBlock" [src]="article.companyLogo.logo+'?size=40'">
+                                      <ng-template #elseBlock><img *ngIf="article.domainLogo" [src]="article.domainLogo.url"/></ng-template>
+                                  </p>       
+                                  </div>
+                                
+                                  <div style="text-align:center" *ngIf="article.companyLogo;else elseName" class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                                        <div class="row">   <p class="my-auto" style="text-align:left;padding-left:1rem">{{article.companyLogo.name}}</p></div>
+                                        <div class="row"> <p class="my-auto" style="text-align:left;padding-left:1rem">{{article.publishedAt | timeAgo}}</p></div></div>
+                                    </div>
+                                    <ng-template #elseName><div class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10 ">
+                                        <div class="row"> <p class="my-auto" style="text-align:left;padding-left:1rem">{{article.source.name}}</p></div>
+                                        <div class="row"> <p class="my-auto" style="text-align:left;padding-left:1rem">{{article.publishedAt | timeAgo}}</p></div></div>
+                                       
+                                    </ng-template>
+                  </div>
+                        
+                        
+                    </div>
+                <!-- Card footer -->
+       <div class="card-data  justify-content-center flex-center">
+            <ul class="row">
+                <li><i class="fa fa-clock-o"></i>&nbsp;{{article.publishedAt | timeAgo}}</li>
+                 
+            </ul>
+           
+        </div>
+                </div>
+            </a>
+    </ng-template>
+
+            

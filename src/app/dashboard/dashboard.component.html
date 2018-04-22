@@ -1,0 +1,129 @@
+<div  class="container-fluid">
+    
+    <!--Intro Section-->
+    <section class="view intro-2 hm-gradient">
+        <div id="dashboard-weather" class="full-bg-img pb-3">
+            <div style="background: linear-gradient(45deg, rgba(42, 27, 161, 0.6), rgba(29, 210, 177, 0.6) 100%);" class="container-fluid">
+                    <div  class="row flex-center pt-5 mt-3">
+                            <app-search-box (QueryParameters)="fetchQueryParameters($event)" class="row pt-3" (displayQueryResult)="enableQueryResultDisplay($event)"(articleSelected)="searchResult($event)" style="min-width: 100%;position: relative;"></app-search-box> 
+                        </div>
+                <div class="row flex-center py-5">
+                    
+                        <div class="white-text">
+                            <h1 class="h1-responsive wow fadeInLeft" data-wow-delay="0.3s">Welcome </h1>
+                                 
+                                 
+                        </div>
+                   
+                    
+                   
+                </div>
+                <div style='margin: auto;
+                max-width: 36rem;
+                overflow: hidden;
+                justify-content: center;' *ngIf='weatherWrapper' class="row flex-center">
+                <div *ngIf='currentWeather && !weatherCoordinate' class="col">
+                   <div  class="row">
+                       <div class="col-6 flex-center"><img [src]= 'currentWeather.weather[0].icon' /></div>
+                       <div class="col-6 flex-center my-auto white-text">{{currentWeather.main.temp | tempConverter: 'f' | number: '2.0-0'}}</div>
+                   </div>
+                   <div class="row flex-center white-text">{{weatherWrapper.city.name}}</div>
+                </div>
+                <div *ngIf='!currentWeather && weatherCoordinate' class="col">
+                   <div  class="row">
+                       <div class="col-6 flex-center"><img [src]= 'weatherCoordinate.weather[0].icon' /></div>
+                       <div class="col-6 flex-center my-auto white-text">{{weatherCoordinate.main.temp | tempConverter: 'f' | number: '2.0-0'}}</div>
+                   </div>
+                   <div class="row flex-center white-text">{{weatherCoordinate.name}}</div>
+                </div>
+                    <div class="col" *ngFor='let weatherData of weatherWrapper.list'>
+                        <div class="white-text">
+                            <div class="row flex-center">{{weatherData.dt_txt | date: 'EEE'}}</div>
+                            <div class="row flex-center">
+                                    <img [src]='weatherData.weather[0].icon'/>   
+                            </div>
+                            <div class="row flex-center">
+                                <div class="col">{{weatherData.main.temp_min | tempConverter:'f' | number: '2.0-0'}}</div>
+                                <div class="col">{{weatherData.main.temp_max | tempConverter: 'f' | number: '2.0-0'}}</div>
+                            </div>
+                              
+                                 
+                        </div>
+                   
+                    </div>
+                   
+                </div>
+               <div class="row">
+                <div   class="row justify-content-center d-flex align-items-baseline w-100">
+                    <mat-card style="box-shadow: none; background:transparent; padding-bottom: 0">
+                            <mat-card-content>
+                             
+                              <mat-tab-group #matTabGroup class="demo-tab-group">
+                                <mat-tab  label="General">
+                                   
+                                </mat-tab>
+                                <mat-tab label="Top Stories Near Me">
+                                   
+                                </mat-tab>
+                                <mat-tab #MatTabAdd label="custom tab-1">
+                                    <ng-template mat-tab-label>
+                                        <mat-icon>add</mat-icon>
+                                      </ng-template>
+                                </mat-tab>
+                              
+                                
+                              </mat-tab-group>
+                            </mat-card-content>
+                          </mat-card>
+            </div>
+               </div>
+            </div>
+            <div *ngIf="topHeadlines && !onQueryDisplay; then thenBlock; else elseBlock" ></div>
+    <ng-template #thenBlock>
+        <div  class="container mx-auto   row px-5 py-5">
+
+      
+        <div *ngFor="let article of topHeadlines.articles" class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
+            <app-dashboard-article (outArticle)='displayArticleOnModal($event)' (initiate)='initiateModal($event)' [article]="article"></app-dashboard-article>
+        </div>
+    </div>
+    </ng-template>
+     
+    <ng-template #elseBlock>
+            <div *ngIf="queryResults" class="container mx-auto   row px-5 py-5">
+
+      
+                    <div *ngFor="let article of queryResults.articles" class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
+                        <app-dashboard-article (outArticle)='displayArticleOnModal($event)' (initiate)='initiateModal($event)' [article]="article"></app-dashboard-article>
+                    </div>
+                </div>
+    </ng-template>
+                   <app-pagination  (pageClicked)="onPageClick($event)" [pageCount]="pageCalculate(topHeadlines.totalResults)" [pageSize]="topHeadlines.totalResults"  *ngIf="topHeadlines && !onQueryDisplay"></app-pagination>
+            
+                <app-pagination (pageClicked)="onPageClick($event)" [pageCount]="pageCalculate(queryResults.totalResults)" [pageSize]="queryResults.totalResults"  *ngIf="queryResults && onQueryDisplay"></app-pagination>
+              
+        </div>
+        
+    </section>
+     
+</div>
+<div (onHidden)="onHidden()" mdbModal #demoBasic="mdb-modal" class="modal fade" id="basicExample" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg " role="document">
+        <div *ngIf='article' class="modal-content">
+            <div class="modal-header">
+                <h4  class="modal-title w-100" id="myModalLabel">{{article.title}}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="demoBasic.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div  class="modal-body">
+               <!-- <div [innerHTML]="article.url | safe" width="100%" height="100%"  ></div> -->
+               <iframe style="min-height:70vh" [src]="article.url | safe" width="100%" height="100%"></iframe>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="demoBasic.hide();" mdbRippleRadius>Close</button>
+                
+            </div>
+        </div>
+    </div>
+</div>

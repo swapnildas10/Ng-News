@@ -1,0 +1,35 @@
+
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.example-right-align {
+  -moz-appearance: textfield;
+}
+.example-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .example-container > * {
+    width: 100%;
+  }
+  
+  .example-right-align {
+    text-align: right;
+  }
+  .example-full-width {
+    width: 100%;
+  }
+
+  input[type=password], input[type=text]{
+    border-bottom: none;
+    height: 100%;
+}
+
+input[type = password]:focus:not([readonly]),input[type = text]:focus:not([readonly]) {
+  border-bottom: none;
+  border-radius: 0%;
+  box-shadow: 0 0 0 0 transparent;
+}

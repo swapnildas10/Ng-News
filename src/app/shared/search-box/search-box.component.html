@@ -1,0 +1,60 @@
+
+ <div class="col-12 flex-center">
+<form class="form-inline md-form form-sm flex-center">
+    <i class="fa fa-search" aria-hidden="true"></i>
+    <i (click) ="toggleAdvancedSearch()" class="fa cogs fa-cogs" aria-hidden="true"></i>
+    <i *ngIf="searchBoxQueryParameters" style="top: 25%;
+    right: 2.5rem;
+    position: absolute;
+    left: auto;" (click)="clearSearchData()" class="material-icons fa">clear</i>
+    
+      <input  class="form-control form-control-sm ml-3 w-100"
+      (keyup.enter) ="onEnterPressed(inputbox.value)"   (keyup)="onKeyPressed(inputbox.value)"
+       id="input_text" type="text" placeholder="Search" #inputbox aria-label="Assignee" matInput [formControl]="searchBox" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+        <mat-option (click) = "onSelectArticle(option)" *ngFor="let option of filteredOptions | async" [value]="option">
+          {{ option.title }}
+        </mat-option>
+      </mat-autocomplete>
+    
+      
+                 
+                  
+     
+</form>
+</div>
+<div class="col-12 flex-center">
+<form  [ngStyle]="!flag && {'display':'none'}">
+        <mat-form-field>
+                <input matInput [max]="maxDate" [matDatepicker]="picker1" placeholder="From"
+                       (dateInput)="addEvent('input', $event)" (dateChange)="fromdateChanged('change', $event)">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+              </mat-form-field>  
+              <mat-form-field>
+                    <input matInput [max]="maxDate" [min]="minDate" [matDatepicker]="picker2" placeholder="To"
+                           (dateInput)="addEvent('input', $event)" (dateChange)="todateChanged('change', $event)">
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                  </mat-form-field>
+                  <mat-form-field>
+                        <mat-select [formControl] = "selectedSortByValue" placeholder="Sort By">
+                          <mat-option>None</mat-option>
+                          <mat-option *ngFor="let state of sortBy" [value]="state.value">{{state.name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>  
+                      <mat-form-field *ngIf="sourceWrapper">
+                            <mat-select placeholder="Publishers" [formControl]="publishers" multiple>
+                              <mat-select-trigger>
+                                {{publishers.value ? publishers.value[0] : ''}}
+                                <span *ngIf="publishers.value?.length > 1" class="example-additional-selection">
+                                  (+{{publishers.value.length - 1}} others)
+                                </span>
+                              </mat-select-trigger>
+                              <mat-option *ngFor="let source of sourceWrapper.sources" [value]="source.id">{{source.name}}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+</form>    
+</div>
+       
+     

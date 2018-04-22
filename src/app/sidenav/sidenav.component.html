@@ -1,0 +1,41 @@
+<ng-container >
+        <mat-toolbar class="example-header">Header</mat-toolbar>
+      
+        <mat-sidenav-container style="z-index:2" class="example-container">
+          <mat-sidenav #sidenav mode="side" opened="true" class="example-sidenav"
+                       [fixedInViewport]="options.value.fixed" [fixedTopGap]="options.value.top"
+                       [fixedBottomGap]="options.value.bottom">
+
+                       <div class="row">
+                           <div class="col-12">
+                                <button mat-icon-button><i class="material-icons md-light">business</i></button>
+                           </div>
+                            <div class="col-12">
+                                    <button mat-icon-button><i class="material-icons md-light">rowing</i></button>
+                            </div>
+                            <div class="col-12">
+                                    <button mat-icon-button><i class="material-icons md-light">memory</i></button>
+                            </div>
+                            <div class="col-12">
+                                    <button mat-icon-button><i class="material-icons md-light">device_hub</i></button>
+                            </div>
+                            <div class="col-12">
+                                    <button mat-icon-button><i class="material-icons md-light">theaters</i></button>
+                            </div>
+                            <div class="col-12">
+                                    <button mat-icon-button><i class="material-icons md-light">people</i></button>
+                            </div>
+                            <div class="col-12">
+                                    <button mat-icon-button><i class="material-icons md-light">healing</i></button>
+                            </div>
+                       </div>
+                      
+          </mat-sidenav>
+      
+          <mat-sidenav-content [formGroup]="options">
+          
+          </mat-sidenav-content>
+        </mat-sidenav-container>
+      
+        <mat-toolbar class="example-footer">Footer</mat-toolbar>
+      </ng-container>

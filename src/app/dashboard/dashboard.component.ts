@@ -1,7 +1,7 @@
 import { Component, OnInit, HostBinding, ViewChild, ElementRef, SimpleChange } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiConnectionService } from '../shared/services/apiconnection.service';
-import { WeatherWrapper, CurrentWeather } from '../shared/modals/weather';
+import { WeatherWrapper, CurrentWeather, WeatherCoordinate } from '../shared/modals/weather';
 import { TopHeadlines } from '../shared/modals/top-headlines';
 import { Article } from '../shared/modals/article';
 import { ModalDirective } from 'angular-bootstrap-md';
@@ -20,6 +20,7 @@ import { MatTab, MatTabGroup, MatTabChangeEvent } from '@angular/material';
 })
 export class DashboardComponent implements OnInit {
   weatherWrapper: WeatherWrapper;
+  weatherCoordinate: WeatherCoordinate;
   topHeadlines: TopHeadlines;
   currentWeather: CurrentWeather;
   article: Article;
@@ -46,18 +47,13 @@ export class DashboardComponent implements OnInit {
 
 
   ngOnInit() {
+    this.getGeoLocation();
     this.matTabGroup.selectChange.subscribe((response) => {
       console.log((<MatTab>(response.tab)));
       console.log(this.matTabGroup._tabs.length);
-      
     });
     this.pageClicked = 1;
     this.pageNumberChanged.asObservable().distinctUntilChanged();
-    this.apiConnectionService.getWeatherDataByZipCodeAPI().subscribe(
-      response => {
-        this.weatherWrapper = response.body;
-      }
-    );
     this.apiConnectionService.getBreakingNewsfromAPI('us', null, null, null, 30, 1).subscribe(
       response => {
         this.topHeadlines = response.body;
@@ -78,11 +74,6 @@ export class DashboardComponent implements OnInit {
         });
       }
     );
-    this.apiConnectionService.getCurrentWeatherDataByZipCodeAPI().subscribe(
-      response => {
-        this.currentWeather = response.body;
-      }
-    );
     this.pageNumberChanged.subscribe(
       (pageNo) => {
         console.log(pageNo);
@@ -99,7 +90,33 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
-
+getGeoLocation() {
+  navigator.geolocation.getCurrentPosition(function(success) {
+   this.apiConnectionService.getCurrentWeatherDataByCoordAPI(success.coords.latitude, success.coords.longitude).subscribe(
+     (response) => {
+      this.weatherCoordinate = response.body;
+      this.apiConnectionService.getWeatherDataByCityIdAPI(this.weatherCoordinate.id).subscribe(
+        (response1) => {
+          this.weatherWrapper = response1.body;
+        }
+      );
+      console.log(response.body);
+     }
+   );
+    }.bind(this), function(error) {
+      this.apiConnectionService.getCurrentWeatherDataByZipCodeAPI().subscribe(
+        response => {
+          this.currentWeather = response.body;
+          this.apiConnectionService.getWeatherDataByZipCodeAPI().subscribe(  // edit this
+            response1 => {
+              this.weatherWrapper = response1.body;
+            }
+          );
+          console.log(error);
+        }
+      );
+    }.bind(this));
+}
   initiateModal(event: Boolean) {
     if (event) {
      this.modal.show();

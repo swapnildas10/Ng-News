@@ -80,4 +80,16 @@
         cod: number;
     }
 
-
+    export interface WeatherCoordinate {
+        coord: Coord;
+        sys: Sys;
+        weather: Weather[];
+        main: Main;
+        wind: Wind;
+        rain: Rain;
+        clouds: Clouds;
+        dt: number;
+        id: number;
+        name: string;
+        cod: number;
+    }

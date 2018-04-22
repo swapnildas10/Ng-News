@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "code": "ng serve --ssl 1 --ssl-key \"C:\\Users\\QAuser\\Desktop\\certs\\server.key\"--ssl-cert \"C:\\Users\\QAuser\\Desktop\\certs\\server.crt\""
+    "code": "ng serve --ssl 1 --ssl-key \"C:\\Users\\swapn\\Desktop\ng-news\\Ng-News\\node_modules\\browser-sync\\certs\\server.key\"--ssl-cert \"C:\\Users\\swapn\\Desktop\\ng-news\\Ng-News\\node_modules\\browser-sync\\certs\\server.crt\""
   },
   "private": true,
   "dependencies": {
@@ -27,7 +27,7 @@
     "@angular/router": "^5.2.0",
     "angular-bootstrap-md": "^5.2.2",
     "angular5-social-login": "^1.0.9",
-    "browser-sync": "^2.23.6",
+    "browser-sync": "^2.23.7",
     "chart.js": "^2.5.0",
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",

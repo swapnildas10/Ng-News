@@ -1,0 +1,15 @@
+.container > *{
+    width: 100%;
+}
+
+input[type = password],input[type = text] {
+    border: none;
+  
+  height: auto;
+}
+
+input[type = password]:focus:not([readonly]),input[type = text]:focus:not([readonly]){
+    border: none;
+   
+  box-shadow: 0 0 0 0 transparent;
+}

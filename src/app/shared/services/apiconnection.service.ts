@@ -5,7 +5,7 @@ import { Article } from '../modals/article';
 import { TopHeadlines } from '../modals/top-headlines';
 import { Source, SourceWrapper } from '../modals/source';
 import { SearchQueryModal } from '../modals/searchquerymodal';
-import { WeatherWrapper, CurrentWeather } from '../modals/weather';
+import { WeatherWrapper, CurrentWeather, WeatherCoordinate } from '../modals/weather';
 import { CompanyLogo } from '../modals/company-logo';
 import 'rxjs/add/operator/map';
 import { DomainLogo } from '../modals/domain-logo';
@@ -220,9 +220,20 @@ getWeatherDataByZipCodeAPI(zipcode: string = '90815 ') {
  return this.httpClient.get<WeatherWrapper>(url, {observe : 'response'});
 }
 
+getWeatherDataByCityIdAPI(id: number = 5395754) {
+ const url = this._baseUrl + 'weeklyweatherbyid?id=' + id;
+ return this.httpClient.get<WeatherWrapper>(url, {observe : 'response'});
+}
+
 getCurrentWeatherDataByZipCodeAPI(zipcode: string = '90815 ') {
  const url = this._baseUrl + 'currentweather?zipcode=' + zipcode;
  return this.httpClient.get<CurrentWeather>(url, {observe : 'response'});
+}
+
+getCurrentWeatherDataByCoordAPI(latitude: number, longitude: number) {
+    console.log(latitude);
+ const url = this._baseUrl + 'currentweatherbycoord?latitude=' + latitude + '&longitude=' + longitude;
+ return this.httpClient.get<WeatherCoordinate>(url, {observe : 'response'});
 }
 
 

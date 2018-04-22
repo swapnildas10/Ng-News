@@ -26,12 +26,9 @@
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
     "angular-bootstrap-md": "^5.2.2",
-<<<<<<< HEAD
-=======
     "angular5-social-login": "^1.0.9",
     "browser-sync": "^2.23.7",
     "chart.js": "^2.5.0",
->>>>>>> dev
     "core-js": "^2.4.1",
     "firebase": "^4.13.1",
     "font-awesome": "^4.7.0",

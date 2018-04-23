@@ -3,11 +3,13 @@ import { Http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import * as firebase from 'firebase';
 import { UserInfo } from '../modals/userinfo';
+import { MatSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class SocialAuthService {
     token: string;
-    constructor( private httpClient: HttpClient) {
+    constructor( private httpClient: HttpClient,  public snackBar: MatSnackBar, private router: Router) {
 
     }
     faceBookAuthMethod(token: string): void {
@@ -26,7 +28,31 @@ export class SocialAuthService {
     userLogin(email: string, password: string) {
         firebase.auth().signInAndRetrieveDataWithEmailAndPassword(email, password).then(
             (success) => {
-                console.log(success);
+                firebase.auth().currentUser.getToken().then(
+                    (token) => {
+                        this.token = token;
+                        this.snackBar.open('LOGIN', 'Success', {
+                            duration: 2000
+                        });
+                        this.router.navigate(['/Dashboard']);
+                    }
+                ).catch(
+                    (token) => {
+                        this.token = null;
+                    }
+                );
+            }
+        ).catch(
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
+    userSignOut() {
+        firebase.auth().signOut().then(
+            (success) => {
+                this.token = null;
+                this.router.navigate(['/Login']);
             }
         ).catch(
             (error) => {
@@ -63,12 +89,15 @@ export class SocialAuthService {
         );
         return this.token;
     }
-
+    isAuthenticated() {
+        return this.token != null;
+    }
     storeUserData(userInfo: UserInfo) {
-        console.log(userInfo);
-        console.log('https://ngnews-201320.firebaseio.com/' +  firebase.auth().currentUser.uid + '.json?auth=' +
-        this.token);
-    this.httpClient.put('https://ngnews-201320.firebaseio.com/' +  firebase.auth().currentUser.uid + '.json?auth=' +
-    this.token, userInfo);
+        firebase.database().ref('users/' + firebase.auth().currentUser.uid).set({
+            firstname: userInfo.firstname,
+            lastname: userInfo.lastname,
+            email: userInfo.email,
+            location: userInfo.location
+        });
     }
 }

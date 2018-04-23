@@ -21,13 +21,21 @@
                 <mat-icon>account_circle</mat-icon>
             </a>
               <mat-menu #menu="matMenu">
-                <a routerLink = "/Login" mat-menu-item>
+                <a *ngIf="!authService.isAuthenticated()" routerLink = "/Login" mat-menu-item>
                   <mat-icon>dialpad</mat-icon>
                   <span>Login</span>
                 </a>
-                <a routerLink = "/SignUp" mat-menu-item>
+                <a *ngIf="authService.isAuthenticated()" (click)="onSignOut()" mat-menu-item>
+                  <mat-icon>dialpad</mat-icon>
+                  <span>Sign Out</span>
+                </a>
+                <a *ngIf="!authService.isAuthenticated()" routerLink = "/SignUp" mat-menu-item>
                   <mat-icon>voicemail</mat-icon>
                   <span>Sign Up</span>
+                </a>
+                <a *ngIf="authService.isAuthenticated()" routerLink = "/Details" mat-menu-item>
+                  <mat-icon>list</mat-icon>
+                  <span>Profile</span>
                 </a>
                
               </mat-menu>

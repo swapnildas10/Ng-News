@@ -35,11 +35,13 @@ import { getAuthServiceConfigs } from '../socialloginConfig';
 import { SocialLoginModule, AuthServiceConfig } from 'angular5-social-login';
 import { SocialAuthService } from './shared/services/auth.service';
 import { PlacesAPIService } from './shared/services/places-api.service';
+import { UserDetailsComponent } from './user/user-details/user-details.component';
 const appRoutes: Routes = [
   {path: 'TopUSNews', component: BreakingNewsComponent},
   {path: 'category/:id', component: CategoryNewsComponent},
   {path: 'Dashboard', component: DashboardComponent},
   {path: 'Login', component: LoginComponent},
+  {path: 'Details', component: UserDetailsComponent},
   {path: 'SignUp', component: SignupComponent},
   {path: '', redirectTo: '/Dashboard', pathMatch: 'full'}
 ];
@@ -65,7 +67,8 @@ const appRoutes: Routes = [
     CategoryHomeComponent,
     SidenavMainComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    UserDetailsComponent
   ],
   imports: [
     BrowserModule,

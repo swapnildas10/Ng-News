@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroupDirective, NgForm, FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import {    AuthService,    FacebookLoginProvider,    GoogleLoginProvider} from 'angular5-social-login';
 import { SocialAuthService } from '../../shared/services/auth.service';
+import { MatSnackBar } from '@angular/material';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

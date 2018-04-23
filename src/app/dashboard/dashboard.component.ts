@@ -12,6 +12,7 @@ import { SearchQueryModal } from '../shared/modals/searchquerymodal';
 import { SearchBoxQueryParameters } from '../shared/modals/searchboxquery-modal';
 import { Subject } from 'rxjs/Subject';
 import { MatTab, MatTabGroup, MatTabChangeEvent } from '@angular/material';
+import { SocialAuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -37,6 +38,7 @@ export class DashboardComponent implements OnInit {
   constructor(
     private router: Router,
     private apiConnectionService: ApiConnectionService,
+    public authService: SocialAuthService
   ) { }
   isCompanyLogo(input: any): input is CompanyLogo {
     return input.constructor.name === 'CompanyLogo';

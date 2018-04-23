@@ -65,7 +65,7 @@
                                 <mat-tab label="Top Stories Near Me">
                                    
                                 </mat-tab>
-                                <mat-tab #MatTabAdd label="custom tab-1">
+                                <mat-tab *ngIf="authService.isAuthenticated()" #MatTabAdd label="custom tab-1">
                                     <ng-template mat-tab-label>
                                         <mat-icon>add</mat-icon>
                                       </ng-template>

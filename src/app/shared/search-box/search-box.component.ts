@@ -59,8 +59,8 @@ export class SearchBoxComponent implements OnInit {
       response => {this.sourceWrapper = response.body;
       }
     );
-    this.queriedArticles = this.searchUpdated.asObservable().debounceTime(2000).distinctUntilChanged();
-    this.queryChanged = this.queryUpdated.asObservable().debounceTime(2000).distinctUntilChanged();
+    this.queriedArticles = this.searchUpdated.asObservable().debounceTime(1000).distinctUntilChanged();
+    this.queryChanged = this.queryUpdated.asObservable().debounceTime(1000).distinctUntilChanged();
     this.queryChanged.subscribe(
       input => {if (input.length === 0) {
         this.apiConnectionService.getQueryResultfromAPI(input,

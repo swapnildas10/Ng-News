@@ -33,9 +33,9 @@ export class SignupComponent implements OnInit, ErrorStateMatcher {
     this.filteredStates = this.SignUpForm.controls.city.valueChanges
       .pipe(
         startWith(''),
-        map(state => state ? this.filterStates(state) : this.cities.slice())
-      ).debounceTime(1000).distinctUntilChanged();
-      this.filteredStates.subscribe(value => {
+        map(state => state ? this.filterStates(state) : this.cities.length === 0 ? null : this.cities.slice())
+      ).debounceTime(1000);
+    this.filteredStates.subscribe(value => {
         console.log(value);
         this.cityAPIService.getPlaces(this.SignUpForm.controls.city.value).subscribe(
           (response: PredictionsWrapper) => {

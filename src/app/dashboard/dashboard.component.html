@@ -80,10 +80,10 @@
             </div>
             <div *ngIf="topHeadlines && !onQueryDisplay; then thenBlock; else elseBlock" ></div>
     <ng-template #thenBlock>
-        <div  class="container mx-auto   row px-5 py-5">
+        <div  class="container mx-auto   row pl-5 py-5">
 
       
-        <div *ngFor="let article of topHeadlines.articles" class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
+        <div *ngFor="let article of topHeadlines.articles" class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 py-2">
             <app-dashboard-article (outArticle)='displayArticleOnModal($event)' (initiate)='initiateModal($event)' [article]="article"></app-dashboard-article>
         </div>
     </div>
@@ -93,7 +93,7 @@
             <div *ngIf="queryResults" class="container mx-auto   row px-5 py-5">
 
       
-                    <div *ngFor="let article of queryResults.articles" class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
+                    <div *ngFor="let article of queryResults.articles" class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 py-2">
                         <app-dashboard-article (outArticle)='displayArticleOnModal($event)' (initiate)='initiateModal($event)' [article]="article"></app-dashboard-article>
                     </div>
                 </div>

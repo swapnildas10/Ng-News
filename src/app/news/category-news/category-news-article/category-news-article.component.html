@@ -1,5 +1,5 @@
 
-<div *ngIf="article['urLtoImage']; else withoutImageTemplate" style="max-width:18rem;" class="card card-dark mx-auto my-auto">
+<div *ngIf="article['urLtoImage']; else withoutImageTemplate" style="max-width:18rem;height: 100%;" class="card card-dark mx-auto my-auto">
   <!--Card image-->
   <div class="view hm-white-slight waves-light" mdbRippleRadius>
       <img *ngIf="article['urLtoImage'];" [src]="article['urLtoImage']" class="img-fluid" alt="">

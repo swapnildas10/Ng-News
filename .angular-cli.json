@@ -10,7 +10,6 @@
       "assets": [
         "assets",
         "favicon.ico",
-        "web.config",
         {
           "glob": "index.js",
           "input": "./server/",

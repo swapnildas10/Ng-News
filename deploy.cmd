@@ -112,7 +112,7 @@ popd
 IF EXIST "%DEPLOYMENT_SOURCE%\web.config" (
   pushd "%DEPLOYMENT_SOURCE%"
  :: the next line is optional to fix 404 error see section #8
-  call :ExecuteCmd cp web.config dist\
+  call :ExecuteCmd cp web.config wwwroot\
   IF !ERRORLEVEL! NEQ 0 goto error
   popd
 )

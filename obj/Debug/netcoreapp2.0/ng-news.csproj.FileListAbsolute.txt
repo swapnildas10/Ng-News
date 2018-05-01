@@ -18,3 +18,4 @@ C:\Users\QAuser\Downloads\ng-news\obj\Debug\netcoreapp2.0\ng-news.AssemblyInfoIn
 C:\Users\QAuser\Downloads\ng-news\obj\Debug\netcoreapp2.0\ng-news.AssemblyInfo.cs
 C:\Users\QAuser\Downloads\ng-news\obj\Debug\netcoreapp2.0\ng-news.dll
 C:\Users\QAuser\Downloads\ng-news\obj\Debug\netcoreapp2.0\ng-news.pdb
+C:\Users\swapn\Desktop\ng-news\Ng-News\obj\Debug\netcoreapp2.0\ng-news.csprojResolveAssemblyReference.cache

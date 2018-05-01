@@ -6,7 +6,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --env=prod --prod --output-path=../server/AspNetCore-NgNews.Api/wwwroot/",
-"build-azure": "ng build --env=prod --prod --output-path=D:/home/site/wwwroot/wwwroot/",
+    "build-azure": "ng build --env=prod --prod --output-path=D:/home/site/wwwroot/wwwroot/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",

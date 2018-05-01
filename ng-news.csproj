@@ -3,6 +3,14 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <RetryAttemptsForDeployment>30</RetryAttemptsForDeployment>
+    <PreBuildEvent>
+    cd "$(MSBuildProjectDirectory)/../../client"
+    npm install
+  </PreBuildEvent>
+  <PostBuildEvent>
+    cd "$(MSBuildProjectDirectory)/../../client"
+    npm run build-azure
+  </PostBuildEvent>
   </PropertyGroup>
 
   <ItemGroup>

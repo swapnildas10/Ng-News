@@ -87,7 +87,7 @@ goto :EOF
 :Deployment
 echo Handling node.js deployment.
 call :ExecuteCmd mkdir "%DEPLOYMENT_SOURCE%\lib"
-call :ExecuteCmd copy NUL "%DEPLOYMENT_SOURCE%\lib\app.js"
+call :ExecuteCmd copy NUL "%DEPLOYMENT_SOURCE%\app.js"
 :: 1. Select node version
 call :SelectNodeVersion
 

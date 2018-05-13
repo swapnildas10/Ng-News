@@ -64,20 +64,7 @@ SET MSBUILD_PATH=%ProgramFiles(x86)%\MSBuild\14.0\Bin\MSBuild.exe
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: Deployment
 :: ----------
-:: Installing NPM dependencies.
-IF EXIST "%DEPLOYMENT_SOURCE%\package.json" (
-  pushd "%DEPLOYMENT_SOURCE%"
-  call npm install --save
-  IF !ERRORLEVEL! NEQ 0 goto error
-  popd
-)
-:: Building the Angular App
-IF EXIST "%DEPLOYMENT_SOURCE%\.angular-cli.json" (
-  pushd "%DEPLOYMENT_SOURCE%"
-  call :ExecuteCmd node_modules\.bin\ng build --progress false --prod
-  IF !ERRORLEVEL! NEQ 0 goto error
-  popd
-)
+
 echo Handling .NET Web Application deployment.
 
 :: 1. Restore NuGet packages
@@ -100,7 +87,20 @@ IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
   call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_TEMP%" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd"
   IF !ERRORLEVEL! NEQ 0 goto error
 )
-
+:: Installing NPM dependencies.
+IF EXIST "%DEPLOYMENT_SOURCE%\package.json" (
+  pushd "%DEPLOYMENT_TARGET%"
+  call npm install --save
+  IF !ERRORLEVEL! NEQ 0 goto error
+  popd
+)
+:: Building the Angular App
+IF EXIST "%DEPLOYMENT_SOURCE%\.angular-cli.json" (
+  pushd "%DEPLOYMENT_TARGET%"
+  call :ExecuteCmd node_modules\.bin\ng build --progress false --prod
+  IF !ERRORLEVEL! NEQ 0 goto error
+  popd
+)
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 goto end
 

@@ -42,6 +42,7 @@ echo =======  Installing npm  devDependancy packages: Starting at %TIME% =======
 echo "%DEPLOYMENT_SOURCE%\package.json"
 IF EXIST "%DEPLOYMENT_SOURCE%\package.json" (
   pushd "%DEPLOYMENT_SOURCE%"
+  call npm cache clean --force
   call npm install --save
   IF !ERRORLEVEL! NEQ 0 goto error
   popd

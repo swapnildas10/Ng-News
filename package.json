@@ -4,9 +4,8 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-   
-    "build": "ng build --env=prod --prod --output-path=D:/home/site/wwwroot/",
-    "build-azure": "ng build --env=prod --prod --output-path=D:/home/site/wwwroot/wwwroot/",
+    "build": "ng build  --prod",
+  
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -46,7 +45,6 @@
     "typescript": "~2.5.3"
   },
   "devDependencies": {
-   
     "@angular/language-service": "^5.2.0",
     "@types/jasmine": "~2.8.3",
     "@types/jasminewd2": "~2.0.2",

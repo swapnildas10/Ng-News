@@ -37,6 +37,28 @@ IF NOT DEFINED NEXT_MANIFEST_PATH (
     SET PREVIOUS_MANIFEST_PATH=%ARTIFACTS%\manifest
   )
 )
+:: Installing NPM dependencies.
+echo =======  Installing npm  devDependancy packages: Starting at %TIME% ======= 
+echo "%DEPLOYMENT_SOURCE%\package.json"
+IF EXIST "%DEPLOYMENT_SOURCE%\package.json" (
+  pushd "%DEPLOYMENT_SOURCE%"
+  call npm install --save
+  IF !ERRORLEVEL! NEQ 0 goto error
+  popd
+)
+echo =======  Installing npm dev packages: Finished at %TIME% =======
+
+:: Building the Angular App
+echo =======  Building Angular App: Starting at %TIME% ======= 
+echo "%DEPLOYMENT_SOURCE%\.angular-cli.json"
+IF EXIST "%DEPLOYMENT_SOURCE%\.angular-cli.json" (
+  pushd "%DEPLOYMENT_SOURCE%"
+  call :ExecuteCmd node_modules\.bin\ng build --progress false --prod
+  IF !ERRORLEVEL! NEQ 0 goto error
+  popd
+)
+echo =======  Building Angular App: Finished at %TIME% =======
+
 
 IF NOT DEFINED KUDU_SYNC_CMD (
   :: Install kudu sync
@@ -67,18 +89,13 @@ SET MSBUILD_PATH=%ProgramFiles(x86)%\MSBuild\14.0\Bin\MSBuild.exe
 
 echo Handling .NET Web Application deployment.
 
-:: 1. Restore NuGet packages
-IF /I "ng-news.sln" NEQ "" (
-  call :ExecuteCmd nuget restore "%DEPLOYMENT_SOURCE%\ng-news.sln"
-  IF !ERRORLEVEL! NEQ 0 goto error
-)
+:: 1. Restore nuget packages
+call :ExecuteCmd dotnet restore "ng-news.csproj"
+IF !ERRORLEVEL! NEQ 0 goto error
 
-:: 2. Build to the temporary path
-IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
-  call :ExecuteCmd "%MSBUILD_PATH%" "%DEPLOYMENT_SOURCE%\ng-news.csproj" /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="%DEPLOYMENT_TEMP%";AutoParameterizationWebConfigConnectionStrings=false;Configuration=Release;UseSharedCompilation=false /p:SolutionDir="%DEPLOYMENT_SOURCE%\.\\" %SCM_BUILD_ARGS%
-) ELSE (
-  call :ExecuteCmd "%MSBUILD_PATH%" "%DEPLOYMENT_SOURCE%\ng-news.csproj" /nologo /verbosity:m /t:Build /p:AutoParameterizationWebConfigConnectionStrings=false;Configuration=Release;UseSharedCompilation=false /p:SolutionDir="%DEPLOYMENT_SOURCE%\.\\" %SCM_BUILD_ARGS%
-)
+:: 2. Build and publish
+call :ExecuteCmd dotnet publish "ng-news.csproj" --output "%DEPLOYMENT_TEMP%" --configuration Release
+IF !ERRORLEVEL! NEQ 0 goto error
 
 IF !ERRORLEVEL! NEQ 0 goto error
 
@@ -86,21 +103,7 @@ IF !ERRORLEVEL! NEQ 0 goto error
 IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
   call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_TEMP%" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd"
   IF !ERRORLEVEL! NEQ 0 goto error
-)
-:: Installing NPM dependencies.
-IF EXIST "%DEPLOYMENT_SOURCE%\package.json" (
-  pushd "%DEPLOYMENT_TARGET%"
-  call npm install --save
-  IF !ERRORLEVEL! NEQ 0 goto error
-  popd
-)
-:: Building the Angular App
-IF EXIST "%DEPLOYMENT_SOURCE%\.angular-cli.json" (
-  pushd "%DEPLOYMENT_TARGET%"
-  call :ExecuteCmd node_modules\.bin\ng build --progress false --prod
-  IF !ERRORLEVEL! NEQ 0 goto error
-  popd
-)
+) 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 goto end
 

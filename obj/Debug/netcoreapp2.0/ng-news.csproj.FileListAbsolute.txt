@@ -19,3 +19,14 @@ C:\Users\QAuser\Downloads\ng-news\obj\Debug\netcoreapp2.0\ng-news.AssemblyInfo.c
 C:\Users\QAuser\Downloads\ng-news\obj\Debug\netcoreapp2.0\ng-news.dll
 C:\Users\QAuser\Downloads\ng-news\obj\Debug\netcoreapp2.0\ng-news.pdb
 C:\Users\swapn\Desktop\ng-news\Ng-News\obj\Debug\netcoreapp2.0\ng-news.csprojResolveAssemblyReference.cache
+C:\Users\swapn\Ng-News\bin\Debug\netcoreapp2.0\ng-news.deps.json
+C:\Users\swapn\Ng-News\bin\Debug\netcoreapp2.0\ng-news.runtimeconfig.json
+C:\Users\swapn\Ng-News\bin\Debug\netcoreapp2.0\ng-news.runtimeconfig.dev.json
+C:\Users\swapn\Ng-News\bin\Debug\netcoreapp2.0\ng-news.dll
+C:\Users\swapn\Ng-News\bin\Debug\netcoreapp2.0\ng-news.pdb
+C:\Users\swapn\Ng-News\obj\Debug\netcoreapp2.0\ng-news.csprojAssemblyReference.cache
+C:\Users\swapn\Ng-News\obj\Debug\netcoreapp2.0\ng-news.csproj.CoreCompileInputs.cache
+C:\Users\swapn\Ng-News\obj\Debug\netcoreapp2.0\ng-news.AssemblyInfoInputs.cache
+C:\Users\swapn\Ng-News\obj\Debug\netcoreapp2.0\ng-news.AssemblyInfo.cs
+C:\Users\swapn\Ng-News\obj\Debug\netcoreapp2.0\ng-news.dll
+C:\Users\swapn\Ng-News\obj\Debug\netcoreapp2.0\ng-news.pdb

@@ -1,4 +1,4 @@
-<div class="container-fluid pt-3">
+<div class="container-fluid ml-5 pl-3 pr-0">
     <section class="view intro-2 hm-gradient">
             <div  class="full-bg-img pb-3">
                 <div style="min-height: 40vh" class="row">
@@ -8,7 +8,7 @@
                                             <app-search-box  (QueryParameters)="getQueryParameters($event)" (displayQueryResult)="getQueryResult($event)" (articleSelected)="getArticleSelected($event)"  class="row pt-3"   style="min-width: 100%;position: absolute;"></app-search-box> 
                                     </div>
                                     <div style="position: absolute; bottom: 0;  left:0; right:0;" class="row justify-content-center d-flex align-items-baseline w-100">
-                                            <mat-card style="box-shadow: none; background:transparent">
+                                            <mat-card style="box-shadow: none; background:transparent;max-width: 100%;">
                                                     <mat-card-content>
                                                      
                                                       <mat-tab-group #matTabGroup class="demo-tab-group">

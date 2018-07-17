@@ -30,12 +30,15 @@ import { CategoryHomeComponent } from './news/category-news/category-home/catego
 import { SidenavMainComponent } from './sidenav/sidenav-main/sidenav-main.component';
 import { LoginComponent } from './user/login/login.component';
 import { SignupComponent } from './user/signup/signup.component';
-import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material';
+import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher, MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule
+} from '@angular/material';
 import { getAuthServiceConfigs } from '../socialloginConfig';
 import { SocialLoginModule, AuthServiceConfig } from 'angular5-social-login';
 import { SocialAuthService } from './shared/services/auth.service';
 import { PlacesAPIService } from './shared/services/places-api.service';
 import { UserDetailsComponent } from './user/user-details/user-details.component';
+import { UserDashboardComponent } from './user/user-dashboard/user-dashboard.component';
+import { LayoutModule } from '@angular/cdk/layout';
 const appRoutes: Routes = [
   {path: 'TopUSNews', component: BreakingNewsComponent},
   {path: 'category/:id', component: CategoryNewsComponent},
@@ -43,6 +46,7 @@ const appRoutes: Routes = [
   {path: 'Login', component: LoginComponent},
   {path: 'Details', component: UserDetailsComponent},
   {path: 'SignUp', component: SignupComponent},
+  {path: 'mydashboard', component: UserDashboardComponent },
   {path: '', redirectTo: '/Dashboard', pathMatch: 'full'}
 ];
 @NgModule({
@@ -68,7 +72,8 @@ const appRoutes: Routes = [
     SidenavMainComponent,
     LoginComponent,
     SignupComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
+    UserDashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -82,7 +87,13 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     MaterialModule,
     CommonModule,
-    SocialLoginModule
+    SocialLoginModule,
+    MatGridListModule,
+    MatCardModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
+    LayoutModule
   ],
   providers: [
     ApiConnectionService, ArticleSharingService, {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}, {

@@ -50,6 +50,7 @@ export class LoginComponent implements OnInit {
     this.authService.signIn(socialPlatformProvider).then(
       (response) => {
               // this will return user data from facebook. What you need is a user token which you will send it to the server
+              this.email.setValue(response.email);
               console.log(response);
                // this.socialAuthService.faceBookAuthMethod(userData.token);
        }

@@ -12541,11 +12541,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\swapn\\Desktop\\ng-news\\Ng-News\\ng-news.csproj",
+      "projectUniqueName": "C:\\Users\\swapn\\Ng-News\\ng-news.csproj",
       "projectName": "ng-news",
-      "projectPath": "C:\\Users\\swapn\\Desktop\\ng-news\\Ng-News\\ng-news.csproj",
+      "projectPath": "C:\\Users\\swapn\\Ng-News\\ng-news.csproj",
       "packagesPath": "C:\\Users\\swapn\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\swapn\\Desktop\\ng-news\\Ng-News\\obj\\",
+      "outputPath": "C:\\Users\\swapn\\Ng-News\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -12559,7 +12559,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Users\\swapn\\Desktop\\simplifycommerce-sdk-dotnet-1.6.0-src\\packages": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

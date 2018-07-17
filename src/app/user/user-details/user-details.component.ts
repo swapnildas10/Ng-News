@@ -6,10 +6,9 @@ import { FormBuilder, FormControl, Validators, FormGroup, FormGroupDirective, Ng
 import { AuthService, FacebookLoginProvider, GoogleLoginProvider } from 'angular5-social-login';
 import { SocialAuthService } from '../../shared/services/auth.service';
 import { UserInfo } from '../../shared/modals/userinfo';
-import { Observable } from 'rxjs/Observable';
-import { startWith } from 'rxjs/operators/startWith';
-import { map } from 'rxjs/operators/map';
-
+import { Observable } from 'rxjs';
+import { startWith ,  map } from 'rxjs/operators';
+import 'rxjs/add/operator/distinctUntilChanged';
 @Component({
   selector: 'app-user-details',
   templateUrl: './user-details.component.html',
@@ -30,6 +29,13 @@ export class UserDetailsComponent implements OnInit, ErrorStateMatcher {
   constructor(private cityAPIService: PlacesAPIService, private fb: FormBuilder,
     private socialAuthService: SocialAuthService, private authService: AuthService) {
     this.createForm();
+    const userData = this.socialAuthService.getUserData();
+    this.SignUpForm.setValue({
+      firstName: userData['firstname'],
+      lastName: userData['lastname'],
+      city: userData['location'],
+      email: userData['city']
+    });
     this.filteredStates = this.SignUpForm.controls.city.valueChanges
       .pipe(
         startWith(''),
@@ -47,6 +53,8 @@ export class UserDetailsComponent implements OnInit, ErrorStateMatcher {
    }
 
    ngOnInit() {
+     
+     
   }
   createForm() {
     this.SignUpForm = this.fb.group({

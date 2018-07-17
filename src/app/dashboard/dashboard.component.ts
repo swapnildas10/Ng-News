@@ -1,3 +1,5 @@
+
+import {distinctUntilChanged} from 'rxjs/operators';
 import { Component, OnInit, HostBinding, ViewChild, ElementRef, SimpleChange } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiConnectionService } from '../shared/services/apiconnection.service';
@@ -10,7 +12,7 @@ import { DomainLogo } from '../shared/modals/domain-logo';
 import { ArticleSource } from '../shared/modals/article-source';
 import { SearchQueryModal } from '../shared/modals/searchquerymodal';
 import { SearchBoxQueryParameters } from '../shared/modals/searchboxquery-modal';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 import { MatTab, MatTabGroup, MatTabChangeEvent } from '@angular/material';
 import { SocialAuthService } from '../shared/services/auth.service';
 
@@ -50,12 +52,12 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.getGeoLocation();
-    this.matTabGroup.selectChange.subscribe((response) => {
+    this.matTabGroup.selectedTabChange.subscribe((response) => {
       console.log((<MatTab>(response.tab)));
       console.log(this.matTabGroup._tabs.length);
     });
     this.pageClicked = 1;
-    this.pageNumberChanged.asObservable().distinctUntilChanged();
+    this.pageNumberChanged.asObservable().pipe(distinctUntilChanged());
     this.apiConnectionService.getBreakingNewsfromAPI('us', null, null, null, 30, 1).subscribe(
       response => {
         this.topHeadlines = response.body;

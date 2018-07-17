@@ -1,17 +1,16 @@
+
+import {distinctUntilChanged, debounceTime, startWith, map} from 'rxjs/operators';
 import { Component, OnInit, Output, Input } from '@angular/core';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import {FormsModule, ReactiveFormsModule, FormControl, NgControl} from '@angular/forms';
 import { ApiConnectionService } from '../services/apiconnection.service';
 import { SourceWrapper } from '../modals/source';
 import { SearchQueryModal } from '../modals/searchquerymodal';
-import { Observable } from 'rxjs/Observable';
-import {startWith} from 'rxjs/operators/startWith';
-import {map} from 'rxjs/operators/map';
+import { Observable ,  Subject } from 'rxjs';
 import { Article } from '../modals/article';
 import { EventEmitter } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
+
+
 import { SearchBoxQueryParameters } from '../modals/searchboxquery-modal';
 @Component({
   selector: 'app-search-box',
@@ -59,8 +58,8 @@ export class SearchBoxComponent implements OnInit {
       response => {this.sourceWrapper = response.body;
       }
     );
-    this.queriedArticles = this.searchUpdated.asObservable().debounceTime(1000).distinctUntilChanged();
-    this.queryChanged = this.queryUpdated.asObservable().debounceTime(1000).distinctUntilChanged();
+    this.queriedArticles = this.searchUpdated.asObservable().pipe(debounceTime(1000),distinctUntilChanged(),);
+    this.queryChanged = this.queryUpdated.asObservable().pipe(debounceTime(1000),distinctUntilChanged(),);
     this.queryChanged.subscribe(
       input => {if (input.length === 0) {
         this.apiConnectionService.getQueryResultfromAPI(input,
@@ -85,8 +84,8 @@ export class SearchBoxComponent implements OnInit {
       response => {this.sourceWrapper = response.body;
       }
     );
-    this.queryChanged = this.queryUpdated.asObservable().debounceTime(2000).distinctUntilChanged();
-    this.queriedArticles = this.searchUpdated.asObservable().debounceTime(2000).distinctUntilChanged();
+    this.queryChanged = this.queryUpdated.asObservable().pipe(debounceTime(2000),distinctUntilChanged(),);
+    this.queriedArticles = this.searchUpdated.asObservable().pipe(debounceTime(2000),distinctUntilChanged(),);
     this.queryChanged.subscribe(
       input => {if (input.length === 0) {
         this.query = input.trim();

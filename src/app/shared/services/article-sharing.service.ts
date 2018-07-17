@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Article } from '../modals/article';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class ArticleSharingService {

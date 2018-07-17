@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { Article } from '../modals/article';
 import { TopHeadlines } from '../modals/top-headlines';
 import { Source, SourceWrapper } from '../modals/source';
 import { SearchQueryModal } from '../modals/searchquerymodal';
 import { WeatherWrapper, CurrentWeather, WeatherCoordinate } from '../modals/weather';
 import { CompanyLogo } from '../modals/company-logo';
-import 'rxjs/add/operator/map';
+
 import { DomainLogo } from '../modals/domain-logo';
 @Injectable()
 export class ApiConnectionService {

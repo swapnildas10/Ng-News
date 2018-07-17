@@ -5,6 +5,7 @@ import * as firebase from 'firebase';
 import { UserInfo } from '../modals/userinfo';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class SocialAuthService {
@@ -28,7 +29,7 @@ export class SocialAuthService {
     userLogin(email: string, password: string) {
         firebase.auth().signInAndRetrieveDataWithEmailAndPassword(email, password).then(
             (success) => {
-                firebase.auth().currentUser.getToken().then(
+                firebase.auth().currentUser.getIdToken().then(
                     (token) => {
                         this.token = token;
                         this.snackBar.open('LOGIN', 'Success', {
@@ -63,7 +64,7 @@ export class SocialAuthService {
     userSignUp(email: string, password: string, userinfo: UserInfo) {
         firebase.auth().createUserWithEmailAndPassword(email, password).then(
             (success) => {
-                firebase.auth().currentUser.getToken().then(
+                firebase.auth().currentUser.getIdToken().then(
                     (success1) => {
                         this.token = success1;
                         this.storeUserData(userinfo);
@@ -78,7 +79,7 @@ export class SocialAuthService {
     }
 
     getTokenfromFireBase() {
-        firebase.auth().currentUser.getToken().then(
+        firebase.auth().currentUser.getIdToken().then(
             (success) => {
                 this.token = success;
             }
@@ -98,6 +99,12 @@ export class SocialAuthService {
             lastname: userInfo.lastname,
             email: userInfo.email,
             location: userInfo.location
+        });
+    }
+
+    getUserData() {
+          firebase.database().ref('users/' + firebase.auth().currentUser.uid).once('value', function(snapshot) {
+            return new Observable<Object>(snapshot.val());
         });
     }
 }

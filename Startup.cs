@@ -44,7 +44,7 @@ namespace ng_news
                         await next();
                    }
           });
-         //   app.UseCors( options => options.WithOrigins("https://localhost:4200").AllowAnyMethod() );
+         app.UseCors( options => options.WithOrigins("https://localhost:4200").AllowAnyMethod() );
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseMvc();

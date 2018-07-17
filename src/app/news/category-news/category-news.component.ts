@@ -1,3 +1,5 @@
+
+import {switchMap} from 'rxjs/operators';
 import { Component, OnInit, Input, OnChanges, SimpleChange, SimpleChanges, Output, EventEmitter,
   HostListener, ViewChild } from '@angular/core';
 import { ApiConnectionService } from '../../shared/services/apiconnection.service';
@@ -7,7 +9,7 @@ import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { Article } from '../../shared/modals/article';
 import { ArticleSharingService } from '../../shared/services/article-sharing.service';
 import { ModalDirective } from 'angular-bootstrap-md';
-import 'rxjs/add/operator/switchMap';
+
 
 @Component({
   selector: 'app-category-news',
@@ -33,10 +35,10 @@ article: Article;
     private router: Router
   ) { }
   ngOnInit() {
-    this.categoryArtice$ = this.route.paramMap.switchMap((params: ParamMap) => {
+    this.categoryArtice$ = this.route.paramMap.pipe(switchMap((params: ParamMap) => {
       this.category = params.get('id');
      return this.apiConnectionService.getTopNewsByCategoryfromAPI('us', params.get('id'), null, null, 20, 1);
-    });
+    }));
      this.categoryArtice$.subscribe((response) => {
       // this.newsData = response.map(key =>
       //   `${key}: ${response.headers.get(key)}`);

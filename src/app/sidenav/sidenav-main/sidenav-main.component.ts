@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild, OnChanges, SimpleChanges, SimpleChange } from '@angular/core';
 import {FormsModule, ReactiveFormsModule, FormControl, NgControl} from '@angular/forms';
 import {MatSidenavModule, MatSidenav} from '@angular/material/sidenav';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 @Component({
   selector: 'app-sidenav-main',
   templateUrl: './sidenav-main.component.html',

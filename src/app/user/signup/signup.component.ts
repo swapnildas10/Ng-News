@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ErrorStateMatcher } from '@angular/material';
 import { FormControl, FormGroupDirective, NgForm, Validators, ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
-import { startWith } from 'rxjs/operators/startWith';
-import { map } from 'rxjs/operators/map';
+import { Observable } from 'rxjs';
+import { startWith ,  map } from 'rxjs/operators';
 import { PlacesAPIService } from '../../shared/services/places-api.service';
 import { PredictionsWrapper } from '../../shared/modals/cities-search';
 import { FacebookLoginProvider, AuthService, GoogleLoginProvider } from 'angular5-social-login';
 import { SocialAuthService } from '../../shared/services/auth.service';
 import { UserInfo } from '../../shared/modals/userinfo';
+import "rxjs/add/operator/debounceTime";
 
 @Component({
   selector: 'app-signup',

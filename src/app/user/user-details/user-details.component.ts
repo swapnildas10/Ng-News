@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ErrorStateMatcher } from '@angular/material';
 import { PredictionsWrapper } from '../../shared/modals/cities-search';
 import { PlacesAPIService } from '../../shared/services/places-api.service';
@@ -9,6 +9,7 @@ import { UserInfo } from '../../shared/modals/userinfo';
 import { Observable } from 'rxjs';
 import { startWith ,  map } from 'rxjs/operators';
 import 'rxjs/add/operator/distinctUntilChanged';
+import {MatSlideToggle} from '@angular/material/slide-toggle';
 @Component({
   selector: 'app-user-details',
   templateUrl: './user-details.component.html',
@@ -22,28 +23,22 @@ export class UserDetailsComponent implements OnInit, ErrorStateMatcher {
   value = '';
   city = new FormControl('', Validators.required);
   email = new FormControl('', [Validators.required, Validators.email]);
-  password = new FormControl('', [Validators.minLength(8), Validators.required]);
-  SignUpForm: FormGroup;
+  UserDetailsForm: FormGroup;
   filteredStates: Observable<any[]>;
   cities: string[] = [];
+  checked = false;
   constructor(private cityAPIService: PlacesAPIService, private fb: FormBuilder,
     private socialAuthService: SocialAuthService, private authService: AuthService) {
     this.createForm();
-    const userData = this.socialAuthService.getUserData();
-    this.SignUpForm.setValue({
-      firstName: userData['firstname'],
-      lastName: userData['lastname'],
-      city: userData['location'],
-      email: userData['city']
-    });
-    this.filteredStates = this.SignUpForm.controls.city.valueChanges
+    this.UserDetailsForm.disable();
+    this.filteredStates = this.UserDetailsForm.controls.city.valueChanges
       .pipe(
         startWith(''),
         map(state => state ? this.filterStates(state) : this.cities.slice())
       ).debounceTime(1000).distinctUntilChanged();
       this.filteredStates.subscribe(value => {
         console.log(value);
-        this.cityAPIService.getPlaces(this.SignUpForm.controls.city.value).subscribe(
+        this.cityAPIService.getPlaces(this.UserDetailsForm.controls.city.value).subscribe(
           (response: PredictionsWrapper) => {
             this.cities = [];
             response.predictions.forEach(element => this.cities.push(element.description));
@@ -51,18 +46,29 @@ export class UserDetailsComponent implements OnInit, ErrorStateMatcher {
         );
       });
    }
-
    ngOnInit() {
-     
-     
+    this.socialAuthService.userDetails.subscribe(
+      response => {
+        console.log(response);
+        this.UserDetailsForm.setValue({
+          firstName: response['firstname'],
+          lastName: response['lastname'],
+          city: response['location'],
+          email: response['email']
+        });
+      },
+      error => {
+        console.log(error);
+      }
+    );
+     this.socialAuthService.getUserData();
   }
   createForm() {
-    this.SignUpForm = this.fb.group({
+    this.UserDetailsForm = this.fb.group({
       'firstName': this.firstName,
       'lastName': this.lastName,
       'city': this.city,
-      'email': this.email,
-      'password': this.password
+      'email': this.email
     });
   }
   onCityInput(value: string) {
@@ -104,5 +110,14 @@ export class UserDetailsComponent implements OnInit, ErrorStateMatcher {
     this.userInfo.location = form.value.city;
   this.socialAuthService.userSignUp(form.value.email, form.value.password, this.userInfo);
 
+  }
+
+  onToggleClicked() {
+    this.checked = !this.checked;
+    if (!this.checked) {
+      this.UserDetailsForm.disable();
+    } else {
+      this.UserDetailsForm.enable();
+    }
   }
 }

@@ -3,6 +3,7 @@ import { FormGroupDirective, NgForm, FormControl, Validators, FormGroup, FormBui
 import {    AuthService,    FacebookLoginProvider,    GoogleLoginProvider} from 'angular5-social-login';
 import { SocialAuthService } from '../../shared/services/auth.service';
 import { MatSnackBar } from '@angular/material';
+import {Router} from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit {
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [Validators.required, Validators.minLength(8)]);
   LoginForm: FormGroup;
-  constructor(private socialAuthService: SocialAuthService, private authService: AuthService, private fb: FormBuilder) { }
+  constructor(private socialAuthService: SocialAuthService, private authService: AuthService, private fb: FormBuilder,
+    private router: Router) { }
 
   ngOnInit() {
     this.createForm();
@@ -52,6 +54,8 @@ export class LoginComponent implements OnInit {
               // this will return user data from facebook. What you need is a user token which you will send it to the server
               this.email.setValue(response.email);
               console.log(response);
+              localStorage.setItem('token', JSON.stringify(response));
+              this.router.navigate(['/Dashboard']);
                // this.socialAuthService.faceBookAuthMethod(userData.token);
        }
     );

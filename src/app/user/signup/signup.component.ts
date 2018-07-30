@@ -8,7 +8,7 @@ import { PredictionsWrapper } from '../../shared/modals/cities-search';
 import { FacebookLoginProvider, AuthService, GoogleLoginProvider } from 'angular5-social-login';
 import { SocialAuthService } from '../../shared/services/auth.service';
 import { UserInfo } from '../../shared/modals/userinfo';
-import "rxjs/add/operator/debounceTime";
+import 'rxjs/add/operator/debounceTime';
 
 @Component({
   selector: 'app-signup',

@@ -5,11 +5,12 @@ import * as firebase from 'firebase';
 import { UserInfo } from '../modals/userinfo';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable()
 export class SocialAuthService {
     token: string;
+    userDetails = new Subject<Object>();
     constructor( private httpClient: HttpClient,  public snackBar: MatSnackBar, private router: Router) {
 
     }
@@ -27,7 +28,7 @@ export class SocialAuthService {
     }
 
     userLogin(email: string, password: string) {
-        firebase.auth().signInAndRetrieveDataWithEmailAndPassword(email, password).then(
+        firebase.auth().signInWithEmailAndPassword(email, password).then(
             (success) => {
                 firebase.auth().currentUser.getIdToken().then(
                     (token) => {
@@ -52,6 +53,7 @@ export class SocialAuthService {
     userSignOut() {
         firebase.auth().signOut().then(
             (success) => {
+                localStorage.removeItem('token');
                 this.token = null;
                 this.router.navigate(['/Login']);
             }
@@ -91,6 +93,9 @@ export class SocialAuthService {
         return this.token;
     }
     isAuthenticated() {
+        if (JSON.parse(localStorage.getItem('token')) != null) {
+        return true;
+        }
         return this.token != null;
     }
     storeUserData(userInfo: UserInfo) {
@@ -103,8 +108,13 @@ export class SocialAuthService {
     }
 
     getUserData() {
-          firebase.database().ref('users/' + firebase.auth().currentUser.uid).once('value', function(snapshot) {
-            return new Observable<Object>(snapshot.val());
+          firebase.database().ref('users/' + firebase.auth().currentUser.uid  ).once('value',
+          this.firebaseSuccessCallback.bind(this), function(error) {
+              console.log(error);
         });
+    }
+
+    firebaseSuccessCallback(snapshot) {
+        this.userDetails.next(snapshot.val());
     }
 }

@@ -1,10 +1,10 @@
-<div  class="container-fluid">
+<div  class="container-fluid pr-0">
     
     <!--Intro Section-->
     <section class="view intro-2 hm-gradient">
         <div id="dashboard-weather" class="full-bg-img pb-3">
             <div style="background: linear-gradient(45deg, rgba(42, 27, 161, 0.6), rgba(29, 210, 177, 0.6) 100%);" class="container-fluid">
-                    <div  class="row flex-center pt-5 mt-3">
+                    <div  class="row flex-center pt-5">
                             <app-search-box (QueryParameters)="fetchQueryParameters($event)" class="row pt-3" (displayQueryResult)="enableQueryResultDisplay($event)"(articleSelected)="searchResult($event)" style="min-width: 100%;position: relative;"></app-search-box> 
                         </div>
                 <div class="row flex-center py-5">

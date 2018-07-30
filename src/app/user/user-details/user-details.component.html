@@ -5,12 +5,14 @@
 <mat-card class="example-card mx-auto my-5">
   <mat-card-header class="flex-center">
     
-    <mat-card-title>SIGN UP</mat-card-title>
-    <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+    <mat-card-title>Account Details</mat-card-title>
+    <mat-card-subtitle style="position: absolute;
+    right: 0;
+    top: 10%;"><mat-slide-toggle (toggleChange) = "onToggleClicked()">{{(checked == true ? 'Save' : 'Edit')}}</mat-slide-toggle></mat-card-subtitle>
   </mat-card-header>
   <!-- <img mat-card-image  alt="Photo of a Shiba Inu"> -->
   <mat-card-content>
-    <form [formGroup]="SignUpForm" (ngSubmit)="onFormSubmit(SignUpForm)" class="example-form">
+    <form [formGroup]="UserDetailsForm"  (ngSubmit)="onFormSubmit(UserDetailsForm)" class="example-form">
       <div class="row">
         <div class="col-6">
             <mat-form-field class="example-full-width">
@@ -58,34 +60,13 @@
           Email is <strong>required</strong>
         </mat-error>
       </mat-form-field>
-      <div class=" example-container">
-        <mat-form-field class="example-full-width">
-          <input     matInput formControlName="password" placeholder="Enter your password" [type]="hide ? 'password' : 'text'">
-          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-          <mat-error *ngIf="password.hasError('required')">
-            Password is <strong>required</strong>
-          </mat-error>
-          <mat-error *ngIf="password.hasError('minlength')">
-            Password should be minimum 8 characters
-          </mat-error>
-        </mat-form-field>
        
-      </div>
-      <div class="row justify-content-center">
-        Or
-      </div>
-      <div style="margin-left:0;" class="row w-100 justify-content-center">
-        <div class="button-row flex-center col-12">
-            <button (click)="facebookSignup()" class="col-6" mat-button color="primary">Facebook</button>
-            <button (click)="googleSignup()" class="col-6" mat-button color="warn">Google+</button>
-          </div>
-      </div>
     </form>
   </mat-card-content>
   <mat-card-actions>
       <div class="button-row flex-center">
-          <a routerLink="/Login"  class="col-6" mat-raised-button>LOGIN</a>
-          <button (click)="onFormSubmit(SignUpForm)" type="submit" [disabled] ="SignUpForm.invalid || SignUpForm.untouched || SignUpForm.pristine || SignUpForm.status == 'INVALID' ? 'true' : 'false'"  class="col-6" mat-raised-button color="accent">SUBMIT</button>
+          <a routerLink="/Login"  class="col-6" mat-raised-button>Change Password</a>
+          <button (click)="onFormSubmit(UserDetailsForm)" [disabled] = "!checked" type="submit"   class="col-6" mat-raised-button color="accent">UNDO</button>
       </div>
   </mat-card-actions>
 </mat-card>

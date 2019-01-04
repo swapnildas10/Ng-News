@@ -1,5 +1,13 @@
+import { Article } from './article';
+
 export interface UserDashboard {
-    title: string;
+   articles: Article[];
     cols: number;
     rows: number;
   }
+
+
+export interface UserFavorites {
+  ID: string;
+  favoriteTags: string[];
+}

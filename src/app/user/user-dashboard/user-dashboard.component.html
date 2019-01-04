@@ -1,7 +1,8 @@
 <div class="grid-container">
   <h1 class="mat-h1">Dashboard</h1>
-  <mat-grid-list cols="2" rowHeight="350px">
-    <mat-grid-tile *ngFor="let card of cards" [colspan]="card.cols" [rowspan]="card.rows">
+  <mat-grid-list  style="width:80vw" *ngIf = "someCards" cols="2"  rowHeight="350px">
+    <mat-grid-tile *ngFor="let card of someCards" [colspan]="card.cols" [rowspan]="card.rows">
+        
       <mat-card class="dashboard-card">
         <mat-card-header>
           <mat-card-title>
@@ -15,9 +16,33 @@
             </mat-menu>
           </mat-card-title>
         </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-          <div>Card Content Here</div>
+        <mat-card-content  class="dashboard-card-content">
+           
         </mat-card-content>
+        <mat-card-actions> <div class="row">
+            <mat-tab-group headerPosition="below">
+                <mat-tab label="First">
+                  
+                </mat-tab>
+                <mat-tab label="Second">
+                  <ng-template matTabContent>
+                    Content 2  
+                  </ng-template>
+                </mat-tab>
+                <mat-tab label="Third">
+                  <ng-template matTabContent>
+                    Content 3 
+                  </ng-template>
+                </mat-tab>
+              </mat-tab-group>
+        </div>
+        <div class="row">
+
+            <button mat-button>LIKE</button>
+            <button mat-button>SHARE</button>
+        </div>
+           
+          </mat-card-actions>
       </mat-card>
     </mat-grid-tile>
   </mat-grid-list>

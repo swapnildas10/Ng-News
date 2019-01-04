@@ -17,8 +17,8 @@
         <div class="col-6">
             <mat-form-field class="example-full-width">
                 <input  matInput placeholder="First Name" formControlName="firstName">
-                <button mat-button *ngIf="firstName.value" matSuffix mat-icon-button aria-label="Clear" (click)="firstName.setValue('')">
-                    <mat-icon>close</mat-icon>
+                <button [disabled] ="!checked" mat-button *ngIf="firstName.value" matSuffix mat-icon-button aria-label="Clear" (click)="firstName.setValue('')">
+                    <mat-icon disable>close</mat-icon>
                   </button>
                   <mat-error *ngIf="firstName.hasError('required')">
                    First Name is <strong>required</strong>
@@ -28,7 +28,7 @@
         <div class="col-6">
             <mat-form-field class="example-full-width">
                 <input  matInput placeholder="Last Name"formControlName="lastName" >
-                <button mat-button *ngIf="lastName.value" matSuffix mat-icon-button aria-label="Clear" (click)="lastName.setValue('');">
+                <button [disabled] ="!checked" mat-button *ngIf="lastName.value" matSuffix mat-icon-button aria-label="Clear" (click)="lastName.setValue('');">
                     <mat-icon>close</mat-icon>
                   </button>
                   <mat-error *ngIf="lastName.hasError('required')">
@@ -51,8 +51,8 @@
       </div>
       <mat-form-field class="example-full-width">
         <input   matInput placeholder="Email" formControlName="email"
-               errorStateMatcher>
-        <mat-hint>Errors appear instantly!</mat-hint>
+               errorStateMatcher> 
+        <mat-hint>abc@xyz.com</mat-hint>
         <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
           Please enter a valid email address
         </mat-error>
@@ -66,7 +66,7 @@
   <mat-card-actions>
       <div class="button-row flex-center">
           <a routerLink="/Login"  class="col-6" mat-raised-button>Change Password</a>
-          <button (click)="onFormSubmit(UserDetailsForm)" [disabled] = "!checked" type="submit"   class="col-6" mat-raised-button color="accent">UNDO</button>
+          <button (click)="onFormSubmit(UserDetailsForm)" [disabled] = "!checked && formValueChanged" type="submit"   class="col-6" mat-raised-button color="accent">UNDO</button>
       </div>
   </mat-card-actions>
 </mat-card>

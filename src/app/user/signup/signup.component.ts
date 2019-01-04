@@ -1,14 +1,15 @@
+
+import {debounceTime,  startWith ,  map } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { ErrorStateMatcher } from '@angular/material';
 import { FormControl, FormGroupDirective, NgForm, Validators, ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { startWith ,  map } from 'rxjs/operators';
 import { PlacesAPIService } from '../../shared/services/places-api.service';
 import { PredictionsWrapper } from '../../shared/modals/cities-search';
 import { FacebookLoginProvider, AuthService, GoogleLoginProvider } from 'angular5-social-login';
 import { SocialAuthService } from '../../shared/services/auth.service';
 import { UserInfo } from '../../shared/modals/userinfo';
-import 'rxjs/add/operator/debounceTime';
+
 
 @Component({
   selector: 'app-signup',
@@ -34,7 +35,7 @@ export class SignupComponent implements OnInit, ErrorStateMatcher {
       .pipe(
         startWith(''),
         map(state => state ? this.filterStates(state) : this.cities.length === 0 ? null : this.cities.slice())
-      ).debounceTime(1000);
+      ).pipe(debounceTime(1000));
     this.filteredStates.subscribe(value => {
         console.log(value);
         this.cityAPIService.getPlaces(this.SignUpForm.controls.city.value).subscribe(

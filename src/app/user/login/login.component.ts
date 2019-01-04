@@ -11,6 +11,7 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   hide = true;
+  displayLoader = false;
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [Validators.required, Validators.minLength(8)]);
   LoginForm: FormGroup;
@@ -62,6 +63,7 @@ export class LoginComponent implements OnInit {
 }
 
 onFormSubmit(form: FormGroup) {
+  this.displayLoader = true;
  this.socialAuthService.userLogin(form.value.email, form.value.password);
 }
 }

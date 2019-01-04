@@ -14,7 +14,7 @@
       <mat-form-field class="example-full-width">
         <input matInput placeholder="Email" formControlName="email"
                errorStateMatcher>
-        <mat-hint>Errors appear instantly!</mat-hint>
+        <mat-hint>abc@xyz.com</mat-hint>
         <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
           Please enter a valid email address
         </mat-error>
@@ -48,7 +48,7 @@
   </mat-card-content>
   <mat-card-actions>
       <div class="button-row flex-center">
-          <button class="col-6"  (click)="onFormSubmit(LoginForm)" [disabled]="LoginForm.invalid || LoginForm.untouched || LoginForm.pristine || LoginForm.status == 'INVALID' ? 'true' : 'false'" type="submit" mat-raised-button>LOGIN</button>
+          <button class="col-6"  (click)="onFormSubmit(LoginForm)" [disabled]="LoginForm.invalid || LoginForm.untouched || LoginForm.pristine || LoginForm.status == 'INVALID' ? 'true' : 'false'" type="submit" mat-raised-button><mat-progress-bar style="position: absolute;left:0;bottom:0" mode="indeterminate"></mat-progress-bar>LOGIN</button>
           <a routerLink="/SignUp" class="col-6" mat-raised-button color="accent">SIGN UP</a>
       </div>
   </mat-card-actions>

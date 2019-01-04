@@ -8,7 +8,7 @@ import { SocialAuthService } from '../../shared/services/auth.service';
 import { UserInfo } from '../../shared/modals/userinfo';
 import { Observable } from 'rxjs';
 import { startWith ,  map } from 'rxjs/operators';
-import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/debounceTime';
 import {MatSlideToggle} from '@angular/material/slide-toggle';
 @Component({
   selector: 'app-user-details',
@@ -27,6 +27,7 @@ export class UserDetailsComponent implements OnInit, ErrorStateMatcher {
   filteredStates: Observable<any[]>;
   cities: string[] = [];
   checked = false;
+  formValueChanged = false;
   constructor(private cityAPIService: PlacesAPIService, private fb: FormBuilder,
     private socialAuthService: SocialAuthService, private authService: AuthService) {
     this.createForm();
@@ -37,7 +38,6 @@ export class UserDetailsComponent implements OnInit, ErrorStateMatcher {
         map(state => state ? this.filterStates(state) : this.cities.slice())
       ).debounceTime(1000).distinctUntilChanged();
       this.filteredStates.subscribe(value => {
-        console.log(value);
         this.cityAPIService.getPlaces(this.UserDetailsForm.controls.city.value).subscribe(
           (response: PredictionsWrapper) => {
             this.cities = [];
@@ -62,6 +62,43 @@ export class UserDetailsComponent implements OnInit, ErrorStateMatcher {
       }
     );
      this.socialAuthService.getUserData();
+        this.UserDetailsForm.controls['firstName'].valueChanges.subscribe(
+          (firstname: string) => {
+           if (this.UserDetailsForm.controls['firstName'].value !== firstname) {
+            this.formValueChanged = true;
+           } else {
+            this.formValueChanged = false;
+          }
+          }
+        );
+        this.UserDetailsForm.controls['lastName'].valueChanges.subscribe(
+          (lastname: string) => {
+            if (this.UserDetailsForm.controls['lastName'].value !== lastname) {
+              this.formValueChanged = true;
+             } else {
+              this.formValueChanged = false;
+            }
+          }
+        );
+        this.UserDetailsForm.controls['city'].valueChanges.subscribe(
+          (city: string) => {
+            if (this.UserDetailsForm.controls['city'].value !== city) {
+              this.formValueChanged = true;
+             } else {
+              this.formValueChanged = false;
+            }
+          }
+        );
+        this.UserDetailsForm.controls['email'].valueChanges.subscribe(
+          (email: string) => {
+            if (this.UserDetailsForm.controls['email'].value !== email) {
+              console.log(this.UserDetailsForm.controls['email'].value );
+              this.formValueChanged = true;
+             } else {
+              this.formValueChanged = false;
+            }
+          }
+        );
   }
   createForm() {
     this.UserDetailsForm = this.fb.group({

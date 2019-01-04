@@ -11,6 +11,7 @@ import { Observable, Subject } from 'rxjs';
 export class SocialAuthService {
     token: string;
     userDetails = new Subject<Object>();
+    userTags = new Subject<string[]>();
     constructor( private httpClient: HttpClient,  public snackBar: MatSnackBar, private router: Router) {
 
     }
@@ -116,5 +117,24 @@ export class SocialAuthService {
 
     firebaseSuccessCallback(snapshot) {
         this.userDetails.next(snapshot.val());
+    }
+
+    storeUserTag(tag: string ) {
+        firebase.database().ref('tags/' + firebase.auth().currentUser.uid).set({
+            tags : ['messi', 'ronaldo']
+        });
+    }
+
+    getUserTags() {
+        this.storeUserTag(null);
+        firebase.database().ref('tags/' + firebase.auth().currentUser.uid  ).once('value',
+          this.firebaseSuccessCallbackforUserTags.bind(this), function(error) {
+              console.log(error);
+        });
+    }
+
+    firebaseSuccessCallbackforUserTags(snapshot) {
+        console.log(snapshot.val()['tags']);
+        this.userTags.next(snapshot.val()['tags']);
     }
 }
